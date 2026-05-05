@@ -10,6 +10,7 @@ import ProfilePage from "./pages/ProfilePage";
 import AnalyticsPage from "./pages/AnalyticsPage";
 import AdminPage from "./pages/AdminPage";
 import BudgetingPage from "./pages/BudgetingPage";
+import GamePage from "./pages/GamePage";
 
 
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router";
@@ -32,6 +33,7 @@ function App() {
           <Route path="/incomes" element={<IncomesPage />} />
           <Route path="/expenses" element={<ExpensesPage />} />
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/game" element={<GamePage />} />
 
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<TransactionsPage />} />

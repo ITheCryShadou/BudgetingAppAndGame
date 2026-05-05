@@ -7,6 +7,7 @@ import transactionIcon from "../assets/images/icons/transaction-icon.svg";
 import analyticsIcon from "../assets/images/icons/analytics-icon.svg";
 import incomeIcon from "../assets/images/icons/rent-icon.svg";
 import userIcon from "../assets/images/icons/user-icon.svg";
+import gameIcon from "../assets/images/icons/stars.svg";
 
 function TransactionNav() {
   const { user } = useAuth();
@@ -41,6 +42,11 @@ function TransactionNav() {
       label: "Expenses",
       href: "http://localhost:5173/expenses",
       icon: expenseIcon,
+    },
+    {
+      label: "Game",
+      href: "http://localhost:5173/game",
+      icon: gameIcon,
     },
     {
       label: "Profile",
