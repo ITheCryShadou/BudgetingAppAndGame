@@ -63,22 +63,40 @@ export function createFloorPlan(floor) {
     floor === GAME_RULES.floorsPerLevel
       ? GAME_RULES.maxRoomsPerFloor
       : randomBetween(GAME_RULES.minRoomsPerFloor, GAME_RULES.maxRoomsPerFloor);
+  const roomTypes = Array.from({ length: roomCount }, (_, index) => {
+    const room = index + 1;
+    const isBossRoom = floor === GAME_RULES.floorsPerLevel && room === roomCount;
+    if (room === 1 || isBossRoom) return "combat";
+
+    const roll = Math.random();
+    if (roll < 0.09) return "award";
+    if (roll < 0.16) return "challenge";
+    if (roll < 0.23) return "cursed";
+    if (roll < 0.31) return "rest";
+    return "combat";
+  });
 
   return {
     floor,
     roomCount,
+    roomTypes,
   };
 }
 
-export function createRoomLayout({ floor, room, isBossRoom, levelId = "skeleton" }) {
+export function createRoomLayout({ floor, room, isBossRoom, levelId = "skeleton", roomType = "combat" }) {
   const roomPadding = 48;
   const roomWidth = GAME_RULES.roomWidth;
   const roomHeight = GAME_RULES.roomHeight;
-  const obstacleCount = isBossRoom ? 0 : randomBetween(4, 7);
-  const enemyCount = isBossRoom ? 1 : Math.min(1 + floor + room + (levelId === "hell" ? 1 : 0), 7);
+  const isEventRoom = roomType !== "combat";
+  const obstacleCount = isBossRoom || isEventRoom ? 0 : randomBetween(4, 7);
+  const enemyCount = isEventRoom ? 0 : (isBossRoom ? 1 : Math.min(1 + floor + room + (levelId === "hell" ? 1 : 0), 7));
   const obstacleTypes = levelId === "hell" ? HELL_OBSTACLE_TYPES : OBSTACLE_TYPES;
-  const spawnPoint = { x: 130, y: roomHeight / 2 };
-  const exitPoint = { x: roomWidth - 85, y: roomHeight / 2 };
+  const spawnPoint = isEventRoom
+    ? { x: roomWidth / 2, y: roomHeight - 80 }
+    : { x: 130, y: roomHeight / 2 };
+  const exitPoint = isEventRoom
+    ? { x: roomWidth / 2, y: roomHeight - 80 }
+    : { x: roomWidth - 85, y: roomHeight / 2 };
   const rewardPoint = { x: roomWidth / 2, y: roomHeight / 2 };
   const reservedPoints = [
     { ...spawnPoint, radius: 150 },
@@ -150,6 +168,7 @@ export function createRoomLayout({ floor, room, isBossRoom, levelId = "skeleton"
       width: roomWidth,
       height: roomHeight,
     },
+    roomType,
     start: {
       x: spawnPoint.x,
       y: spawnPoint.y,
@@ -157,8 +176,8 @@ export function createRoomLayout({ floor, room, isBossRoom, levelId = "skeleton"
     exit: {
       x: exitPoint.x,
       y: exitPoint.y,
-      width: 64,
-      height: 110,
+      width: isEventRoom ? 130 : 64,
+      height: isEventRoom ? 54 : 110,
     },
     obstacles,
     enemies,

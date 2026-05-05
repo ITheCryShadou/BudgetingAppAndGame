@@ -10,9 +10,19 @@ export const GAME_RULES = {
   chestBlueHeartChance: 0.08,
   chestTarotChance: 0.1,
   chestPotionChance: 0.2,
+  chestTypeWeights: {
+    dungeon: 35,
+    wooden: 35,
+    blue: 15,
+    golden: 10,
+    cursed: 5,
+  },
   merchantTunnelChance: 1,
   merchantForceAfterTunnels: 0,
   shopCardCost: 1,
+  shopCoinRerollBaseCost: 10,
+  shopCoinRerollCostStep: 10,
+  shopGemRerollCost: 1,
   coinDropMin: 5,
   coinDropMax: 10,
   roomWidth: 960,
@@ -45,7 +55,7 @@ export const HEROES = {
     id: "nox",
     name: "Nox",
     price: 0,
-    description: "Balanced mage with a close burst skill.",
+    description: "Remodeled void mage with animated magic attacks.",
   },
   riven: {
     id: "riven",
@@ -97,6 +107,7 @@ export const PLAYER_BASE_STATS = {
   venomRitual: false,
   spreadingPlague: false,
   blackVenom: false,
+  quickHandsKillTempo: false,
   skillCooldown: 4500,
   rollCooldown: 900,
   rollSpeed: 520,
@@ -385,6 +396,217 @@ export const TAROT_CARDS = [
       stats.toxicReward = true;
     },
   },
+  {
+    id: "cursed-contract",
+    title: "Cursed Contract",
+    description: "Damage +45%, max HP -1 heart",
+    theme: "cursed",
+    rarity: "cursed",
+    apply(stats, scene) {
+      stats.attackDamage *= 1.45;
+      scene.decreaseMaxHearts(1);
+    },
+  },
+  {
+    id: "hollow-speed",
+    title: "Hollow Speed",
+    description: "Speed +25%, incoming damage +15%",
+    theme: "cursed",
+    rarity: "cursed",
+    apply(stats) {
+      stats.speed *= 1.25;
+      stats.damageReduction = Math.max(-0.35, (stats.damageReduction ?? 0) - 0.15);
+    },
+  },
+  {
+    id: "nox-astral-engine",
+    title: "Astral Engine",
+    description: "Nox: E cooldown -18%, projectiles become active",
+    theme: "hero",
+    rarity: "hero",
+    heroId: "nox",
+    apply(stats, scene) {
+      stats.skillCooldown *= 0.82;
+      scene.enableProjectileAttack();
+    },
+  },
+  {
+    id: "riven-ember-rhythm",
+    title: "Ember Rhythm",
+    description: "Riven: attack speed +14%, E burns enemies",
+    theme: "hero",
+    rarity: "hero",
+    heroId: "riven",
+    apply(stats) {
+      stats.attackCooldown *= 0.86;
+      stats.burnChance = Math.max(stats.burnChance, 0.2);
+      stats.burnDamage = Math.max(stats.burnDamage, 0.14);
+    },
+  },
+];
+
+const TAROT_CARD_RARITIES = {
+  "quick-hands": "common",
+  "fleet-step": "common",
+  "soft-heart": "common",
+  "moon-guard": "common",
+  "short-ritual": "common",
+  "war-tempo": "common",
+  "toxic-edge": "common",
+  "heart-vessel": "rare",
+  "azure-vessel": "rare",
+  "blue-splinter": "rare",
+  "bone-focus": "rare",
+  "grave-fang": "rare",
+  "obsidian-skin": "rare",
+  "cinder-edge": "rare",
+  "rotten-heart": "rare",
+  "violet-force": "epic",
+  "shield-echo": "epic",
+  "crystal-blood": "epic",
+  "hunters-mark": "epic",
+  "sharp-ritual": "epic",
+  "execution-fang": "epic",
+  "hellfire-core": "epic",
+  "infernal-dash": "epic",
+  "burning-wave": "epic",
+  "flame-crit": "epic",
+  "ash-tether": "epic",
+  "plague-cloud": "epic",
+  "venom-ritual": "epic",
+  "toxic-reward": "epic",
+};
+
+const TAROT_CARD_LEVELS = {
+  "quick-hands": [
+    {
+      title: "Quick Hands I",
+      description: "Attack speed +10%",
+      apply(stats) {
+        stats.attackCooldown *= 0.9;
+      },
+    },
+    {
+      title: "Quick Hands II",
+      description: "Attack speed +18%",
+      apply(stats) {
+        stats.attackCooldown *= 0.911;
+      },
+    },
+    {
+      title: "Quick Hands III",
+      description: "Attack speed +25%, kills give +10% attack speed for 2s",
+      apply(stats) {
+        stats.attackCooldown *= 0.914;
+        stats.quickHandsKillTempo = true;
+      },
+    },
+  ],
+  "fleet-step": [
+    {
+      title: "Fleet Step I",
+      description: "Movement speed +12%",
+      apply(stats) {
+        stats.speed *= 1.12;
+      },
+    },
+    {
+      title: "Fleet Step II",
+      description: "Movement speed +20%",
+      apply(stats) {
+        stats.speed *= 1.071;
+      },
+    },
+    {
+      title: "Fleet Step III",
+      description: "Movement speed +28%, dash cooldown -10%",
+      apply(stats) {
+        stats.speed *= 1.067;
+        stats.rollCooldown *= 0.9;
+      },
+    },
+  ],
+  "violet-force": [
+    {
+      title: "Violet Force I",
+      description: "Damage +25%",
+      apply(stats) {
+        stats.attackDamage *= 1.25;
+      },
+    },
+    {
+      title: "Violet Force II",
+      description: "Damage +38%",
+      apply(stats) {
+        stats.attackDamage *= 1.104;
+      },
+    },
+    {
+      title: "Violet Force III",
+      description: "Damage +50%, crit chance +8%",
+      apply(stats) {
+        stats.attackDamage *= 1.087;
+        stats.critChance += 0.08;
+      },
+    },
+  ],
+  "cinder-edge": [
+    {
+      title: "Cinder Edge I",
+      description: "15% chance to burn enemies for 3s",
+      apply(stats) {
+        stats.burnChance = Math.max(stats.burnChance, 0.15);
+        stats.burnDamage = Math.max(stats.burnDamage, 0.16);
+      },
+    },
+    {
+      title: "Cinder Edge II",
+      description: "22% chance to burn enemies for 3s",
+      apply(stats) {
+        stats.burnChance = Math.max(stats.burnChance, 0.22);
+        stats.burnDamage = Math.max(stats.burnDamage, 0.2);
+      },
+    },
+    {
+      title: "Cinder Edge III",
+      description: "28% burn chance; burning enemies take +8% damage",
+      apply(stats) {
+        stats.burnChance = Math.max(stats.burnChance, 0.28);
+        stats.burnDamage = Math.max(stats.burnDamage, 0.24);
+        stats.flameCrit = true;
+      },
+    },
+  ],
+};
+
+TAROT_CARDS.forEach((card) => {
+  card.rarity = card.rarity ?? TAROT_CARD_RARITIES[card.id] ?? "common";
+  card.levels = card.levels ?? TAROT_CARD_LEVELS[card.id];
+});
+
+export const BOSS_CARDS = [
+  {
+    id: "boss-crimson-crown",
+    title: "Crimson Crown",
+    description: "Boss reward: damage +15%, crit chance +8%",
+    theme: "boss",
+    rarity: "boss",
+    apply(stats) {
+      stats.attackDamage *= 1.15;
+      stats.critChance += 0.08;
+    },
+  },
+  {
+    id: "boss-heart-of-ashes",
+    title: "Heart of Ashes",
+    description: "Boss reward: max HP +1 and burn damage +25%",
+    theme: "boss",
+    rarity: "boss",
+    apply(stats, scene) {
+      scene.increaseMaxHearts(1);
+      stats.burnDamageMultiplier = Math.max(stats.burnDamageMultiplier, 1.25);
+    },
+  },
 ];
 
 export const SHOP_CARDS = [
@@ -419,9 +641,9 @@ export const SHOP_CARDS = [
 
 export const HERO_SHOP_SKILLS = {
   nox: {
-    id: "traveler-nox-star-shot",
-    title: "Star Shot",
-    description: "LMB also fires a magic projectile",
+    id: "traveler-nox-void-barrage",
+    title: "Void Barrage",
+    description: "LMB fires Nox magic bolts; every third shot adds an arcane orb and E launches crystal shards",
     asset: "traveler2",
   },
   riven: {

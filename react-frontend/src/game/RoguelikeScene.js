@@ -1,11 +1,21 @@
 import * as Phaser from "phaser";
-import heroWalkSheet from "../assets/game/hero-walk.png";
-import heroFastWalkSheet from "../assets/game/hero-fast-walk.png";
-import heroDashSheet from "../assets/game/hero-dash.png";
-import heroAttackSheet from "../assets/game/hero-attack.png";
-import heroDamagedSheet from "../assets/game/hero-damaged.png";
-import heroDeathSheet from "../assets/game/hero-death.png";
-import heroProjectile from "../assets/game/hero-projectile.png";
+import noxIdleSheet from "../assets/game/heroes/nox/Nox-Idle.png";
+import noxWalkSheet from "../assets/game/heroes/nox/Nox-Walk.png";
+import noxRunSheet from "../assets/game/heroes/nox/Nox-Run.png";
+import noxDashSheet from "../assets/game/heroes/nox/Nox-Dash.png";
+import noxAttackSheet from "../assets/game/heroes/nox/Nox-Attack.png";
+import noxSkillAttackSheet from "../assets/game/heroes/nox/Nox-SkillAttack.png";
+import noxSuperAttackSheet from "../assets/game/heroes/nox/Nox-SuperAttack.png";
+import noxDamagedSheet from "../assets/game/heroes/nox/Nox-DamageTaken.png";
+import noxDeathSheet from "../assets/game/heroes/nox/Nox-Death.png";
+import noxArcaneOrbProjectile from "../assets/game/heroes/nox/Nox-ArcaneOrbProjectile.png";
+import noxCrystalShardProjectile from "../assets/game/heroes/nox/Nox-CrystalShardProjectile.png";
+import noxDashShadowProjectile from "../assets/game/heroes/nox/Nox-DashShadowProjectile.png";
+import noxHitImpactEffect from "../assets/game/heroes/nox/Nox-HitImpactEffect.png";
+import noxLargeMagicWaveProjectile from "../assets/game/heroes/nox/Nox-LargeMagicWaveProjectile.png";
+import noxMagicBoltProjectile from "../assets/game/heroes/nox/Nox-MagicBoltProjectile.png";
+import noxSmallMagicArcProjectile from "../assets/game/heroes/nox/Nox-SmallMagicArcProjectile.png";
+import noxSuperSpellBurstProjectile from "../assets/game/heroes/nox/Nox-SuperSpellBurstProjectile.png";
 import rivenIdleSheet from "../assets/game/heroes/riven/Riven-Idle.png";
 import rivenWalkSheet from "../assets/game/heroes/riven/Riven-Walk.png";
 import rivenRunSheet from "../assets/game/heroes/riven/Riven-Run.png";
@@ -114,10 +124,17 @@ import hellBgBoss from "../assets/game/hell-bg-boss.png";
 import hellTunnel from "../assets/game/hell-tunnel.png";
 import hellTunnelBoss from "../assets/game/hell-tunnel-boss.png";
 import travelerRoomBg from "../assets/game/traveler-room-bg.png";
-import chestIcon from "../assets/game/chests/chest-icon.png";
-import chestCloseSheet from "../assets/game/chests/chest-close.png";
-import chestOpenSheet from "../assets/game/chests/chest-open.png";
-import chestOpenedIcon from "../assets/game/chests/chest-opened-icon.png";
+import dungeonChestIcon from "../assets/game/chests/dungeon-chest-icon.png";
+import dungeonChestOpenSheet from "../assets/game/chests/dungeon-chest-open.png";
+import dungeonChestOpenedIcon from "../assets/game/chests/dungeon-chest-opened.png";
+import woodenChestIcon from "../assets/game/chests/wooden-chest-icon.png";
+import woodenChestOpenSheet from "../assets/game/chests/wooden-chest-open.png";
+import blueChestIcon from "../assets/game/chests/blue-chest-icon.png";
+import blueChestOpenSheet from "../assets/game/chests/blue-chest-open.png";
+import goldenChestIcon from "../assets/game/chests/golden-chest-icon.png";
+import goldenChestOpenSheet from "../assets/game/chests/golden-chest-open.png";
+import cursedChestIcon from "../assets/game/chests/cursed-chest-icon.png";
+import cursedChestOpenSheet from "../assets/game/chests/cursed-chest-open.png";
 import healPotion from "../assets/game/heal-potion.png";
 import blueHeartHalfIcon from "../assets/game/heart-blue-half.png";
 import greenHeartHalfIcon from "../assets/game/heart-green-half.png";
@@ -156,18 +173,31 @@ import {
   LEVELS,
   PLAYER_BASE_STATS,
   SHOP_CARDS,
+  BOSS_CARDS,
   TAROT_CARDS,
 } from "./gameBalance";
 import { chooseTarotCards, createFloorPlan, createRoomLayout } from "./dungeonGenerator";
 
 const PLAYER_STRIPS = {
-  idle: { source: "heroWalkSheet", width: 77, height: 87, frames: 1, fps: 1 },
-  walk: { source: "heroWalkSheet", width: 309, height: 87, frames: 4, fps: 9 },
-  fastWalk: { source: "heroFastWalkSheet", width: 319, height: 87, frames: 4, fps: 12 },
-  dash: { source: "heroDashSheet", width: 545, height: 97, frames: 5, fps: 14 },
-  attack: { source: "heroAttackSheet", width: 468, height: 105, frames: 4, fps: 13 },
-  damaged: { source: "heroDamagedSheet", width: 545, height: 113, frames: 6, fps: 12 },
-  death: { source: "heroDeathSheet", width: 570, height: 121, frames: 5, fps: 8 },
+  idle: { source: "noxIdleSheet", width: 1009, height: 95, frames: 9, fps: 6 },
+  walk: { source: "noxWalkSheet", width: 1045, height: 91, frames: 9, fps: 10 },
+  fastWalk: { source: "noxRunSheet", width: 1066, height: 88, frames: 9, fps: 13 },
+  dash: { source: "noxDashSheet", width: 711, height: 93, frames: 5, fps: 14 },
+  attack: { source: "noxAttackSheet", width: 1151, height: 90, frames: 9, fps: 13 },
+  skillAttack: { source: "noxSkillAttackSheet", width: 1025, height: 115, frames: 8, fps: 12 },
+  superAttack: { source: "noxSuperAttackSheet", width: 1255, height: 128, frames: 8, fps: 11 },
+  damaged: { source: "noxDamagedSheet", width: 496, height: 93, frames: 4, fps: 10 },
+  death: { source: "noxDeathSheet", width: 825, height: 93, frames: 6, fps: 8 },
+};
+const NOX_PROJECTILE_STRIPS = {
+  arcaneOrb: { source: "noxArcaneOrbProjectile", width: 1014, height: 78, frames: 9, fps: 13 },
+  crystalShard: { source: "noxCrystalShardProjectile", width: 1028, height: 71, frames: 9, fps: 13 },
+  dashShadow: { source: "noxDashShadowProjectile", width: 1023, height: 83, frames: 9, fps: 14 },
+  hitImpact: { source: "noxHitImpactEffect", width: 814, height: 118, frames: 7, fps: 14 },
+  largeWave: { source: "noxLargeMagicWaveProjectile", width: 1116, height: 105, frames: 9, fps: 12 },
+  magicBolt: { source: "noxMagicBoltProjectile", width: 1040, height: 70, frames: 9, fps: 14 },
+  smallArc: { source: "noxSmallMagicArcProjectile", width: 697, height: 81, frames: 6, fps: 13 },
+  superBurst: { source: "noxSuperSpellBurstProjectile", width: 1118, height: 197, frames: 7, fps: 11 },
 };
 const RIVEN_STRIPS = {
   idle: { source: "rivenIdleSheet", width: 109, height: 116, frames: 1, fps: 1 },
@@ -183,8 +213,54 @@ const HERO_STRIPS = {
   riven: RIVEN_STRIPS,
 };
 const CHEST_STRIPS = {
-  closed: { source: "chestCloseSheet", width: 1392, height: 207, frames: 8, fps: 7 },
-  open: { source: "chestOpenSheet", width: 1396, height: 195, frames: 8, fps: 12 },
+  dungeon: { source: "dungeonChestOpenSheet", width: 1396, height: 195, frames: 8, fps: 12 },
+  wooden: { source: "woodenChestOpenSheet", width: 1496, height: 232, frames: 8, fps: 12 },
+  blue: { source: "blueChestOpenSheet", width: 1492, height: 220, frames: 8, fps: 12 },
+  golden: { source: "goldenChestOpenSheet", width: 1489, height: 220, frames: 8, fps: 12 },
+  cursed: { source: "cursedChestOpenSheet", width: 1476, height: 219, frames: 8, fps: 12 },
+};
+const CHEST_TYPES = {
+  dungeon: {
+    icon: "dungeonChestIcon",
+    openPrefix: "chestOpenDungeon",
+    finalTexture: "dungeonChestOpenedIcon",
+    displayWidth: 74,
+    displayHeight: 72,
+    openWidth: 72,
+    openHeight: 82,
+  },
+  wooden: {
+    icon: "woodenChestIcon",
+    openPrefix: "chestOpenWooden",
+    displayWidth: 74,
+    displayHeight: 72,
+    openWidth: 76,
+    openHeight: 82,
+  },
+  blue: {
+    icon: "blueChestIcon",
+    openPrefix: "chestOpenBlue",
+    displayWidth: 74,
+    displayHeight: 72,
+    openWidth: 76,
+    openHeight: 82,
+  },
+  golden: {
+    icon: "goldenChestIcon",
+    openPrefix: "chestOpenGolden",
+    displayWidth: 74,
+    displayHeight: 72,
+    openWidth: 76,
+    openHeight: 82,
+  },
+  cursed: {
+    icon: "cursedChestIcon",
+    openPrefix: "chestOpenCursed",
+    displayWidth: 74,
+    displayHeight: 72,
+    openWidth: 76,
+    openHeight: 82,
+  },
 };
 const ENEMY_STRIPS = {
   skeleton: {
@@ -392,13 +468,23 @@ export default class RoguelikeScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("heroWalkSheet", heroWalkSheet);
-    this.load.image("heroFastWalkSheet", heroFastWalkSheet);
-    this.load.image("heroDashSheet", heroDashSheet);
-    this.load.image("heroAttackSheet", heroAttackSheet);
-    this.load.image("heroDamagedSheet", heroDamagedSheet);
-    this.load.image("heroDeathSheet", heroDeathSheet);
-    this.load.image("heroProjectile", heroProjectile);
+    this.load.image("noxIdleSheet", noxIdleSheet);
+    this.load.image("noxWalkSheet", noxWalkSheet);
+    this.load.image("noxRunSheet", noxRunSheet);
+    this.load.image("noxDashSheet", noxDashSheet);
+    this.load.image("noxAttackSheet", noxAttackSheet);
+    this.load.image("noxSkillAttackSheet", noxSkillAttackSheet);
+    this.load.image("noxSuperAttackSheet", noxSuperAttackSheet);
+    this.load.image("noxDamagedSheet", noxDamagedSheet);
+    this.load.image("noxDeathSheet", noxDeathSheet);
+    this.load.image("noxArcaneOrbProjectile", noxArcaneOrbProjectile);
+    this.load.image("noxCrystalShardProjectile", noxCrystalShardProjectile);
+    this.load.image("noxDashShadowProjectile", noxDashShadowProjectile);
+    this.load.image("noxHitImpactEffect", noxHitImpactEffect);
+    this.load.image("noxLargeMagicWaveProjectile", noxLargeMagicWaveProjectile);
+    this.load.image("noxMagicBoltProjectile", noxMagicBoltProjectile);
+    this.load.image("noxSmallMagicArcProjectile", noxSmallMagicArcProjectile);
+    this.load.image("noxSuperSpellBurstProjectile", noxSuperSpellBurstProjectile);
     this.load.image("rivenIdleSheet", rivenIdleSheet);
     this.load.image("rivenWalkSheet", rivenWalkSheet);
     this.load.image("rivenRunSheet", rivenRunSheet);
@@ -507,10 +593,17 @@ export default class RoguelikeScene extends Phaser.Scene {
     this.load.image("hellTunnel", hellTunnel);
     this.load.image("hellTunnelBoss", hellTunnelBoss);
     this.load.image("travelerRoomBg", travelerRoomBg);
-    this.load.image("chestIcon", chestIcon);
-    this.load.image("chestCloseSheet", chestCloseSheet);
-    this.load.image("chestOpenSheet", chestOpenSheet);
-    this.load.image("chestOpenedIcon", chestOpenedIcon);
+    this.load.image("dungeonChestIcon", dungeonChestIcon);
+    this.load.image("dungeonChestOpenSheet", dungeonChestOpenSheet);
+    this.load.image("dungeonChestOpenedIcon", dungeonChestOpenedIcon);
+    this.load.image("woodenChestIcon", woodenChestIcon);
+    this.load.image("woodenChestOpenSheet", woodenChestOpenSheet);
+    this.load.image("blueChestIcon", blueChestIcon);
+    this.load.image("blueChestOpenSheet", blueChestOpenSheet);
+    this.load.image("goldenChestIcon", goldenChestIcon);
+    this.load.image("goldenChestOpenSheet", goldenChestOpenSheet);
+    this.load.image("cursedChestIcon", cursedChestIcon);
+    this.load.image("cursedChestOpenSheet", cursedChestOpenSheet);
     this.load.image("healPotion", healPotion);
     this.load.image("blueHeartHalf", blueHeartHalfIcon);
     this.load.image("greenHeartHalf", greenHeartHalfIcon);
@@ -558,10 +651,18 @@ export default class RoguelikeScene extends Phaser.Scene {
     this.runStartedAt = this.time.now;
     this.enemyKills = 0;
     this.selectedCards = [];
+    this.cardLevels = {};
     this.bossRewards = [];
     this.tunnelsSinceTraveler = 0;
     this.hasProjectileAttack = false;
+    this.hasNoxVoidBarrage = false;
     this.purchasedShopCards = new Set();
+    this.shopCards = [];
+    this.shopCoinRerollCost = GAME_RULES.shopCoinRerollBaseCost;
+    this.shopGemRerollUsed = false;
+    this.activeCurses = [];
+    this.challengeActive = false;
+    this.challengeCompleted = false;
     this.stats = { ...PLAYER_BASE_STATS };
     this.lastAttackAt = 0;
     this.lastSkillAt = 0;
@@ -603,6 +704,7 @@ export default class RoguelikeScene extends Phaser.Scene {
     this.movePlayer(time);
     this.moveEnemies(time);
     this.updateProjectiles(time);
+    this.updateChallengeRoom(time);
     this.updateSpriteAnimations(time);
     this.updateUi();
     this.maybeSpawnChest();
@@ -628,13 +730,24 @@ export default class RoguelikeScene extends Phaser.Scene {
       room: this.room,
       isBossRoom: this.isBossRoom(),
       levelId: this.levelId,
+      roomType: this.getCurrentRoomType(),
     });
     this.drawRoom();
     this.createPlayer();
     this.createEnemies();
     this.createExit();
+    this.createEventRoomChoices();
     this.grantSpawnProtection();
     this.updateUi();
+  }
+
+  getCurrentRoomType() {
+    if (this.isBossRoom()) return "combat";
+    return this.floorPlan.roomTypes?.[this.room - 1] ?? "combat";
+  }
+
+  isEventRoom() {
+    return this.layout?.roomType && this.layout.roomType !== "combat";
   }
 
   grantSpawnProtection() {
@@ -665,6 +778,9 @@ export default class RoguelikeScene extends Phaser.Scene {
       this.travelerSprite,
       this.travelerCarpet,
       this.shopHint,
+      this.eventChoiceGroup,
+      this.eventRoomTitle,
+      this.challengeTimerText,
       this.player,
     ].forEach((item) => item?.destroy?.(true));
     this.chestSprite = null;
@@ -674,6 +790,13 @@ export default class RoguelikeScene extends Phaser.Scene {
     this.travelerSprite = null;
     this.travelerCarpet = null;
     this.shopHint = null;
+    this.eventChoiceGroup = null;
+    this.eventRoomTitle = null;
+    this.challengeTimerText = null;
+    this.challengeActive = false;
+    this.challengeCompleted = false;
+    this.challengeNextWaveAt = 0;
+    this.challengeDrainAt = 0;
     this.roomRewardResolved = false;
     this.aliveEnemies = 0;
   }
@@ -689,15 +812,15 @@ export default class RoguelikeScene extends Phaser.Scene {
   }
 
   registerCroppedTextures() {
-    this.registerHeroStrip("heroIdle", this.heroStrips.idle);
-    this.registerHeroStrip("heroWalk", this.heroStrips.walk);
-    this.registerHeroStrip("heroFastWalk", this.heroStrips.fastWalk);
-    this.registerHeroStrip("heroDash", this.heroStrips.dash);
-    this.registerHeroStrip("heroAttack", this.heroStrips.attack);
-    this.registerHeroStrip("heroDamaged", this.heroStrips.damaged);
-    this.registerHeroStrip("heroDeath", this.heroStrips.death);
-    this.registerStrip("chestClosed", CHEST_STRIPS.closed);
-    this.registerStrip("chestOpen", CHEST_STRIPS.open);
+    Object.entries(this.heroStrips).forEach(([name, strip]) => {
+      this.registerHeroStrip(`hero${capitalize(name)}`, strip);
+    });
+    Object.entries(NOX_PROJECTILE_STRIPS).forEach(([name, strip]) => {
+      this.registerStrip(`nox${capitalize(name)}`, strip);
+    });
+    Object.entries(CHEST_STRIPS).forEach(([type, strip]) => {
+      this.registerStrip(CHEST_TYPES[type].openPrefix, strip);
+    });
 
     this.registerEnemyStrips("enemySkeleton", ENEMY_STRIPS.skeleton);
     this.registerEnemyStrips("enemyGuard", ENEMY_STRIPS.guard);
@@ -918,12 +1041,15 @@ export default class RoguelikeScene extends Phaser.Scene {
 
     enemy.body.setSize(displaySize.bodyWidth, displaySize.bodyHeight, true);
     enemy.type = enemyData.type;
-    enemy.health = enemyData.health;
-    enemy.maxHealth = enemyData.health;
+    const bossCurseMultiplier = (enemyData.type === "boss" || enemyData.type === "infernalBoss") && this.activeCurses.includes("Boss HP +20%")
+      ? 1.2
+      : 1;
+    enemy.health = enemyData.health * bossCurseMultiplier;
+    enemy.maxHealth = enemy.health;
     enemy.isAlive = true;
     enemy.isReviving = false;
     enemy.isSummoned = summoned || enemyData.isSummoned || false;
-    enemy.speed = enemyData.speed;
+    enemy.speed = enemyData.speed * (this.challengeActive ? 1.35 : 1);
     enemy.aiStyle = enemyData.aiStyle ?? "cautious";
     enemy.desiredRange = enemyData.desiredRange ?? 70;
     enemy.retreatHealthRatio = enemyData.retreatHealthRatio ?? 0.35;
@@ -1006,21 +1132,36 @@ export default class RoguelikeScene extends Phaser.Scene {
   }
 
   maybeSpawnChest() {
+    if (this.isEventRoom()) return;
     if (this.getAliveEnemyCount() > 0 || this.chestSprite || this.roomRewardResolved) return;
 
     this.roomRewardResolved = true;
     if (Math.random() > GAME_RULES.chestSpawnChance) return;
 
     const { room } = this.layout;
+    const chestType = this.chooseChestType();
+    const chestConfig = CHEST_TYPES[chestType] ?? CHEST_TYPES.dungeon;
     this.chestSprite = this.add
-      .image(room.x + room.width / 2, room.y + room.height / 2, "chestIcon")
-      .setDisplaySize(74, 72)
+      .image(room.x + room.width / 2, room.y + room.height / 2, chestConfig.icon)
+      .setDisplaySize(chestConfig.displayWidth, chestConfig.displayHeight)
       .setDepth(8);
     this.chestSprite.isOpened = false;
+    this.chestSprite.chestType = chestType;
     this.chestSprite.frameKeys = null;
-    this.chestSprite.gameDisplayWidth = 74;
-    this.chestSprite.gameDisplayHeight = 72;
+    this.chestSprite.gameDisplayWidth = chestConfig.displayWidth;
+    this.chestSprite.gameDisplayHeight = chestConfig.displayHeight;
 
+  }
+
+  chooseChestType() {
+    const weights = GAME_RULES.chestTypeWeights ?? { dungeon: 1 };
+    const totalWeight = Object.values(weights).reduce((sum, value) => sum + value, 0);
+    let roll = Math.random() * totalWeight;
+    for (const [type, weight] of Object.entries(weights)) {
+      roll -= weight;
+      if (roll <= 0) return type;
+    }
+    return "dungeon";
   }
 
   openChest() {
@@ -1030,56 +1171,44 @@ export default class RoguelikeScene extends Phaser.Scene {
     this.roomRewardResolved = true;
     const lootX = this.chestSprite.x;
     const lootY = this.chestSprite.y + 58;
+    const chestType = this.chestSprite.chestType ?? "dungeon";
+    const chestConfig = CHEST_TYPES[chestType] ?? CHEST_TYPES.dungeon;
+    const chestStrip = CHEST_STRIPS[chestType] ?? CHEST_STRIPS.dungeon;
 
     this.chestSprite.frameKeys = Array.from(
-      { length: CHEST_STRIPS.open.frames },
-      (_, index) => `chestOpen${index}`
+      { length: chestStrip.frames },
+      (_, index) => `${chestConfig.openPrefix}${index}`
     );
     this.chestSprite.animationFps = 16;
     this.chestSprite.animationFrame = -1;
     this.chestSprite.animationStartedAt = this.time.now;
     this.chestSprite.loopAnimation = false;
-    this.chestSprite.gameDisplayWidth = 72;
-    this.chestSprite.gameDisplayHeight = 82;
-    this.chestSprite.setTexture("chestOpen0").setDisplaySize(72, 82);
+    this.chestSprite.gameDisplayWidth = chestConfig.openWidth;
+    this.chestSprite.gameDisplayHeight = chestConfig.openHeight;
+    this.chestSprite.setTexture(`${chestConfig.openPrefix}0`).setDisplaySize(chestConfig.openWidth, chestConfig.openHeight);
 
     this.time.delayedCall(520, () => {
       if (!this.chestSprite?.active) return;
       this.chestSprite.frameKeys = null;
-      this.chestSprite.setTexture("chestOpenedIcon").setDisplaySize(72, 82);
+      this.chestSprite.setTexture(chestConfig.finalTexture ?? `${chestConfig.openPrefix}${chestStrip.frames - 1}`)
+        .setDisplaySize(chestConfig.openWidth, chestConfig.openHeight);
     });
 
-    this.time.delayedCall(260, () => this.dropChestLoot(lootX, lootY));
+    this.time.delayedCall(260, () => this.dropChestLoot(lootX, lootY, chestType));
   }
 
-  dropChestLoot(lootX, lootY) {
+  dropChestLoot(lootX, lootY, chestType = "dungeon") {
     if (!this.pickupGroup) return;
 
-    const x = lootX + Phaser.Math.Between(-18, 18);
-    const y = lootY + Phaser.Math.Between(-6, 12);
+    const lootPosition = this.findSafePickupPosition(
+      lootX + Phaser.Math.Between(-18, 18),
+      lootY + Phaser.Math.Between(-6, 12)
+    );
+    const { x, y } = lootPosition;
     const lootRoll = Math.random();
     let pickup = null;
 
-    if (lootRoll < GAME_RULES.chestGemChance) {
-      pickup = this.spawnCurrency("gem", 1, x, y);
-    } else if (lootRoll < GAME_RULES.chestGemChance + GAME_RULES.chestBlueHeartChance) {
-      pickup = this.spawnTempHeartPickup(x, y, 0.5);
-    } else if (
-      lootRoll <
-      GAME_RULES.chestGemChance + GAME_RULES.chestBlueHeartChance + GAME_RULES.chestTarotChance
-    ) {
-      pickup = this.spawnTarotPickup(x, y + 4);
-    } else if (
-      lootRoll <
-      GAME_RULES.chestGemChance +
-        GAME_RULES.chestBlueHeartChance +
-        GAME_RULES.chestTarotChance +
-        GAME_RULES.chestPotionChance
-    ) {
-      pickup = this.spawnPotion(x, y);
-    } else {
-      pickup = this.spawnCurrency("coin", this.rollCoinAmount(), x, y);
-    }
+    pickup = this.createChestLootByType(chestType, lootRoll, x, y);
 
     if (!pickup) return;
 
@@ -1093,9 +1222,124 @@ export default class RoguelikeScene extends Phaser.Scene {
     });
   }
 
-  rollCoinAmount() {
-    const range = GAME_RULES.coinDropMax - GAME_RULES.coinDropMin + 1;
-    return GAME_RULES.coinDropMin + Math.floor(Math.random() * Math.random() * range);
+  findSafePickupPosition(preferredX, preferredY, radius = 24) {
+    if (this.isPickupPositionSafe(preferredX, preferredY, radius)) {
+      return { x: preferredX, y: preferredY };
+    }
+
+    const anchorX = this.chestSprite?.x ?? preferredX;
+    const anchorY = this.chestSprite?.y ?? preferredY;
+    const angles = [90, 120, 60, 180, 0, 145, 35, -90, -135, -45];
+    const distances = [72, 96, 124, 152, 184];
+
+    for (const distance of distances) {
+      for (const angleDeg of angles) {
+        const angle = Phaser.Math.DegToRad(angleDeg);
+        const x = anchorX + Math.cos(angle) * distance;
+        const y = anchorY + Math.sin(angle) * distance;
+        if (this.isPickupPositionSafe(x, y, radius)) {
+          return { x, y };
+        }
+      }
+    }
+
+    const bounds = this.getWalkableBounds();
+    return {
+      x: Phaser.Math.Clamp(preferredX, bounds.left + radius, bounds.right - radius),
+      y: Phaser.Math.Clamp(preferredY, bounds.top + radius, bounds.bottom - radius),
+    };
+  }
+
+  isPickupPositionSafe(x, y, radius = 24) {
+    const bounds = this.getWalkableBounds();
+    if (
+      x < bounds.left + radius ||
+      x > bounds.right - radius ||
+      y < bounds.top + radius ||
+      y > bounds.bottom - radius
+    ) {
+      return false;
+    }
+
+    const blockedByObstacle = this.getGroupChildren(this.obstacleGroup).some((block) => {
+      const halfWidth = (block.collisionWidth ?? block.displayWidth) / 2 + radius + 8;
+      const halfHeight = (block.collisionHeight ?? block.displayHeight) / 2 + radius + 8;
+      return (
+        x > block.x - halfWidth &&
+        x < block.x + halfWidth &&
+        y > block.y - halfHeight &&
+        y < block.y + halfHeight
+      );
+    });
+    if (blockedByObstacle) return false;
+
+    if (this.chestSprite?.active) {
+      const chestHalfWidth = Math.max(70, this.chestSprite.displayWidth * 0.62) + radius;
+      const chestHalfHeight = Math.max(78, this.chestSprite.displayHeight * 0.72) + radius;
+      const blockedByChest =
+        x > this.chestSprite.x - chestHalfWidth &&
+        x < this.chestSprite.x + chestHalfWidth &&
+        y > this.chestSprite.y - chestHalfHeight &&
+        y < this.chestSprite.y + chestHalfHeight;
+      if (blockedByChest) return false;
+    }
+
+    return true;
+  }
+
+  createChestLootByType(chestType, lootRoll, x, y) {
+    if (chestType === "blue") {
+      if (lootRoll < 0.45) return this.spawnTempHeartPickup(x, y, 1);
+      if (lootRoll < 0.75) return this.spawnPotion(x, y);
+      if (lootRoll < 0.9) return this.spawnTempHeartPickup(x, y, 0.5);
+      return this.spawnTarotPickup(x, y + 4);
+    }
+
+    if (chestType === "golden") {
+      if (lootRoll < 0.18) return this.spawnCurrency("gem", 1, x, y);
+      if (lootRoll < 0.32) return this.spawnTarotPickup(x, y + 4);
+      return this.spawnCurrency("coin", this.rollCoinAmount(12, 24), x, y);
+    }
+
+    if (chestType === "cursed") {
+      this.applyCursedChestPenalty();
+      if (lootRoll < 0.32) return this.spawnTarotPickup(x, y + 4);
+      if (lootRoll < 0.56) return this.spawnCurrency("gem", 1, x, y);
+      return this.spawnCurrency("coin", this.rollCoinAmount(18, 30), x, y);
+    }
+
+    if (chestType === "wooden") {
+      if (lootRoll < 0.04) return this.spawnCurrency("gem", 1, x, y);
+      if (lootRoll < 0.12) return this.spawnTarotPickup(x, y + 4);
+      if (lootRoll < 0.28) return this.spawnPotion(x, y);
+      return this.spawnCurrency("coin", this.rollCoinAmount(6, 14), x, y);
+    }
+
+    if (lootRoll < GAME_RULES.chestGemChance) return this.spawnCurrency("gem", 1, x, y);
+    if (lootRoll < GAME_RULES.chestGemChance + GAME_RULES.chestBlueHeartChance) {
+      return this.spawnTempHeartPickup(x, y, 0.5);
+    }
+    if (lootRoll < GAME_RULES.chestGemChance + GAME_RULES.chestBlueHeartChance + GAME_RULES.chestTarotChance) {
+      return this.spawnTarotPickup(x, y + 4);
+    }
+    if (lootRoll < GAME_RULES.chestGemChance + GAME_RULES.chestBlueHeartChance + GAME_RULES.chestTarotChance + GAME_RULES.chestPotionChance) {
+      return this.spawnPotion(x, y);
+    }
+    return this.spawnCurrency("coin", this.rollCoinAmount(), x, y);
+  }
+
+  applyCursedChestPenalty() {
+    this.showFloatingText(this.player.x, this.player.y - 68, "CURSED CHEST", "#7c3cff", 18);
+    if (Math.random() < 0.5) {
+      this.applyPlayerDamage(0.5);
+      return;
+    }
+    this.stats.damageReduction = Math.max(-0.35, (this.stats.damageReduction ?? 0) - 0.08);
+  }
+
+  rollCoinAmount(min = GAME_RULES.coinDropMin, max = GAME_RULES.coinDropMax) {
+    const range = max - min + 1;
+    return min + Math.floor(Math.random() * Math.random() * range);
   }
 
   spawnPotion(x, y) {
@@ -1169,16 +1413,239 @@ export default class RoguelikeScene extends Phaser.Scene {
     return pickup;
   }
 
+  createEventRoomChoices() {
+    if (!this.isEventRoom()) return;
+
+    const roomType = this.layout.roomType;
+    const titleByType = {
+      award: "Award Room",
+      challenge: "Challenge Room",
+      cursed: "Cursed Room",
+      rest: "Rest Room",
+    };
+    this.eventChoiceGroup = this.add.group();
+    this.eventRoomTitle = this.add
+      .text(512, 78, titleByType[roomType] ?? "Event Room", {
+        fontFamily: "monospace",
+        fontSize: "24px",
+        color: roomType === "cursed" ? "#b98cff" : "#f5f0ff",
+        stroke: "#08090e",
+        strokeThickness: 5,
+      })
+      .setOrigin(0.5)
+      .setDepth(20);
+
+    const choices = this.getEventRoomChoices(roomType);
+    const positions = [
+      { x: 350, y: 300 },
+      { x: 512, y: 220 },
+      { x: 674, y: 300 },
+    ];
+    choices.forEach((choice, index) => this.createEventChoice(choice, positions[index]));
+  }
+
+  getEventRoomChoices(roomType) {
+    if (roomType === "award") {
+      return [
+        { id: "award-tarot", label: "Tarot", detail: "Choose a card", icon: "tarotCard", apply: () => this.offerTarotChoice({ advanceFloor: false }) },
+        { id: "award-chest", label: "Chest", detail: "Random chest", icon: "dungeonChestIcon", apply: () => this.spawnRewardChestAt(512, 300) },
+        { id: "award-coins", label: "Coins", detail: "+15 coins", icon: "coinIcon", apply: () => { this.coins += 15; this.updateUi(); } },
+      ];
+    }
+
+    if (roomType === "challenge") {
+      return [
+        { id: "challenge-start", label: "Start", detail: "Waves, no dash, HP drain", icon: "cursedChestIcon", apply: () => this.startChallengeRoom() },
+      ];
+    }
+
+    if (roomType === "cursed") {
+      return [
+        { id: "curse-card", label: "Rare card", detail: "Boss HP +20%", icon: "tarotCard", apply: () => this.takeCursedRareCard() },
+        { id: "curse-power", label: "Dark power", detail: "Damage +40%, -1 max heart", icon: "cursedChestIcon", apply: () => { this.stats.attackDamage *= 1.4; this.decreaseMaxHearts(1); } },
+        { id: "curse-gems", label: "Blood gems", detail: "+2 gems, take damage", icon: "gemIcon", apply: () => { this.gems += 2; this.applyPlayerDamage(0.5); this.updateUi(); } },
+      ];
+    }
+
+    return [
+      { id: "rest-heal", label: "Rest", detail: "Restore 1 heart", icon: "healPotion", apply: () => this.healPlayer(1) },
+      { id: "rest-cleanse", label: "Cleanse", detail: "Remove a curse", icon: "tarotCard", apply: () => this.cleanseCurse() },
+      { id: "rest-upgrade", label: "Upgrade", detail: "Improve a card", icon: "tarotCard", apply: () => this.upgradeRandomCard() },
+      { id: "rest-buy-heal", label: "Buy heal", detail: "10 coins -> 1 heart", icon: "coinIcon", apply: () => this.buyRestHeal() },
+    ].slice(0, 3);
+  }
+
+  createEventChoice(choice, position) {
+    const marker = this.add
+      .rectangle(position.x, position.y, 120, 92, 0x171923, 0.78)
+      .setStrokeStyle(2, 0xb98cff, 0.65)
+      .setDepth(8);
+    const icon = this.add.image(position.x, position.y - 14, choice.icon).setDisplaySize(34, 34).setDepth(9);
+    const label = this.add
+      .text(position.x, position.y + 26, `${choice.label}\n${choice.detail}`, {
+        fontFamily: "monospace",
+        fontSize: "12px",
+        color: "#f5f0ff",
+        align: "center",
+      })
+      .setOrigin(0.5)
+      .setDepth(9);
+    marker.choice = choice;
+    marker.choiceRadius = 72;
+    this.eventChoiceGroup.add(marker);
+    this.eventChoiceGroup.add(icon);
+    this.eventChoiceGroup.add(label);
+  }
+
+  startChallengeRoom() {
+    if (this.challengeActive || this.challengeCompleted) return;
+    this.challengeActive = true;
+    this.challengeCompleted = false;
+    this.challengeWave = 0;
+    this.challengeTotalWaves = 3;
+    this.challengeEndsAt = this.time.now + 45000;
+    this.challengeNextWaveAt = this.time.now;
+    this.challengeDrainAt = this.time.now + 5000;
+    this.challengeTimerText = this.add
+      .text(512, 116, "Challenge: 45s", {
+        fontFamily: "monospace",
+        fontSize: "18px",
+        color: "#ffcf6b",
+        stroke: "#08090e",
+        strokeThickness: 4,
+      })
+      .setOrigin(0.5)
+      .setDepth(30);
+  }
+
+  updateChallengeRoom(time) {
+    if (!this.challengeActive) return;
+
+    const remaining = Math.max(0, Math.ceil((this.challengeEndsAt - time) / 1000));
+    this.challengeTimerText?.setText(`Challenge: ${remaining}s   Dash locked`);
+
+    if (time >= this.challengeNextWaveAt && this.challengeWave < this.challengeTotalWaves) {
+      this.spawnChallengeWave();
+      this.challengeWave += 1;
+      this.challengeNextWaveAt = time + 8500;
+    }
+
+    if (time >= this.challengeDrainAt) {
+      this.challengeDrainAt = time + 5000;
+      this.applyPlayerDamage(0.5);
+      this.showFloatingText(this.player.x, this.player.y - 68, "TRIAL DRAIN", "#ff5f87", 16);
+    }
+
+    const wavesDone = this.challengeWave >= this.challengeTotalWaves;
+    if (wavesDone && this.getAliveEnemyCount() <= 0) {
+      this.completeChallengeRoom();
+      return;
+    }
+
+    if (time >= this.challengeEndsAt) {
+      this.endGame("Failed the challenge room timer");
+    }
+  }
+
+  spawnChallengeWave() {
+    const bounds = this.getWalkableBounds();
+    const count = 2 + this.challengeWave;
+    Array.from({ length: count }).forEach((_, index) => {
+      const type = this.levelId === "hell"
+        ? Phaser.Utils.Array.GetRandom(["impLittle", "hellKiller", "hellGolem"])
+        : Phaser.Utils.Array.GetRandom(["skeleton", "guard", "dog"]);
+      const x = Phaser.Math.Clamp(310 + index * 120, bounds.left + 40, bounds.right - 40);
+      const y = Phaser.Math.Between(bounds.top + 80, bounds.bottom - 130);
+      const enemy = this.spawnEnemy({
+        ...ENEMY_TYPES[type],
+        type,
+        x,
+        y,
+        canRevive: false,
+        isSummoned: true,
+      }, { summoned: true });
+      enemy.setAlpha(0);
+      this.tweens.add({ targets: enemy, alpha: 1, duration: 240 });
+    });
+  }
+
+  completeChallengeRoom() {
+    this.challengeActive = false;
+    this.challengeCompleted = true;
+    this.challengeTimerText?.setText("Challenge completed");
+    this.spawnCurrency("coin", this.rollCoinAmount(18, 28), 512, 280);
+    if (Math.random() < 0.35) this.spawnTarotPickup(560, 282);
+    this.showFloatingText(this.player.x, this.player.y - 72, "CHALLENGE COMPLETE", "#ffd36b", 18);
+  }
+
+  resolveEventChoice(marker) {
+    if (!marker?.choice || marker.choiceResolved) return;
+    marker.choiceResolved = true;
+    const choice = marker.choice;
+    this.getGroupChildren(this.eventChoiceGroup).forEach((item) => item?.destroy?.());
+    this.eventChoiceGroup = this.add.group();
+    choice.apply?.();
+    this.showFloatingText(this.player.x, this.player.y - 62, choice.label.toUpperCase(), "#f5f0ff", 16);
+  }
+
+  spawnRewardChestAt(x, y) {
+    if (this.chestSprite?.active) return;
+    const chestType = this.chooseChestType();
+    const chestConfig = CHEST_TYPES[chestType] ?? CHEST_TYPES.dungeon;
+    this.chestSprite = this.add.image(x, y, chestConfig.icon).setDisplaySize(chestConfig.displayWidth, chestConfig.displayHeight).setDepth(8);
+    this.chestSprite.isOpened = false;
+    this.chestSprite.chestType = chestType;
+    this.chestSprite.frameKeys = null;
+    this.chestSprite.gameDisplayWidth = chestConfig.displayWidth;
+    this.chestSprite.gameDisplayHeight = chestConfig.displayHeight;
+  }
+
+  takeCursedRareCard() {
+    this.activeCurses.push("Boss HP +20%");
+    const rareCards = this.getEligibleTarotCards(TAROT_CARDS).filter((card) => ["rare", "epic"].includes(card.rarity));
+    const card = this.prepareCardForOffer(Phaser.Utils.Array.GetRandom(rareCards.length ? rareCards : this.getEligibleTarotCards(TAROT_CARDS)));
+    this.applyChosenCard(card, "Cursed Room");
+  }
+
+  cleanseCurse() {
+    const removed = this.activeCurses.pop();
+    this.showFloatingText(this.player.x, this.player.y - 70, removed ? "CURSE CLEANSED" : "NO CURSE", "#d9ccff", 16);
+  }
+
+  upgradeRandomCard() {
+    const upgradeable = Object.keys(this.cardLevels).filter((id) => this.cardLevels[id] < 3);
+    if (upgradeable.length === 0) {
+      this.showFloatingText(this.player.x, this.player.y - 70, "NO CARD TO UPGRADE", "#d9ccff", 16);
+      return;
+    }
+    const id = Phaser.Utils.Array.GetRandom(upgradeable);
+    const source = [...TAROT_CARDS, ...BOSS_CARDS].find((card) => card.id === id);
+    if (!source) return;
+    const card = this.prepareCardForOffer(source);
+    this.applyChosenCard(card, "Rest Upgrade");
+  }
+
+  buyRestHeal() {
+    if (this.coins < 10) {
+      this.showFloatingText(this.player.x, this.player.y - 70, "NEED 10 COINS", "#ffd36b", 16);
+      return;
+    }
+    this.coins -= 10;
+    this.healPlayer(1);
+  }
+
   createExit() {
     const { exit } = this.layout;
+    this.exitReadyAt = this.time.now + (this.isEventRoom() ? 900 : 0);
     this.exitZone = this.add.rectangle(exit.x, exit.y, exit.width, exit.height, 0x6b4bb5, 0.35);
     this.exitZone.setStrokeStyle(2, 0xa988ff, 0.9);
     this.exitLabel = this.add
-      .text(exit.x - 31, exit.y - 7, "EXIT", {
+      .text(exit.x, exit.y - (this.isEventRoom() ? 42 : 7), "EXIT", {
         fontFamily: "monospace",
         fontSize: "14px",
         color: "#d9ccff",
       })
+      .setOrigin(0.5)
       .setDepth(12);
   }
 
@@ -1701,7 +2168,8 @@ export default class RoguelikeScene extends Phaser.Scene {
       if (!projectile.active || !enemy?.isAlive || enemy.isReviving) return;
 
       const distance = Phaser.Math.Distance.Between(projectile.x, projectile.y, enemy.x, enemy.y);
-      if (distance < enemy.displayWidth * 0.28 + 14) {
+      if (distance < (projectile.hazardRadius ?? enemy.displayWidth * 0.28 + 14)) {
+        this.createNoxHitImpact(projectile.x, projectile.y, projectile.rotation);
         this.damageEnemy(enemy, projectile.damage ?? this.stats.attackDamage, {
           canBurn: true,
           canCrit: true,
@@ -1759,22 +2227,53 @@ export default class RoguelikeScene extends Phaser.Scene {
   }
 
   fireHeroProjectile(angle) {
-    const texture = this.heroId === "riven" ? "rivenProjectile" : "heroProjectile";
-    const projectile = this.add
-      .image(
-        this.player.x + Math.cos(angle) * 34,
-        this.player.y + Math.sin(angle) * 34,
-        texture
-      )
-      .setDisplaySize(this.heroId === "riven" ? 48 : 36, this.heroId === "riven" ? 34 : 36)
-      .setDepth(11)
-      .setRotation(angle);
+    const isRiven = this.heroId === "riven";
+    const isNox = this.heroId === "nox";
+    const projectile = isRiven
+      ? this.add
+        .image(
+          this.player.x + Math.cos(angle) * 34,
+          this.player.y + Math.sin(angle) * 34,
+          "rivenProjectile"
+        )
+        .setDisplaySize(48, 34)
+        .setDepth(11)
+        .setRotation(angle)
+      : this.createNoxAnimatedEffect({
+        prefix: "noxMagicBolt",
+        strip: NOX_PROJECTILE_STRIPS.magicBolt,
+        x: this.player.x + Math.cos(angle) * 34,
+        y: this.player.y + Math.sin(angle) * 34,
+        width: 58,
+        height: 34,
+        rotation: angle,
+        depth: 11,
+      });
     projectile.owner = "hero";
-    projectile.damage = this.stats.attackDamage;
-    projectile.expiresAt = this.time.now + 950;
+    projectile.damage = this.stats.attackDamage * (isNox && this.hasNoxVoidBarrage ? 1.08 : 1);
+    projectile.expiresAt = this.time.now + (isNox ? 1150 : 950);
     this.projectileGroup.add(projectile);
     this.physics.add.existing(projectile);
-    projectile.body.setVelocity(Math.cos(angle) * 430, Math.sin(angle) * 430);
+    projectile.body.setVelocity(Math.cos(angle) * (isNox ? 500 : 430), Math.sin(angle) * (isNox ? 500 : 430));
+
+    if (isNox && this.hasNoxVoidBarrage && this.attackCounter % 3 === 0) {
+      const crit = this.createNoxAnimatedEffect({
+        prefix: "noxArcaneOrb",
+        strip: NOX_PROJECTILE_STRIPS.arcaneOrb,
+        x: this.player.x + Math.cos(angle) * 30,
+        y: this.player.y + Math.sin(angle) * 30,
+        width: 66,
+        height: 44,
+        rotation: angle,
+        depth: 12,
+      });
+      crit.owner = "hero";
+      crit.damage = this.stats.attackDamage * 1.35;
+      crit.expiresAt = this.time.now + 1050;
+      this.projectileGroup.add(crit);
+      this.physics.add.existing(crit);
+      crit.body.setVelocity(Math.cos(angle) * 560, Math.sin(angle) * 560);
+    }
   }
 
   castSkill(time) {
@@ -1786,26 +2285,149 @@ export default class RoguelikeScene extends Phaser.Scene {
       return;
     }
 
-    const burst = this.add.circle(this.player.x, this.player.y, 22, HERO_COLOR, 0.32);
+    this.castNoxSkill();
+  }
+
+  castNoxSkill() {
+    const pointer = this.input.activePointer;
+    const angle = Phaser.Math.Angle.Between(this.player.x, this.player.y, pointer.worldX, pointer.worldY);
+    this.playHeroAnimation(this.hasNoxVoidBarrage ? "superAttack" : "skillAttack", {
+      loop: false,
+      lockMs: this.hasNoxVoidBarrage ? 620 : 460,
+    });
+
+    const burst = this.createNoxAnimatedEffect({
+      prefix: this.hasNoxVoidBarrage ? "noxSuperBurst" : "noxLargeWave",
+      strip: this.hasNoxVoidBarrage ? NOX_PROJECTILE_STRIPS.superBurst : NOX_PROJECTILE_STRIPS.largeWave,
+      x: this.player.x + Math.cos(angle) * 72,
+      y: this.player.y + Math.sin(angle) * 72,
+      width: this.hasNoxVoidBarrage ? 126 : 104,
+      height: this.hasNoxVoidBarrage ? 86 : 50,
+      rotation: angle,
+      depth: 12,
+      selfAnimate: true,
+    });
     this.tweens.add({
       targets: burst,
-      radius: 145,
+      x: burst.x + Math.cos(angle) * (this.hasNoxVoidBarrage ? 190 : 155),
+      y: burst.y + Math.sin(angle) * (this.hasNoxVoidBarrage ? 190 : 155),
       alpha: 0,
-      duration: 280,
+      scaleX: 1.35,
+      scaleY: 1.2,
+      duration: this.hasNoxVoidBarrage ? 520 : 390,
+      ease: "Cubic.easeOut",
       onComplete: () => burst.destroy(),
     });
 
     this.getGroupChildren(this.enemyGroup).forEach((enemy) => {
       if (!enemy?.isAlive || enemy.isReviving) return;
-      const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, enemy.x, enemy.y);
-      if (distance < 150) {
-        this.damageEnemy(enemy, this.getSkillDamage(enemy, 1.4), {
+      const distance = Phaser.Math.Distance.Between(burst.x, burst.y, enemy.x, enemy.y);
+      if (distance < 175) {
+        this.damageEnemy(enemy, this.getSkillDamage(enemy, this.hasNoxVoidBarrage ? 1.95 : 1.55), {
           canBurn: true,
           canCrit: true,
           canSlow: true,
           isSkill: true,
         });
       }
+    });
+
+    const boom = this.createNoxAnimatedEffect({
+      prefix: "noxHitImpact",
+      strip: NOX_PROJECTILE_STRIPS.hitImpact,
+      x: burst.x + Math.cos(angle) * 120,
+      y: burst.y + Math.sin(angle) * 120,
+      width: 86,
+      height: 62,
+      rotation: angle,
+      depth: 11,
+      selfAnimate: true,
+    }).setAlpha(0.85);
+    this.tweens.add({
+      targets: boom,
+      alpha: 0,
+      scaleX: 1.55,
+      scaleY: 1.45,
+      duration: 360,
+      ease: "Cubic.easeOut",
+      onComplete: () => boom.destroy(),
+    });
+
+    if (this.hasNoxVoidBarrage) {
+      [-14, 0, 14].forEach((spread, index) => {
+        this.time.delayedCall(index * 70, () => {
+          this.fireNoxShardProjectile(angle + Phaser.Math.DegToRad(spread));
+        });
+      });
+    }
+  }
+
+  fireNoxShardProjectile(angle) {
+    const projectile = this.createNoxAnimatedEffect({
+      prefix: "noxCrystalShard",
+      strip: NOX_PROJECTILE_STRIPS.crystalShard,
+      x: this.player.x + Math.cos(angle) * 42,
+      y: this.player.y + Math.sin(angle) * 42,
+      width: 62,
+      height: 36,
+      rotation: angle,
+      depth: 12,
+    });
+    projectile.owner = "hero";
+    projectile.damage = this.stats.attackDamage * 1.15;
+    projectile.expiresAt = this.time.now + 1250;
+    projectile.hazardRadius = 42;
+    this.projectileGroup.add(projectile);
+    this.physics.add.existing(projectile);
+    projectile.body.setVelocity(Math.cos(angle) * 460, Math.sin(angle) * 460);
+  }
+
+  createNoxAnimatedEffect({ prefix, strip, x, y, width, height, rotation = 0, depth = 11, selfAnimate = false }) {
+    const sprite = this.add.image(x, y, `${prefix}0`).setDisplaySize(width, height).setDepth(depth).setRotation(rotation);
+    sprite.frameKeys = Array.from({ length: strip.frames }, (_, index) => `${prefix}${index}`);
+    sprite.animationFps = strip.fps;
+    sprite.animationFrame = -1;
+    sprite.animationLastFrameAt = 0;
+    sprite.gameDisplayWidth = width;
+    sprite.gameDisplayHeight = height;
+    if (selfAnimate && strip.frames > 1) {
+      let frame = 0;
+      const timer = this.time.addEvent({
+        delay: 1000 / strip.fps,
+        loop: true,
+        callback: () => {
+          if (!sprite.active) {
+            timer.remove(false);
+            return;
+          }
+          frame = (frame + 1) % strip.frames;
+          sprite.setTexture(sprite.frameKeys[frame]);
+          sprite.setDisplaySize(width, height);
+        },
+      });
+    }
+    return sprite;
+  }
+
+  createNoxHitImpact(x, y, rotation = 0) {
+    if (this.heroId !== "nox") return;
+    const impact = this.createNoxAnimatedEffect({
+      prefix: "noxHitImpact",
+      strip: NOX_PROJECTILE_STRIPS.hitImpact,
+      x,
+      y,
+      width: 58,
+      height: 48,
+      rotation,
+      depth: 13,
+      selfAnimate: true,
+    });
+    this.tweens.add({
+      targets: impact,
+      alpha: 0,
+      scale: 1.25,
+      duration: 240,
+      onComplete: () => impact.destroy(),
     });
   }
 
@@ -1880,6 +2502,10 @@ export default class RoguelikeScene extends Phaser.Scene {
   }
 
   roll(time) {
+    if (this.challengeActive) {
+      this.showFloatingText(this.player.x, this.player.y - 56, "NO DASH", "#ffcf6b", 14);
+      return;
+    }
     if (time - this.lastRollAt < this.stats.rollCooldown || this.isRolling) return;
 
     this.lastRollAt = time;
@@ -1887,6 +2513,28 @@ export default class RoguelikeScene extends Phaser.Scene {
     this.invulnerableUntil = time + this.stats.rollDuration + 120;
     this.player.setAlpha(0.55);
     this.playHeroAnimation("dash", { loop: false, lockMs: this.stats.rollDuration });
+    if (this.heroId === "nox") {
+      const pointer = this.input.activePointer;
+      const angle = Phaser.Math.Angle.Between(this.player.x, this.player.y, pointer.worldX, pointer.worldY);
+      const shadow = this.createNoxAnimatedEffect({
+        prefix: "noxDashShadow",
+        strip: NOX_PROJECTILE_STRIPS.dashShadow,
+        x: this.player.x,
+        y: this.player.y,
+        width: 92,
+        height: 44,
+        rotation: angle,
+        depth: 7,
+        selfAnimate: true,
+      }).setAlpha(0.62);
+      this.tweens.add({
+        targets: shadow,
+        alpha: 0,
+        scaleX: 1.25,
+        duration: 260,
+        onComplete: () => shadow.destroy(),
+      });
+    }
     if (this.stats.infernalDash) {
       this.createInfernalDashTrail();
     }
@@ -2101,6 +2749,14 @@ export default class RoguelikeScene extends Phaser.Scene {
       }
     });
 
+    this.getGroupChildren(this.eventChoiceGroup).forEach((marker) => {
+      if (!marker?.choice || marker.choiceResolved) return;
+      const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, marker.x, marker.y);
+      if (distance < (marker.choiceRadius ?? 68)) {
+        this.resolveEventChoice(marker);
+      }
+    });
+
     if (this.chestSprite && !this.chestSprite.isOpened) {
       const chestDistance = Phaser.Math.Distance.Between(
         this.player.x,
@@ -2120,6 +2776,7 @@ export default class RoguelikeScene extends Phaser.Scene {
   }
 
   isPlayerTouchingExit() {
+    if (this.time.now < (this.exitReadyAt ?? 0)) return false;
     const bounds = this.exitZone.getBounds();
 
     return (
@@ -2302,6 +2959,17 @@ export default class RoguelikeScene extends Phaser.Scene {
     this.time.delayedCall(2000, () => {
       this.stats.attackCooldown /= 0.85;
       this.killerTempoResetAt = 0;
+    });
+  }
+
+  applyQuickHandsTempo() {
+    if (this.quickHandsTempoResetAt && this.time.now < this.quickHandsTempoResetAt) return;
+    this.stats.attackCooldown *= 0.9;
+    this.quickHandsTempoResetAt = this.time.now + 2000;
+    this.showFloatingText(this.player.x, this.player.y - 52, "QUICK HANDS", "#f5f0ff", 15);
+    this.time.delayedCall(2000, () => {
+      this.stats.attackCooldown /= 0.9;
+      this.quickHandsTempoResetAt = 0;
     });
   }
 
@@ -2503,6 +3171,7 @@ export default class RoguelikeScene extends Phaser.Scene {
     if (enemy.type === "boss" || enemy.type === "infernalBoss") {
       this.spawnCurrency("gem", 1, enemy.x, enemy.y + 42);
       this.bossRewards.push("Gem x1");
+      this.grantBossCard();
     }
     if (
       this.stats.blueHeartDropChance > 0 &&
@@ -2513,6 +3182,9 @@ export default class RoguelikeScene extends Phaser.Scene {
     if (this.stats.blueHeartCards >= 5 && this.tempHearts > 0) {
       this.addTempHearts(0.5);
     }
+    if (this.stats.quickHandsKillTempo) {
+      this.applyQuickHandsTempo();
+    }
     this.time.delayedCall(deathDuration + 40, () => {
       if (!enemy?.active || !enemy.frameKeys?.length) return;
       enemy.animationFrame = enemy.frameKeys.length - 1;
@@ -2521,6 +3193,15 @@ export default class RoguelikeScene extends Phaser.Scene {
       enemy.frameKeys = null;
     });
     this.time.delayedCall(5000, () => enemy.destroy());
+  }
+
+  grantBossCard() {
+    const availableCards = this.getEligibleTarotCards(BOSS_CARDS);
+    if (availableCards.length === 0) return;
+    const card = this.prepareCardForOffer(Phaser.Utils.Array.GetRandom(availableCards));
+    this.applyChosenCard(card, "Boss");
+    this.bossRewards.push(card.title);
+    this.showFloatingText(this.player.x, this.player.y - 74, `BOSS CARD: ${card.title}`, "#ff5f5f", 18);
   }
 
   takeEnemyHit(player, enemy) {
@@ -2680,13 +3361,24 @@ export default class RoguelikeScene extends Phaser.Scene {
     this.updateUi();
   }
 
+  decreaseMaxHearts(amount) {
+    this.maxHearts = Math.max(1, this.maxHearts - amount);
+    this.hearts = Math.min(this.hearts, this.maxHearts);
+    this.updateUi();
+  }
+
   enableProjectileAttack() {
     this.hasProjectileAttack = true;
+    if (this.heroId === "nox") {
+      this.hasNoxVoidBarrage = true;
+      this.stats.skillCooldown *= 0.92;
+    }
     this.updateUi();
   }
 
   tryLeaveFloor() {
     if (this.getAliveEnemyCount() > 0) return;
+    if (this.challengeActive && !this.challengeCompleted) return;
 
     if (this.isBossRoom()) {
       this.winRun();
@@ -2813,6 +3505,9 @@ export default class RoguelikeScene extends Phaser.Scene {
 
   createTravelerShop() {
     this.purchasedShopCards = new Set();
+    this.shopCards = [];
+    this.shopCoinRerollCost = GAME_RULES.shopCoinRerollBaseCost;
+    this.shopGemRerollUsed = false;
     const travelerKey = Phaser.Utils.Array.GetRandom(TRAVELER_KEYS);
     this.travelerCarpet = this.add
       .image(520, 388, "travelerCarpet")
@@ -2909,24 +3604,118 @@ export default class RoguelikeScene extends Phaser.Scene {
 
     this.isShopOpen = true;
     this.player.setVelocity(0, 0);
-    const cards = this.getTravelerCards();
+    if (!this.shopCards.length) {
+      this.shopCards = this.rollTravelerCards();
+    }
     this.callbacks.onShopOffer?.(
-      cards,
+      this.shopCards,
       (cardId) => this.buyShopCard(cardId),
-      () => this.closeShop()
+      () => this.closeShop(),
+      {
+        rerollCoins: () => this.rerollShop("coin"),
+        rerollGem: () => this.rerollShop("gem"),
+        getState: () => ({
+          coinCost: this.shopCoinRerollCost,
+          gemCost: GAME_RULES.shopGemRerollCost,
+          gemUsed: this.shopGemRerollUsed,
+        }),
+      }
     );
   }
 
   getTravelerCards() {
+    return this.rollTravelerCards();
+  }
+
+  rollTravelerCards({ improved = false } = {}) {
     const heroSkill = HERO_SHOP_SKILLS[this.heroId] ?? HERO_SHOP_SKILLS.nox;
-    return [
-      SHOP_CARDS[0],
+    const heroCard = this.prepareCardForOffer({
+      ...heroSkill,
+      theme: "hero",
+      rarity: "hero",
+      apply: (stats, scene) => scene.enableProjectileAttack(),
+    });
+    const pool = [
+      ...SHOP_CARDS,
       {
         ...heroSkill,
+        theme: "hero",
+        rarity: "hero",
         apply: (stats, scene) => scene.enableProjectileAttack(),
       },
-      SHOP_CARDS[2],
-    ];
+      ...this.getEligibleTarotCards(TAROT_CARDS),
+    ].filter((card) => !this.purchasedShopCards.has(card.id));
+
+    const cards = [heroCard];
+    while (cards.length < 3 && pool.length > 0) {
+      const card = this.pickWeightedTravelerCard(pool, cards, improved);
+      if (!card) break;
+      cards.push(this.prepareCardForOffer(card));
+    }
+    return cards;
+  }
+
+  pickWeightedTravelerCard(pool, selectedCards, improved = false) {
+    const selectedIds = new Set(selectedCards.map((card) => card.id));
+    const candidates = pool.filter((card) => !selectedIds.has(card.id));
+    if (candidates.length === 0) return null;
+
+    const rarityWeight = {
+      common: improved ? 0.35 : 0.65,
+      rare: improved ? 3.4 : 2.4,
+      epic: improved ? 4.4 : 3.2,
+      cursed: improved ? 3.2 : 2.1,
+      hero: improved ? 4.8 : 3.8,
+      boss: 0,
+    };
+    const weighted = candidates.map((card) => {
+      const currentLevel = this.cardLevels[card.id] ?? 0;
+      const levelBonus = currentLevel > 0 ? 2 + currentLevel * (improved ? 2.2 : 1.4) : 0;
+      return {
+        card,
+        weight: (rarityWeight[card.rarity ?? "common"] ?? 1) + levelBonus,
+      };
+    });
+    const totalWeight = weighted.reduce((sum, item) => sum + item.weight, 0);
+    let roll = Math.random() * totalWeight;
+    for (const item of weighted) {
+      roll -= item.weight;
+      if (roll <= 0) return item.card;
+    }
+    return weighted[weighted.length - 1]?.card ?? null;
+  }
+
+  rerollShop(currency) {
+    if (!this.isShopOpen) return null;
+    if (currency === "gem") {
+      if (this.shopGemRerollUsed || this.gems < GAME_RULES.shopGemRerollCost) return null;
+      this.gems -= GAME_RULES.shopGemRerollCost;
+      this.shopGemRerollUsed = true;
+      this.shopCards = this.rollTravelerCards({ improved: true });
+      this.updateUi();
+      return {
+        cards: this.shopCards,
+        state: {
+          coinCost: this.shopCoinRerollCost,
+          gemCost: GAME_RULES.shopGemRerollCost,
+          gemUsed: this.shopGemRerollUsed,
+        },
+      };
+    }
+
+    if (this.coins < this.shopCoinRerollCost) return null;
+    this.coins -= this.shopCoinRerollCost;
+    this.shopCoinRerollCost += GAME_RULES.shopCoinRerollCostStep;
+    this.shopCards = this.rollTravelerCards();
+    this.updateUi();
+    return {
+      cards: this.shopCards,
+      state: {
+        coinCost: this.shopCoinRerollCost,
+        gemCost: GAME_RULES.shopGemRerollCost,
+        gemUsed: this.shopGemRerollUsed,
+      },
+    };
   }
 
   closeShop() {
@@ -2934,23 +3723,75 @@ export default class RoguelikeScene extends Phaser.Scene {
   }
 
   buyShopCard(cardId) {
-    const card = this.getTravelerCards().find((item) => item.id === cardId);
+    const card = this.shopCards.find((item) => item.id === cardId);
     if (!card || this.purchasedShopCards.has(cardId) || this.gems < GAME_RULES.shopCardCost) {
       return false;
     }
 
     this.gems -= GAME_RULES.shopCardCost;
     this.purchasedShopCards.add(cardId);
-    card.apply(this.stats, this);
+    this.applyChosenCard(card, "Traveler");
+    this.updateUi();
+    return true;
+  }
+
+  getEligibleTarotCards(sourceCards = TAROT_CARDS) {
+    return sourceCards.filter((card) => {
+      if (card.heroId && card.heroId !== this.heroId) return false;
+      const currentLevel = this.cardLevels[card.id] ?? 0;
+      const maxLevel = this.getCardMaxLevel(card);
+      return currentLevel < maxLevel;
+    });
+  }
+
+  getCardMaxLevel(card) {
+    return Math.max(1, card.levels?.length ?? 3);
+  }
+
+  prepareCardForOffer(card) {
+    const currentLevel = this.cardLevels[card.id] ?? 0;
+    const maxLevel = this.getCardMaxLevel(card);
+    const nextLevel = Math.min(currentLevel + 1, maxLevel);
+    const nextLevelData = card.levels?.[nextLevel - 1];
+    const previousLevelData = currentLevel > 0 ? card.levels?.[currentLevel - 1] : null;
+    const displayTitle = nextLevelData?.title ?? (
+      maxLevel > 1 ? `${card.title} ${this.toRoman(nextLevel)}` : card.title
+    );
+    const description = nextLevelData?.description ?? (
+      currentLevel > 0 ? `Improved: ${card.description}` : card.description
+    );
+
+    return {
+      ...card,
+      baseTitle: card.title,
+      title: displayTitle,
+      description,
+      previousDescription: previousLevelData?.description ?? (currentLevel > 0 ? card.description : null),
+      level: nextLevel,
+      currentLevel,
+      maxLevel,
+      isDuplicate: currentLevel > 0,
+      rarity: card.rarity ?? "common",
+      apply: nextLevelData?.apply ?? card.apply,
+    };
+  }
+
+  applyChosenCard(card, source = "Tarot") {
+    card.apply?.(this.stats, this);
+    this.cardLevels[card.id] = Math.max(this.cardLevels[card.id] ?? 0, card.level ?? 1);
     this.applyCardSynergy(card);
     this.selectedCards.push({
       id: card.id,
       title: card.title,
       description: card.description,
-      source: "Traveler",
+      rarity: card.rarity,
+      level: card.level,
+      source,
     });
-    this.updateUi();
-    return true;
+  }
+
+  toRoman(value) {
+    return ["", "I", "II", "III", "IV", "V"][value] ?? `${value}`;
   }
 
   applyCardSynergy(card) {
@@ -3037,18 +3878,12 @@ export default class RoguelikeScene extends Phaser.Scene {
     this.isChoosingTarot = true;
     this.physics.pause();
 
-    const cards = chooseTarotCards(TAROT_CARDS);
+    const cards = chooseTarotCards(this.getEligibleTarotCards(TAROT_CARDS))
+      .map((card) => this.prepareCardForOffer(card));
     this.callbacks.onTarotOffer?.(cards, (cardId) => {
       const card = cards.find((item) => item.id === cardId);
-      card?.apply(this.stats, this);
       if (card) {
-        this.applyCardSynergy(card);
-        this.selectedCards.push({
-          id: card.id,
-          title: card.title,
-          description: card.description,
-          source: "Tarot",
-        });
+        this.applyChosenCard(card, "Tarot");
       }
       this.isChoosingTarot = false;
       this.physics.resume();
@@ -3084,9 +3919,15 @@ export default class RoguelikeScene extends Phaser.Scene {
     if (!this.uiText) return;
     const aliveEnemies = this.getAliveEnemyCount();
     const activeBoss = this.getActiveBoss();
+    const eventLabel = {
+      award: "Award Room",
+      challenge: "Challenge Room",
+      cursed: "Cursed Room",
+      rest: "Rest Room",
+    }[this.layout?.roomType];
     const roomLabel = this.isBossRoom()
       ? "Boss"
-      : `Room ${this.room}/${this.floorPlan.roomCount}`;
+      : (eventLabel ?? `Room ${this.room}/${this.floorPlan.roomCount}`);
     const levelLabel = this.levelId === "hell" ? "Hell" : "Crypt";
     const stageLabel = this.levelSequence.length > 1
       ? `Stage ${this.stageIndex + 1}/${this.levelSequence.length}  `

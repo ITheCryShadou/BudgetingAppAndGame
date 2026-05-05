@@ -734,6 +734,12 @@
   background: #2b2e45;
 }
 
+.tarot-card.duplicate,
+.shop-card.duplicate {
+  border-color: rgba(255, 255, 255, 0.64);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+}
+
 .tarot-card-art {
   width: 132px;
   height: 212px;
@@ -753,11 +759,69 @@
   text-shadow: 0 2px 0 rgba(0, 0, 0, 0.7);
 }
 
+.tarot-card.rarity-common strong,
+.shop-card.rarity-common strong {
+  color: #ffffff;
+}
+
+.tarot-card.rarity-rare strong,
+.shop-card.rarity-rare strong {
+  color: #76c9ff;
+}
+
+.tarot-card.rarity-epic strong,
+.shop-card.rarity-epic strong {
+  color: #c18cff;
+}
+
+.tarot-card.rarity-cursed strong,
+.shop-card.rarity-cursed strong {
+  color: #7c3cff;
+}
+
+.tarot-card.rarity-hero strong,
+.shop-card.rarity-hero strong {
+  color: #ffd36b;
+}
+
+.tarot-card.rarity-boss strong,
+.shop-card.rarity-boss strong {
+  color: #ff5f5f;
+}
+
+.card-rarity {
+  color: #bdb5d9;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
 .tarot-card-art span {
   color: #d7cdee;
   font-size: 12px;
   line-height: 1.25;
   text-shadow: 0 2px 0 rgba(0, 0, 0, 0.7);
+}
+
+.tarot-card-art small {
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.7);
+}
+
+.card-upgrade-old {
+  display: block;
+  color: #ffffff;
+  text-decoration: line-through;
+  opacity: 0.82;
+}
+
+.card-upgrade-new {
+  display: block;
+  color: #f4efff;
 }
 
 .shop-panel {
@@ -869,6 +933,17 @@
   font-weight: 800;
 }
 
+.shop-card-art .card-rarity {
+  display: block;
+  color: #bdb5d9;
+  font-family: inherit;
+  font-size: 9px;
+}
+
+.shop-card-art .shop-card-cost {
+  display: inline-flex;
+}
+
 .shop-card-art em img {
   width: 18px;
   height: 18px;
@@ -881,6 +956,40 @@
   font-family: monospace;
   font-size: 12px;
   color: #c9b8ff;
+}
+
+.shop-reroll-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.shop-reroll {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid rgba(210, 184, 255, 0.34);
+  background: #222437;
+  color: #f4efff;
+  font-weight: 800;
+}
+
+.shop-reroll.improved {
+  border-color: rgba(118, 201, 255, 0.5);
+  color: #d9efff;
+}
+
+.shop-reroll:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.shop-reroll img {
+  width: 18px;
+  height: 18px;
 }
 
 .shop-close {

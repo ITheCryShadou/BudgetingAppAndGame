@@ -3,13 +3,16 @@ import { useNavigate } from "react-router";
 import { createRoguelikeGame } from "./createRoguelikeGame";
 import { ARCHIVE_ENEMIES, ARCHIVE_HEROES } from "./archiveData";
 import { HEROES, LEVELS } from "./gameBalance";
-import heroIcon from "../assets/game/hero-icon.png";
+import heroIcon from "../assets/game/heroes/nox/Nox-Icon.png";
 import rivenIcon from "../assets/game/heroes/riven/Riven-Icon.png";
 import tarotCardImage from "../assets/game/tarot-card.png";
 import tarotCardHealImage from "../assets/game/tarot-card-heal.png";
 import tarotCardHellImage from "../assets/game/tarot-card-hell.png";
 import tarotCardHellBonusImage from "../assets/game/tarot-card-hell-bonus.png";
 import tarotCardSkeletonImage from "../assets/game/tarot-card-skeleton.png";
+import tarotCardCursedImage from "../assets/game/tarot-card-cursed.png";
+import tarotCardHeroImage from "../assets/game/tarot-card-hero.png";
+import tarotCardBossImage from "../assets/game/tarot-card-boss.png";
 import tarotTraveler1 from "../assets/game/tarot-traveler-1.png";
 import tarotTraveler2 from "../assets/game/tarot-traveler-2.png";
 import tarotTraveler3 from "../assets/game/tarot-traveler-3.png";
@@ -89,11 +92,40 @@ function greenHeartImage(hearts, index) {
 }
 
 function tarotBackground(card) {
+  if (card.theme === "cursed" || card.rarity === "cursed") return tarotCardCursedImage;
+  if (card.theme === "hero" || card.rarity === "hero") return tarotCardHeroImage;
+  if (card.theme === "boss" || card.rarity === "boss") return tarotCardBossImage;
   if (card.theme === "heart") return tarotCardHealImage;
   if (card.theme === "hell") return tarotCardHellImage;
   if (card.theme === "hellBonus") return tarotCardHellBonusImage;
   if (card.theme === "skeleton") return tarotCardSkeletonImage;
   return tarotCardImage;
+}
+
+function rarityLabel(card) {
+  const value = card.rarity ?? "common";
+  const labels = {
+    common: "Common",
+    rare: "Rare",
+    epic: "Epic",
+    cursed: "Cursed",
+    hero: "Hero Card",
+    boss: "Boss Card",
+  };
+  return labels[value] ?? "Common";
+}
+
+function CardDescription({ card }) {
+  return (
+    <span>
+      {card.previousDescription && (
+        <span className="card-upgrade-old">{card.previousDescription}</span>
+      )}
+      <span className={card.previousDescription ? "card-upgrade-new" : ""}>
+        {card.description}
+      </span>
+    </span>
+  );
 }
 
 function HeartRow({ hearts = 4, maxHearts = 4, tempHearts = 0, greenHearts = 0, className = "" }) {
@@ -292,9 +324,10 @@ function ArchiveAnimatedSprite({ animation }) {
   const [naturalSize, setNaturalSize] = useState(null);
   const [frame, setFrame] = useState(0);
   const frames = Math.max(1, animation.frames ?? 1);
+  const sheetFrames = Math.max(frames, animation.sheetFrames ?? frames);
   const fps = Math.max(1, animation.fps ?? 1);
   const frameRatio = naturalSize
-    ? Math.max(0.45, Math.min(2.2, (naturalSize.width / frames) / naturalSize.height))
+    ? Math.max(0.45, Math.min(2.2, (naturalSize.width / sheetFrames) / naturalSize.height))
     : 1;
 
   useEffect(() => {
@@ -322,8 +355,8 @@ function ArchiveAnimatedSprite({ animation }) {
         alt=""
         aria-hidden="true"
         style={{
-          width: `${frames * 100}%`,
-          transform: `translateX(-${(frame * 100) / frames}%)`,
+          width: `${sheetFrames * 100}%`,
+          transform: `translateX(-${(frame * 100) / sheetFrames}%)`,
         }}
         onLoad={(event) => {
           setNaturalSize({
@@ -517,8 +550,15 @@ function RoguelikeGame() {
       onStatsChange(nextStats) {
         setStats(nextStats);
       },
-      onShopOffer(cards, buyCard, closeShop) {
-        setShopOffer({ cards, buyCard, closeShop, purchased: [] });
+      onShopOffer(cards, buyCard, closeShop, rerollApi) {
+        setShopOffer({
+          cards,
+          buyCard,
+          closeShop,
+          rerollApi,
+          rerollState: rerollApi?.getState?.() ?? { coinCost: 10, gemCost: 1, gemUsed: false },
+          purchased: [],
+        });
       },
       onRunComplete(result) {
         setRunResult(result);
@@ -576,6 +616,19 @@ function RoguelikeGame() {
       }));
       window.setTimeout(() => setBuyingCardId(null), 520);
     }
+  }
+
+  function rerollShop(currency) {
+    if (!shopOffer) return;
+    const result = currency === "gem"
+      ? shopOffer.rerollApi?.rerollGem?.()
+      : shopOffer.rerollApi?.rerollCoins?.();
+    if (!result) return;
+    setShopOffer((offer) => ({
+      ...offer,
+      cards: result.cards,
+      rerollState: result.state,
+    }));
   }
 
   function closeShop() {
@@ -825,7 +878,12 @@ function RoguelikeGame() {
                   <button
                     key={card.id}
                     type="button"
-                    className={chosenTarotId === card.id ? "tarot-card choosing" : "tarot-card"}
+                    className={[
+                      "tarot-card",
+                      `rarity-${card.rarity ?? "common"}`,
+                      card.isDuplicate ? "duplicate" : "",
+                      chosenTarotId === card.id ? "choosing" : "",
+                    ].filter(Boolean).join(" ")}
                     onClick={() => chooseTarot(card.id)}
                     disabled={Boolean(chosenTarotId)}
                   >
@@ -833,12 +891,15 @@ function RoguelikeGame() {
                       className="tarot-card-art"
                       style={{ backgroundImage: `url(${tarotBackground(card)})` }}
                     >
+                      <em className="card-rarity">{rarityLabel(card)}</em>
                       <strong>{card.title}</strong>
-                      <span>{card.description}</span>
+                      <CardDescription card={card} />
+                      {card.isDuplicate && <small>Upgrade available</small>}
                     </span>
                     <span className="card-tooltip">
                       <strong>{card.title}</strong>
-                      {card.description}
+                      <em>{rarityLabel(card)}</em>
+                      <CardDescription card={card} />
                     </span>
                   </button>
                 ))}
@@ -868,28 +929,53 @@ function RoguelikeGame() {
                       <button
                         key={card.id}
                         type="button"
-                        className={buyingCardId === card.id ? "shop-card buying" : "shop-card"}
+                        className={[
+                          "shop-card",
+                          `rarity-${card.rarity ?? "common"}`,
+                          card.isDuplicate ? "duplicate" : "",
+                          buyingCardId === card.id ? "buying" : "",
+                        ].filter(Boolean).join(" ")}
                         disabled={!canBuy}
                         onClick={() => buyShopCard(card.id)}
                       >
                         <span
                           className="shop-card-art"
-                          style={{ backgroundImage: `url(${SHOP_CARD_IMAGES[card.asset]})` }}
+                          style={{ backgroundImage: `url(${card.theme === "hero" ? tarotBackground(card) : SHOP_CARD_IMAGES[card.asset]})` }}
                         >
+                          <em className="card-rarity">{rarityLabel(card)}</em>
                           <strong>{card.title}</strong>
-                          <span>{card.description}</span>
-                          <em>
+                          <CardDescription card={card} />
+                          <em className="shop-card-cost">
                             <img src={gemImage} alt="" aria-hidden="true" /> 1
                           </em>
                         </span>
                         <span className="card-tooltip">
                           <strong>{card.title}</strong>
-                          {card.description}
+                          <em>{rarityLabel(card)}</em>
+                          <CardDescription card={card} />
                         </span>
                         {purchased && <span className="shop-card-state">Bought</span>}
                       </button>
                     );
                   })}
+                </div>
+                <div className="shop-reroll-row">
+                  <button
+                    type="button"
+                    className="shop-reroll"
+                    disabled={(stats?.coins ?? 0) < (shopOffer.rerollState?.coinCost ?? 10)}
+                    onClick={() => rerollShop("coin")}
+                  >
+                    Reroll <img src={coinImage} alt="" aria-hidden="true" /> {shopOffer.rerollState?.coinCost ?? 10}
+                  </button>
+                  <button
+                    type="button"
+                    className="shop-reroll improved"
+                    disabled={shopOffer.rerollState?.gemUsed || (stats?.gems ?? 0) < (shopOffer.rerollState?.gemCost ?? 1)}
+                    onClick={() => rerollShop("gem")}
+                  >
+                    Rare reroll <img src={gemImage} alt="" aria-hidden="true" /> {shopOffer.rerollState?.gemCost ?? 1}
+                  </button>
                 </div>
                 <button type="button" className="shop-close" onClick={closeShop}>
                   Leave

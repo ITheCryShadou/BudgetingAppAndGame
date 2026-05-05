@@ -1,13 +1,22 @@
 import { ENEMY_TYPES, GAME_RULES, HEROES, PLAYER_BASE_STATS } from "./gameBalance";
-import noxIcon from "../assets/game/hero-icon.png";
-import noxIdle from "../assets/game/hero-menu.png";
-import noxWalk from "../assets/game/hero-walk.png";
-import noxRun from "../assets/game/hero-fast-walk.png";
-import noxDash from "../assets/game/hero-dash.png";
-import noxAttack from "../assets/game/hero-attack.png";
-import noxDamage from "../assets/game/hero-damaged.png";
-import noxDeath from "../assets/game/hero-death.png";
-import noxProjectile from "../assets/game/hero-projectile.png";
+import noxIcon from "../assets/game/heroes/nox/Nox-Icon.png";
+import noxIdle from "../assets/game/heroes/nox/Nox-Idle.png";
+import noxWalk from "../assets/game/heroes/nox/Nox-Walk.png";
+import noxRun from "../assets/game/heroes/nox/Nox-Run.png";
+import noxDash from "../assets/game/heroes/nox/Nox-Dash.png";
+import noxAttack from "../assets/game/heroes/nox/Nox-Attack.png";
+import noxSkillAttack from "../assets/game/heroes/nox/Nox-SkillAttack.png";
+import noxSuperAttack from "../assets/game/heroes/nox/Nox-SuperAttack.png";
+import noxDamage from "../assets/game/heroes/nox/Nox-DamageTaken.png";
+import noxDeath from "../assets/game/heroes/nox/Nox-Death.png";
+import noxArcaneOrbProjectile from "../assets/game/heroes/nox/Nox-ArcaneOrbProjectile.png";
+import noxCrystalShardProjectile from "../assets/game/heroes/nox/Nox-CrystalShardProjectile.png";
+import noxDashShadowProjectile from "../assets/game/heroes/nox/Nox-DashShadowProjectile.png";
+import noxHitImpactEffect from "../assets/game/heroes/nox/Nox-HitImpactEffect.png";
+import noxLargeMagicWaveProjectile from "../assets/game/heroes/nox/Nox-LargeMagicWaveProjectile.png";
+import noxMagicBoltProjectile from "../assets/game/heroes/nox/Nox-MagicBoltProjectile.png";
+import noxSmallMagicArcProjectile from "../assets/game/heroes/nox/Nox-SmallMagicArcProjectile.png";
+import noxSuperSpellBurstProjectile from "../assets/game/heroes/nox/Nox-SuperSpellBurstProjectile.png";
 import rivenIcon from "../assets/game/heroes/riven/Riven-Icon.png";
 import rivenIdle from "../assets/game/heroes/riven/Riven-Idle.png";
 import rivenWalk from "../assets/game/heroes/riven/Riven-Walk.png";
@@ -145,14 +154,23 @@ function heroStats(heroId) {
 
 const ARCHIVE_ANIMATION_META = {
   nox: {
-    Idle: { frames: 1, fps: 1 },
-    Walk: { frames: 4, fps: 9 },
-    Run: { frames: 4, fps: 12 },
+    Idle: { frames: 9, fps: 6 },
+    Walk: { frames: 9, fps: 10 },
+    Run: { frames: 9, fps: 13 },
     Dash: { frames: 5, fps: 14 },
-    Attack: { frames: 4, fps: 13 },
-    "Damage taken": { frames: 6, fps: 12 },
-    Death: { frames: 5, fps: 8 },
-    Projectile: { frames: 1, fps: 1 },
+    Attack: { frames: 9, fps: 13 },
+    "Skill attack": { frames: 8, fps: 12 },
+    "Super attack": { frames: 8, fps: 11 },
+    "Damage taken": { frames: 4, fps: 10 },
+    Death: { frames: 6, fps: 8 },
+    "Magic bolt projectile": { frames: 9, fps: 14 },
+    "Arcane orb projectile": { frames: 9, fps: 13 },
+    "Crystal shard projectile": { frames: 9, fps: 13 },
+    "Dash shadow projectile": { frames: 9, fps: 14 },
+    "Hit impact effect": { frames: 7, fps: 14 },
+    "Large magic wave projectile": { frames: 9, fps: 12 },
+    "Small magic arc projectile": { frames: 6, fps: 13 },
+    "Super spell burst projectile": { frames: 7, fps: 11 },
   },
   riven: {
     Idle: { frames: 1, fps: 1 },
@@ -291,7 +309,7 @@ export const ARCHIVE_HEROES = addAnimationMeta([
     name: "Nox",
     icon: noxIcon,
     type: "Hero",
-    description: "Balanced starter mage. Plays safely with a close burst skill and can later turn basic attacks into projectiles through tarot or shop upgrades.",
+    description: "Remodeled void mage. Nox fights with precise magic strikes, an air strike skill, and an optional shop upgrade that unlocks a stronger projectile pattern.",
     stats: heroStats("nox"),
     animations: [
       { label: "Idle", image: noxIdle },
@@ -299,14 +317,23 @@ export const ARCHIVE_HEROES = addAnimationMeta([
       { label: "Run", image: noxRun },
       { label: "Dash", image: noxDash },
       { label: "Attack", image: noxAttack },
+      { label: "Skill attack", image: noxSkillAttack },
+      { label: "Super attack", image: noxSuperAttack },
       { label: "Damage taken", image: noxDamage },
       { label: "Death", image: noxDeath },
-      { label: "Projectile", image: noxProjectile },
+      { label: "Magic bolt projectile", image: noxMagicBoltProjectile },
+      { label: "Arcane orb projectile", image: noxArcaneOrbProjectile },
+      { label: "Crystal shard projectile", image: noxCrystalShardProjectile },
+      { label: "Dash shadow projectile", image: noxDashShadowProjectile },
+      { label: "Hit impact effect", image: noxHitImpactEffect },
+      { label: "Large magic wave projectile", image: noxLargeMagicWaveProjectile },
+      { label: "Small magic arc projectile", image: noxSmallMagicArcProjectile },
+      { label: "Super spell burst projectile", image: noxSuperSpellBurstProjectile },
     ],
     attacks: [
-      "LMB: close arcane strike.",
-      "E: short range magic burst around the hero.",
-      "Shop upgrade: Star Shot adds a magic projectile to basic attacks.",
+      "LMB: close magic strike.",
+      "E: Skill Attack sends a large magic wave forward and damages enemies around the impact.",
+      "Shop upgrade: Void Barrage adds animated Nox projectiles to LMB, every third shot adds an arcane orb, and E fires extra crystal shards.",
     ],
   },
   {
