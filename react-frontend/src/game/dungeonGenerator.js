@@ -21,6 +21,16 @@ function pickEnemyType(floor, levelId = "skeleton") {
     return "impLittle";
   }
 
+  if (levelId === "icy") {
+    const roll = Math.random();
+    if (floor >= 4 && roll > 0.86) return "iceAxeTitan";
+    if (floor >= 3 && roll > 0.7) return "iceWraith";
+    if (roll > 0.54) return "icebladeMaster";
+    if (roll > 0.34) return "frozenKnight";
+    if (roll > 0.16) return "frostPriest";
+    return "frostBladeWarrior";
+  }
+
   if (floor <= 1) return "skeleton";
   if (floor <= 3) return Math.random() > 0.65 ? "guard" : "skeleton";
   const roll = Math.random();
@@ -52,6 +62,18 @@ const HELL_OBSTACLE_TYPES = [
   "hellSpikes",
   "hellTorch",
   "hellTable",
+];
+
+const ICY_OBSTACLE_TYPES = [
+  "icyChainedTotem",
+  "icyCrackedObelisk",
+  "icyFrostedBrazier",
+  "icyRunePedestal",
+  "icySarcophagus",
+  "icyStonePillar",
+  "icyFrostStatue",
+  "icySnowCrate",
+  "icySpikedMound",
 ];
 
 export function createFloorLayout(floor) {
@@ -88,9 +110,17 @@ export function createRoomLayout({ floor, room, isBossRoom, levelId = "skeleton"
   const roomWidth = GAME_RULES.roomWidth;
   const roomHeight = GAME_RULES.roomHeight;
   const isEventRoom = roomType !== "combat";
-  const obstacleCount = isBossRoom || isEventRoom ? 0 : randomBetween(4, 7);
-  const enemyCount = isEventRoom ? 0 : (isBossRoom ? 1 : Math.min(1 + floor + room + (levelId === "hell" ? 1 : 0), 7));
-  const obstacleTypes = levelId === "hell" ? HELL_OBSTACLE_TYPES : OBSTACLE_TYPES;
+  const obstacleCount = isBossRoom || isEventRoom
+    ? 0
+    : levelId === "icy"
+      ? randomBetween(1, 3)
+      : randomBetween(3, 6);
+  const enemyCount = isEventRoom ? 0 : (isBossRoom ? 1 : Math.min(1 + floor + room + (levelId === "hell" || levelId === "icy" ? 1 : 0), 7));
+  const obstacleTypes = levelId === "icy"
+    ? ICY_OBSTACLE_TYPES
+    : levelId === "hell"
+      ? HELL_OBSTACLE_TYPES
+      : OBSTACLE_TYPES;
   const spawnPoint = isEventRoom
     ? { x: roomWidth / 2, y: roomHeight - 80 }
     : { x: 130, y: roomHeight / 2 };
@@ -131,7 +161,7 @@ export function createRoomLayout({ floor, room, isBossRoom, levelId = "skeleton"
 
   const enemies = Array.from({ length: enemyCount }, (_, index) => {
     const type = isBossRoom
-      ? (levelId === "hell" ? "infernalBoss" : "boss")
+      ? (levelId === "icy" ? "frostTyrant" : levelId === "hell" ? "infernalBoss" : "boss")
       : pickEnemyType(floor, levelId);
     const enemyReservedPoints = [
       { ...spawnPoint, radius: 235 },
@@ -161,6 +191,28 @@ export function createRoomLayout({ floor, room, isBossRoom, levelId = "skeleton"
     };
   });
 
+  const traps = [];
+  if (levelId === "icy" && !isBossRoom && !isEventRoom) {
+    const trapCount = randomBetween(0, 2);
+    let trapAttempts = 0;
+    while (traps.length < trapCount && trapAttempts < 80) {
+      trapAttempts += 1;
+      const trap = {
+        id: `icy-trap-${traps.length}`,
+        type: "frostSpikeTrap",
+        x: randomBetween(roomPadding + 140, roomWidth - roomPadding - 140),
+        y: randomBetween(roomPadding + 120, roomHeight - roomPadding - 120),
+        radius: 34,
+      };
+      const tooCloseToReservedPoint = isTooClose(trap, reservedPoints);
+      const tooCloseToObstacle = isTooClose(trap, obstacles.map((item) => ({ ...item, radius: 82 })));
+      const tooCloseToTrap = isTooClose(trap, traps.map((item) => ({ ...item, radius: 105 })));
+      if (!tooCloseToReservedPoint && !tooCloseToObstacle && !tooCloseToTrap) {
+        traps.push(trap);
+      }
+    }
+  }
+
   return {
     room: {
       x: 32,
@@ -180,6 +232,7 @@ export function createRoomLayout({ floor, room, isBossRoom, levelId = "skeleton"
       height: isEventRoom ? 54 : 110,
     },
     obstacles,
+    traps,
     enemies,
   };
 }

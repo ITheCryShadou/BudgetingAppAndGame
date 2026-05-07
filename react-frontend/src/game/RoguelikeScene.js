@@ -21,9 +21,17 @@ import rivenWalkSheet from "../assets/game/heroes/riven/Riven-Walk.png";
 import rivenRunSheet from "../assets/game/heroes/riven/Riven-Run.png";
 import rivenDashSheet from "../assets/game/heroes/riven/Riven-Dash.png";
 import rivenAttackSheet from "../assets/game/heroes/riven/Riven-Attack.png";
-import rivenDamagedSheet from "../assets/game/heroes/riven/Riven-DamageTaken.png";
+import rivenSkillSheet from "../assets/game/heroes/riven/Riven-Skill.png";
+import rivenSuperAttackSheet from "../assets/game/heroes/riven/Riven-SuperAttack.png";
+import rivenDamagedSheet from "../assets/game/heroes/riven/Riven-TakeDamage.png";
 import rivenDeathSheet from "../assets/game/heroes/riven/Riven-Death.png";
-import rivenProjectile from "../assets/game/heroes/riven/Riven-AttackCritProjectin.png";
+import rivenDaggerProjectile from "../assets/game/heroes/riven/Riven-DaggerProjectile.png";
+import rivenDashTrailProjectile from "../assets/game/heroes/riven/Riven-DashTrailProjectile.png";
+import rivenImpactHitEffect from "../assets/game/heroes/riven/Riven-ImpactHitEffect.png";
+import rivenLargeSlashArcProjectile from "../assets/game/heroes/riven/Riven-LargeSlashArcProjectile.png";
+import rivenSkillOrbProjectile from "../assets/game/heroes/riven/Riven-SkillOrbProjectile.png";
+import rivenSmallSlashArcProjectile from "../assets/game/heroes/riven/Riven-SmallSlashArcProjectile.png";
+import rivenSuperAttackBurstProjectile from "../assets/game/heroes/riven/Riven-SuperAttackBurstProjectile.png";
 import skeletonCommonIdle from "../assets/game/enemies/skeleton-common/SkeletonCommon-Idle.png";
 import skeletonCommonWalk from "../assets/game/enemies/skeleton-common/SkeletonCommon-Walk.png";
 import skeletonCommonAttack from "../assets/game/enemies/skeleton-common/SkeletonCommon-Attack.png";
@@ -124,6 +132,14 @@ import hellBgBoss from "../assets/game/hell-bg-boss.png";
 import hellTunnel from "../assets/game/hell-tunnel.png";
 import hellTunnelBoss from "../assets/game/hell-tunnel-boss.png";
 import travelerRoomBg from "../assets/game/traveler-room-bg.png";
+import awardRoomBg from "../assets/game/special-rooms/award-room.png";
+import challengeRoomBg from "../assets/game/special-rooms/challenge-room.png";
+import cursedRoomBg from "../assets/game/special-rooms/cursed-room.png";
+import restRoomBg from "../assets/game/special-rooms/rest-room.png";
+import awardTunnelBg from "../assets/game/special-rooms/award-tunnel.png";
+import challengeTunnelBg from "../assets/game/special-rooms/challenge-tunnel.png";
+import cursedTunnelBg from "../assets/game/special-rooms/cursed-tunnel.png";
+import restTunnelBg from "../assets/game/special-rooms/rest-tunnel.png";
 import dungeonChestIcon from "../assets/game/chests/dungeon-chest-icon.png";
 import dungeonChestOpenSheet from "../assets/game/chests/dungeon-chest-open.png";
 import dungeonChestOpenedIcon from "../assets/game/chests/dungeon-chest-opened.png";
@@ -166,6 +182,90 @@ import hellRock from "../assets/game/hell/obstacles/HellRock.png";
 import hellSpikes from "../assets/game/hell/obstacles/HellSpikes.png";
 import hellTorch from "../assets/game/hell/obstacles/HellTorch.png";
 import hellTable from "../assets/game/hell/obstacles/Table.png";
+import icyBgCommon from "../assets/game/icy/room-bg/IcyKingdom-common.png";
+import icyBgBoss from "../assets/game/icy/room-bg/IcyKingdom-Boss.png";
+import icyTunnelBg from "../assets/game/icy/room-bg/IcyKingdomTunnelBg.png";
+import frostBladeWarriorIdle from "../assets/game/icy/Enemy/FrostBladeWarrior/FrostBladeWarrior-Idle.png";
+import frostBladeWarriorWalk from "../assets/game/icy/Enemy/FrostBladeWarrior/FrostBladeWarrior-Walk.png";
+import frostBladeWarriorRun from "../assets/game/icy/Enemy/FrostBladeWarrior/FrostBladeWarrior-Run.png";
+import frostBladeWarriorAttack from "../assets/game/icy/Enemy/FrostBladeWarrior/FrostBladeWarrior-Attack.png";
+import frostBladeWarriorSuperAttack from "../assets/game/icy/Enemy/FrostBladeWarrior/FrostBladeWarrior-SuperAttack.png";
+import frostBladeWarriorDamage from "../assets/game/icy/Enemy/FrostBladeWarrior/FrostBladeWarrior-DamageTaken.png";
+import frostBladeWarriorDeath from "../assets/game/icy/Enemy/FrostBladeWarrior/FrostBladeWarrior-Death.png";
+import frostPriestIdle from "../assets/game/icy/Enemy/FrostPriest/FrostPriest-Idle.png";
+import frostPriestWalk from "../assets/game/icy/Enemy/FrostPriest/FrostPriest-Walk.png";
+import frostPriestRun from "../assets/game/icy/Enemy/FrostPriest/FrostPriest-Run.png";
+import frostPriestAttack from "../assets/game/icy/Enemy/FrostPriest/FrostPriest-Attack.png";
+import frostPriestSuperAttack from "../assets/game/icy/Enemy/FrostPriest/FrostPriest-SuperAttack.png";
+import frostPriestDamage from "../assets/game/icy/Enemy/FrostPriest/FrostPriest-DamageTaken.png";
+import frostPriestDeath from "../assets/game/icy/Enemy/FrostPriest/FrostPriest-Death.png";
+import frostPriestProjectileSpawn from "../assets/game/icy/Enemy/FrostPriest/FrostPriestProjectile-Spawn.png";
+import frostPriestProjectileFly from "../assets/game/icy/Enemy/FrostPriest/FrostPriestProjectile-Fly.png";
+import frostPriestProjectileImpact from "../assets/game/icy/Enemy/FrostPriest/FrostPriestProjectile-Impact.png";
+import frostPriestProjectileChargedShot from "../assets/game/icy/Enemy/FrostPriest/FrostPriestProjectile-ChargedShot.png";
+import frostPriestProjectileChargedExplosion from "../assets/game/icy/Enemy/FrostPriest/FrostPriestProjectile-ChargedShotExplosion.png";
+import frozenKnightIdle from "../assets/game/icy/Enemy/FrozenKnight/FrozenKnight-Idle.png";
+import frozenKnightWalk from "../assets/game/icy/Enemy/FrozenKnight/FrozenKnight-Walk.png";
+import frozenKnightRun from "../assets/game/icy/Enemy/FrozenKnight/FrozenKnight-Run.png";
+import frozenKnightAttack from "../assets/game/icy/Enemy/FrozenKnight/FrozenKnight-Attack.png";
+import frozenKnightSuperAttack from "../assets/game/icy/Enemy/FrozenKnight/FrozenKnight-SuperAttack.png";
+import frozenKnightDamage from "../assets/game/icy/Enemy/FrozenKnight/FrozenKnight-DamageTaken.png";
+import frozenKnightDeath from "../assets/game/icy/Enemy/FrozenKnight/FrozenKnight-Death.png";
+import iceAxeTitanIdle from "../assets/game/icy/Enemy/IceAxeTitan/IceAxeTitan-Idle.png";
+import iceAxeTitanWalk from "../assets/game/icy/Enemy/IceAxeTitan/IceAxeTitan-Walk.png";
+import iceAxeTitanRun from "../assets/game/icy/Enemy/IceAxeTitan/IceAxeTitan-Run.png";
+import iceAxeTitanAttack from "../assets/game/icy/Enemy/IceAxeTitan/IceAxeTitan-Attack.png";
+import iceAxeTitanSuperAttack from "../assets/game/icy/Enemy/IceAxeTitan/IceAxeTitan-SuperAttack.png";
+import iceAxeTitanDamage from "../assets/game/icy/Enemy/IceAxeTitan/IceAxeTitan-DamageTaken.png";
+import iceAxeTitanDeath from "../assets/game/icy/Enemy/IceAxeTitan/IceAxeTitan-Death.png";
+import icebladeMasterIdle from "../assets/game/icy/Enemy/IcebladeMaster/IcebladeMaster-Idle.png";
+import icebladeMasterWalk from "../assets/game/icy/Enemy/IcebladeMaster/IcebladeMaster-Walk.png";
+import icebladeMasterRun from "../assets/game/icy/Enemy/IcebladeMaster/IcebladeMaster-Run.png";
+import icebladeMasterAttack from "../assets/game/icy/Enemy/IcebladeMaster/IcebladeMaster-Attack.png";
+import icebladeMasterSuperAttack from "../assets/game/icy/Enemy/IcebladeMaster/IcebladeMaster-SuperAttack.png";
+import icebladeMasterDamage from "../assets/game/icy/Enemy/IcebladeMaster/IcebladeMaster-DamageTaken.png";
+import icebladeMasterDeath from "../assets/game/icy/Enemy/IcebladeMaster/IcebladeMaster-Death.png";
+import iceWraithIdle from "../assets/game/icy/Enemy/IceWraith/IceWraith-Idle.png";
+import iceWraithWalk from "../assets/game/icy/Enemy/IceWraith/IceWraith-Walk.png";
+import iceWraithRun from "../assets/game/icy/Enemy/IceWraith/IceWraith-Run.png";
+import iceWraithAttack from "../assets/game/icy/Enemy/IceWraith/IceWraith-Attack.png";
+import iceWraithSuperAttack from "../assets/game/icy/Enemy/IceWraith/IceWraith-SuperAttack.png";
+import iceWraithDamage from "../assets/game/icy/Enemy/IceWraith/IceWraith-DamageTaken.png";
+import iceWraithDeath from "../assets/game/icy/Enemy/IceWraith/IceWraith-Death.png";
+import iceWraithProjectileCharge from "../assets/game/icy/Enemy/IceWraith/IceWraithProjectile-Charge.png";
+import iceWraithProjectileFly from "../assets/game/icy/Enemy/IceWraith/IceWraithProjectile-Fly.png";
+import iceWraithProjectileImpact from "../assets/game/icy/Enemy/IceWraith/IceWraithProjectile-Impact.png";
+import iceWraithProjectileNova from "../assets/game/icy/Enemy/IceWraith/IceWraithProjectile-Nova.png";
+import frostTyrantIdle from "../assets/game/icy/Enemy/Boss/FrostTyrant-Idle.png";
+import frostTyrantWalk from "../assets/game/icy/Enemy/Boss/FrostTyrant-Walk.png";
+import frostTyrantRun from "../assets/game/icy/Enemy/Boss/FrostTyrant-Run.png";
+import frostTyrantAttack from "../assets/game/icy/Enemy/Boss/FrostTyrant-Attack.png";
+import frostTyrantHeavyAttack from "../assets/game/icy/Enemy/Boss/FrostTyrant-HeavyAttack.png";
+import frostTyrantRangedAttack from "../assets/game/icy/Enemy/Boss/FrostTyrant-RangedAttack.png";
+import frostTyrantSuperAttack from "../assets/game/icy/Enemy/Boss/FrostTyrant-SuperAttack.png";
+import frostTyrantDamage from "../assets/game/icy/Enemy/Boss/FrostTyrant-DamageTaken.png";
+import frostTyrantDeath from "../assets/game/icy/Enemy/Boss/FrostTyrant-Death.png";
+import frostTyrantIntoIceStart from "../assets/game/icy/Enemy/Boss/FrostTyranthIntoIce-Start.png";
+import frostTyrantIntoIceEnd from "../assets/game/icy/Enemy/Boss/FrostTyranthIntoIce-End.png";
+import frostTyrantIceLance from "../assets/game/icy/Enemy/Boss/FrostTyrantProjectile-IceLance.png";
+import frostTyrantFrostOrb from "../assets/game/icy/Enemy/Boss/FrostTyrantProjectile-FrostOrb.png";
+import matriarchSoul from "../assets/game/icy/Enemy/Boss/FrostTyrantProjectile-MatriarchSoul.png";
+import matriarchSoulAppear from "../assets/game/icy/Enemy/Boss/MatriarchSoul-Appear.png";
+import matriarchSoulDeath from "../assets/game/icy/Enemy/Boss/MatriarchSoul-Death.png";
+import matriarchSoulShardBurst from "../assets/game/icy/Enemy/Boss/MatriarchSoulProjectile-ShardBurst.png";
+import matriarchSoulBlizzardImpact from "../assets/game/icy/Enemy/Boss/MatriarchSoulProjectile-BlizzardImpact.png";
+import fallingIceSpikeIndicator from "../assets/game/icy/Mechanics/FallingIceSpikeIndikator-Projectile.png";
+import fallingIceSpikeTrap from "../assets/game/icy/Mechanics/FallingIceSpikeTrap-Projectile.png";
+import frostSpikeTrap from "../assets/game/icy/Mechanics/FrostSpikeTrap-Projectile.png";
+import icyChainedTotem from "../assets/game/icy/obstacles/ChainedIceTotem.png";
+import icyCrackedObelisk from "../assets/game/icy/obstacles/CrackedIcyObelisk.png";
+import icyFrostedBrazier from "../assets/game/icy/obstacles/FrostedBrazier.png";
+import icyRunePedestal from "../assets/game/icy/obstacles/FrostRunePedestal.png";
+import icySarcophagus from "../assets/game/icy/obstacles/FrozenSarcophagus.png";
+import icyStonePillar from "../assets/game/icy/obstacles/FrozenStonePillar.png";
+import icyFrostStatue from "../assets/game/icy/obstacles/RuinedFrostStatue.png";
+import icySnowCrate from "../assets/game/icy/obstacles/SnowCoveredCrate.png";
+import icySpikedMound from "../assets/game/icy/obstacles/SpikedIceMound.png";
 import {
   GAME_RULES,
   ENEMY_TYPES,
@@ -200,14 +300,113 @@ const NOX_PROJECTILE_STRIPS = {
   superBurst: { source: "noxSuperSpellBurstProjectile", width: 1118, height: 197, frames: 7, fps: 11 },
 };
 const RIVEN_STRIPS = {
-  idle: { source: "rivenIdleSheet", width: 109, height: 116, frames: 1, fps: 1 },
-  walk: { source: "rivenWalkSheet", width: 1022, height: 107, frames: 8, fps: 9 },
-  fastWalk: { source: "rivenRunSheet", width: 1026, height: 113, frames: 8, fps: 12 },
-  dash: { source: "rivenDashSheet", width: 765, height: 88, frames: 6, fps: 14 },
-  attack: { source: "rivenAttackSheet", width: 641, height: 104, frames: 5, fps: 13 },
-  damaged: { source: "rivenDamagedSheet", width: 627, height: 98, frames: 5, fps: 12 },
-  death: { source: "rivenDeathSheet", width: 884, height: 97, frames: 7, fps: 8 },
+  idle: { source: "rivenIdleSheet", width: 911, height: 105, frames: 8, fps: 6 },
+  walk: { source: "rivenWalkSheet", width: 1020, height: 95, frames: 9, fps: 10 },
+  fastWalk: { source: "rivenRunSheet", width: 1045, height: 95, frames: 9, fps: 13 },
+  dash: { source: "rivenDashSheet", width: 758, height: 100, frames: 6, fps: 15 },
+  attack: { source: "rivenAttackSheet", width: 1140, height: 102, frames: 10, fps: 15 },
+  skillAttack: { source: "rivenSkillSheet", width: 887, height: 100, frames: 8, fps: 13 },
+  superAttack: { source: "rivenSuperAttackSheet", width: 1158, height: 95, frames: 10, fps: 14 },
+  damaged: { source: "rivenDamagedSheet", width: 441, height: 100, frames: 4, fps: 11 },
+  death: { source: "rivenDeathSheet", width: 703, height: 102, frames: 6, fps: 8 },
 };
+const RIVEN_PROJECTILE_STRIPS = {
+  dagger: { source: "rivenDaggerProjectile", width: 1028, height: 77, frames: 9, fps: 14 },
+  dashTrail: { source: "rivenDashTrailProjectile", width: 844, height: 88, frames: 8, fps: 14 },
+  hitImpact: { source: "rivenImpactHitEffect", width: 663, height: 112, frames: 6, fps: 15 },
+  largeSlash: { source: "rivenLargeSlashArcProjectile", width: 945, height: 116, frames: 9, fps: 13 },
+  skillOrb: { source: "rivenSkillOrbProjectile", width: 925, height: 84, frames: 8, fps: 13 },
+  smallSlash: { source: "rivenSmallSlashArcProjectile", width: 700, height: 74, frames: 7, fps: 14 },
+  superBurst: { source: "rivenSuperAttackBurstProjectile", width: 1134, height: 184, frames: 9, fps: 12 },
+};
+
+const ICY_IMAGE_ASSETS = [
+  ["icyBgCommon", icyBgCommon],
+  ["icyBgBoss", icyBgBoss],
+  ["icyTunnelBg", icyTunnelBg],
+  ["frostBladeWarriorIdle", frostBladeWarriorIdle],
+  ["frostBladeWarriorWalk", frostBladeWarriorWalk],
+  ["frostBladeWarriorRun", frostBladeWarriorRun],
+  ["frostBladeWarriorAttack", frostBladeWarriorAttack],
+  ["frostBladeWarriorSuperAttack", frostBladeWarriorSuperAttack],
+  ["frostBladeWarriorDamage", frostBladeWarriorDamage],
+  ["frostBladeWarriorDeath", frostBladeWarriorDeath],
+  ["frostPriestIdle", frostPriestIdle],
+  ["frostPriestWalk", frostPriestWalk],
+  ["frostPriestRun", frostPriestRun],
+  ["frostPriestAttack", frostPriestAttack],
+  ["frostPriestSuperAttack", frostPriestSuperAttack],
+  ["frostPriestDamage", frostPriestDamage],
+  ["frostPriestDeath", frostPriestDeath],
+  ["frostPriestProjectileSpawn", frostPriestProjectileSpawn],
+  ["frostPriestProjectileFly", frostPriestProjectileFly],
+  ["frostPriestProjectileImpact", frostPriestProjectileImpact],
+  ["frostPriestProjectileChargedShot", frostPriestProjectileChargedShot],
+  ["frostPriestProjectileChargedExplosion", frostPriestProjectileChargedExplosion],
+  ["frozenKnightIdle", frozenKnightIdle],
+  ["frozenKnightWalk", frozenKnightWalk],
+  ["frozenKnightRun", frozenKnightRun],
+  ["frozenKnightAttack", frozenKnightAttack],
+  ["frozenKnightSuperAttack", frozenKnightSuperAttack],
+  ["frozenKnightDamage", frozenKnightDamage],
+  ["frozenKnightDeath", frozenKnightDeath],
+  ["iceAxeTitanIdle", iceAxeTitanIdle],
+  ["iceAxeTitanWalk", iceAxeTitanWalk],
+  ["iceAxeTitanRun", iceAxeTitanRun],
+  ["iceAxeTitanAttack", iceAxeTitanAttack],
+  ["iceAxeTitanSuperAttack", iceAxeTitanSuperAttack],
+  ["iceAxeTitanDamage", iceAxeTitanDamage],
+  ["iceAxeTitanDeath", iceAxeTitanDeath],
+  ["icebladeMasterIdle", icebladeMasterIdle],
+  ["icebladeMasterWalk", icebladeMasterWalk],
+  ["icebladeMasterRun", icebladeMasterRun],
+  ["icebladeMasterAttack", icebladeMasterAttack],
+  ["icebladeMasterSuperAttack", icebladeMasterSuperAttack],
+  ["icebladeMasterDamage", icebladeMasterDamage],
+  ["icebladeMasterDeath", icebladeMasterDeath],
+  ["iceWraithIdle", iceWraithIdle],
+  ["iceWraithWalk", iceWraithWalk],
+  ["iceWraithRun", iceWraithRun],
+  ["iceWraithAttack", iceWraithAttack],
+  ["iceWraithSuperAttack", iceWraithSuperAttack],
+  ["iceWraithDamage", iceWraithDamage],
+  ["iceWraithDeath", iceWraithDeath],
+  ["iceWraithProjectileCharge", iceWraithProjectileCharge],
+  ["iceWraithProjectileFly", iceWraithProjectileFly],
+  ["iceWraithProjectileImpact", iceWraithProjectileImpact],
+  ["iceWraithProjectileNova", iceWraithProjectileNova],
+  ["frostTyrantIdle", frostTyrantIdle],
+  ["frostTyrantWalk", frostTyrantWalk],
+  ["frostTyrantRun", frostTyrantRun],
+  ["frostTyrantAttack", frostTyrantAttack],
+  ["frostTyrantHeavyAttack", frostTyrantHeavyAttack],
+  ["frostTyrantRangedAttack", frostTyrantRangedAttack],
+  ["frostTyrantSuperAttack", frostTyrantSuperAttack],
+  ["frostTyrantDamage", frostTyrantDamage],
+  ["frostTyrantDeath", frostTyrantDeath],
+  ["frostTyrantIntoIceStart", frostTyrantIntoIceStart],
+  ["frostTyrantIntoIceEnd", frostTyrantIntoIceEnd],
+  ["frostTyrantIceLance", frostTyrantIceLance],
+  ["frostTyrantFrostOrb", frostTyrantFrostOrb],
+  ["matriarchSoul", matriarchSoul],
+  ["matriarchSoulAppear", matriarchSoulAppear],
+  ["matriarchSoulDeath", matriarchSoulDeath],
+  ["matriarchSoulShardBurst", matriarchSoulShardBurst],
+  ["matriarchSoulBlizzardImpact", matriarchSoulBlizzardImpact],
+  ["fallingIceSpikeIndicator", fallingIceSpikeIndicator],
+  ["fallingIceSpikeTrap", fallingIceSpikeTrap],
+  ["frostSpikeTrap", frostSpikeTrap],
+  ["icyChainedTotem", icyChainedTotem],
+  ["icyCrackedObelisk", icyCrackedObelisk],
+  ["icyFrostedBrazier", icyFrostedBrazier],
+  ["icyRunePedestal", icyRunePedestal],
+  ["icySarcophagus", icySarcophagus],
+  ["icyStonePillar", icyStonePillar],
+  ["icyFrostStatue", icyFrostStatue],
+  ["icySnowCrate", icySnowCrate],
+  ["icySpikedMound", icySpikedMound],
+];
+
 const HERO_STRIPS = {
   nox: PLAYER_STRIPS,
   riven: RIVEN_STRIPS,
@@ -363,6 +562,99 @@ const ENEMY_STRIPS = {
     damaged: { source: "infernalBossP2Damage", width: 807, height: 107, frames: 7, fps: 11 },
     death: { source: "infernalBossP2Death", width: 1062, height: 97, frames: 8, fps: 8 },
   },
+  frostBladeWarrior: {
+    idle: { source: "frostBladeWarriorIdle", width: 937, height: 113, frames: 8, fps: 6 },
+    walk: { source: "frostBladeWarriorWalk", width: 1072, height: 113, frames: 8, fps: 9 },
+    run: { source: "frostBladeWarriorRun", width: 1072, height: 113, frames: 8, fps: 11 },
+    attack: { source: "frostBladeWarriorAttack", width: 1060, height: 119, frames: 8, fps: 12 },
+    superAttack: { source: "frostBladeWarriorSuperAttack", width: 1437, height: 134, frames: 10, fps: 11 },
+    damaged: { source: "frostBladeWarriorDamage", width: 637, height: 104, frames: 5, fps: 10 },
+    death: { source: "frostBladeWarriorDeath", width: 1152, height: 86, frames: 9, fps: 8 },
+  },
+  frostPriest: {
+    idle: { source: "frostPriestIdle", width: 992, height: 116, frames: 8, fps: 5 },
+    walk: { source: "frostPriestWalk", width: 1041, height: 112, frames: 8, fps: 7 },
+    run: { source: "frostPriestRun", width: 1077, height: 112, frames: 8, fps: 9 },
+    attack: { source: "frostPriestAttack", width: 1208, height: 112, frames: 10, fps: 11 },
+    superAttack: { source: "frostPriestSuperAttack", width: 1409, height: 125, frames: 10, fps: 10 },
+    damaged: { source: "frostPriestDamage", width: 659, height: 97, frames: 5, fps: 10 },
+    death: { source: "frostPriestDeath", width: 1011, height: 88, frames: 8, fps: 8 },
+  },
+  frozenKnight: {
+    idle: { source: "frozenKnightIdle", width: 960, height: 105, frames: 8, fps: 5 },
+    walk: { source: "frozenKnightWalk", width: 1096, height: 105, frames: 8, fps: 8 },
+    run: { source: "frozenKnightRun", width: 1089, height: 105, frames: 8, fps: 10 },
+    attack: { source: "frozenKnightAttack", width: 1305, height: 109, frames: 10, fps: 11 },
+    superAttack: { source: "frozenKnightSuperAttack", width: 1387, height: 109, frames: 10, fps: 10 },
+    damaged: { source: "frozenKnightDamage", width: 713, height: 109, frames: 5, fps: 10 },
+    death: { source: "frozenKnightDeath", width: 1040, height: 106, frames: 8, fps: 8 },
+  },
+  iceAxeTitan: {
+    idle: { source: "iceAxeTitanIdle", width: 1036, height: 117, frames: 8, fps: 5 },
+    walk: { source: "iceAxeTitanWalk", width: 1042, height: 117, frames: 7, fps: 7 },
+    run: { source: "iceAxeTitanRun", width: 1042, height: 117, frames: 7, fps: 10 },
+    attack: { source: "iceAxeTitanAttack", width: 1208, height: 117, frames: 9, fps: 10 },
+    superAttack: { source: "iceAxeTitanSuperAttack", width: 1379, height: 131, frames: 10, fps: 10 },
+    damaged: { source: "iceAxeTitanDamage", width: 652, height: 97, frames: 5, fps: 10 },
+    death: { source: "iceAxeTitanDeath", width: 1372, height: 91, frames: 10, fps: 8 },
+  },
+  icebladeMaster: {
+    idle: { source: "icebladeMasterIdle", width: 926, height: 116, frames: 8, fps: 6 },
+    walk: { source: "icebladeMasterWalk", width: 1063, height: 116, frames: 8, fps: 9 },
+    run: { source: "icebladeMasterRun", width: 1068, height: 116, frames: 8, fps: 11 },
+    attack: { source: "icebladeMasterAttack", width: 1145, height: 113, frames: 9, fps: 13 },
+    superAttack: { source: "icebladeMasterSuperAttack", width: 1398, height: 113, frames: 10, fps: 12 },
+    damaged: { source: "icebladeMasterDamage", width: 648, height: 108, frames: 5, fps: 11 },
+    death: { source: "icebladeMasterDeath", width: 1031, height: 91, frames: 8, fps: 8 },
+  },
+  iceWraith: {
+    idle: { source: "iceWraithIdle", width: 930, height: 130, frames: 8, fps: 6 },
+    walk: { source: "iceWraithWalk", width: 1046, height: 130, frames: 8, fps: 8 },
+    attack: { source: "iceWraithAttack", width: 1264, height: 120, frames: 10, fps: 11 },
+    superAttack: { source: "iceWraithSuperAttack", width: 1413, height: 120, frames: 10, fps: 10 },
+    damaged: { source: "iceWraithDamage", width: 588, height: 101, frames: 5, fps: 10 },
+    death: { source: "iceWraithDeath", width: 1037, height: 94, frames: 8, fps: 8 },
+  },
+  frostTyrant: {
+    idle: { source: "frostTyrantIdle", width: 826, height: 154, frames: 5, fps: 5 },
+    walk: { source: "frostTyrantWalk", width: 981, height: 154, frames: 6, fps: 7 },
+    run: { source: "frostTyrantRun", width: 1053, height: 143, frames: 7, fps: 10 },
+    attack: { source: "frostTyrantAttack", width: 1416, height: 149, frames: 10, fps: 11 },
+    heavyAttack: { source: "frostTyrantHeavyAttack", width: 1446, height: 208, frames: 10, fps: 10 },
+    rangedAttack: { source: "frostTyrantRangedAttack", width: 1446, height: 208, frames: 10, fps: 10 },
+    superAttack: { source: "frostTyrantSuperAttack", width: 1448, height: 229, frames: 10, fps: 9 },
+    intoIceStart: { source: "frostTyrantIntoIceStart", width: 1019, height: 306, frames: 7, fps: 8 },
+    intoIceEnd: { source: "frostTyrantIntoIceEnd", width: 1019, height: 306, frames: 7, fps: 8 },
+    damaged: { source: "frostTyrantDamage", width: 1446, height: 191, frames: 10, fps: 10 },
+    death: { source: "frostTyrantDeath", width: 1446, height: 240, frames: 10, fps: 8 },
+  },
+  matriarchSoul: {
+    idle: { source: "matriarchSoul", width: 370, height: 884, frames: 1, fps: 1 },
+    appear: { source: "matriarchSoulAppear", width: 1480, height: 614, frames: 8, fps: 8 },
+    attack: { source: "matriarchSoulShardBurst", width: 1010, height: 209, frames: 7, fps: 11 },
+    superAttack: { source: "matriarchSoulBlizzardImpact", width: 1015, height: 258, frames: 7, fps: 10 },
+    damaged: { source: "matriarchSoul", width: 370, height: 884, frames: 1, fps: 1 },
+    death: { source: "matriarchSoulDeath", width: 1371, height: 589, frames: 7, fps: 8 },
+  },
+};
+
+const ICY_PROJECTILE_STRIPS = {
+  frostPriestSpawn: { source: "frostPriestProjectileSpawn", width: 948, height: 124, frames: 7, fps: 8 },
+  frostPriestFly: { source: "frostPriestProjectileFly", width: 1038, height: 82, frames: 8, fps: 11 },
+  frostPriestImpact: { source: "frostPriestProjectileImpact", width: 1089, height: 139, frames: 8, fps: 12 },
+  frostPriestChargedShot: { source: "frostPriestProjectileChargedShot", width: 1385, height: 105, frames: 10, fps: 12 },
+  frostPriestChargedExplosion: { source: "frostPriestProjectileChargedExplosion", width: 1409, height: 172, frames: 10, fps: 12 },
+  iceWraithCharge: { source: "iceWraithProjectileCharge", width: 1085, height: 168, frames: 8, fps: 10 },
+  iceWraithFly: { source: "iceWraithProjectileFly", width: 1063, height: 117, frames: 8, fps: 11 },
+  iceWraithImpact: { source: "iceWraithProjectileImpact", width: 1385, height: 166, frames: 10, fps: 12 },
+  iceWraithNova: { source: "iceWraithProjectileNova", width: 1385, height: 180, frames: 10, fps: 12 },
+  frostTyrantIceLance: { source: "frostTyrantIceLance", width: 997, height: 213, frames: 7, fps: 12 },
+  frostTyrantFrostOrb: { source: "frostTyrantFrostOrb", width: 992, height: 218, frames: 7, fps: 10 },
+  matriarchSoulShard: { source: "matriarchSoulShardBurst", width: 1010, height: 209, frames: 7, fps: 12 },
+  matriarchSoulBlizzard: { source: "matriarchSoulBlizzardImpact", width: 1015, height: 258, frames: 7, fps: 11 },
+  fallingIceSpikeIndicator: { source: "fallingIceSpikeIndicator", width: 1653, height: 243, frames: 10, fps: 12 },
+  fallingIceSpikeTrap: { source: "fallingIceSpikeTrap", width: 1624, height: 482, frames: 10, fps: 13 },
+  frostSpikeTrap: { source: "frostSpikeTrap", width: 1649, height: 129, frames: 10, fps: 10 },
 };
 
 function createEnemyKeys(prefix, strips) {
@@ -408,7 +700,108 @@ const ENEMY_FRAME_KEYS = {
   hellTitan: "enemyHellTitanIdle0",
   impLittle: "enemyImpLittleIdle0",
   infernalBoss: "enemyInfernalBossIdle0",
+  frostBladeWarrior: "enemyFrostBladeWarriorIdle0",
+  frostPriest: "enemyFrostPriestIdle0",
+  frozenKnight: "enemyFrozenKnightIdle0",
+  iceAxeTitan: "enemyIceAxeTitanIdle0",
+  icebladeMaster: "enemyIcebladeMasterIdle0",
+  iceWraith: "enemyIceWraithIdle0",
+  frostTyrant: "enemyFrostTyrantIdle0",
+  matriarchSoul: "enemyMatriarchSoulIdle0",
 };
+
+const ICY_WALK_ANCHOR_PROFILES = {
+  enemyFrostBladeWarrior: { footBandRatio: 0.24 },
+  enemyFrostPriest: { footBandRatio: 0.25 },
+  enemyFrozenKnight: { footBandRatio: 0.22 },
+  enemyIceAxeTitan: { footBandRatio: 0.2 },
+  enemyIcebladeMaster: { footBandRatio: 0.28 },
+  enemyIceWraith: { footBandRatio: 0.3 },
+};
+
+const ICY_MOVEMENT_LOOP_FRAMES = {
+  frostBladeWarrior: [0, 1, 2, 3, 4, 5, 6, 7],
+  frostPriest: [0, 1, 2, 3, 4, 5, 6, 7],
+  frozenKnight: [0, 1, 2, 3, 4, 5, 6, 7],
+  iceAxeTitan: [0, 1, 2, 3, 4, 5, 6],
+  icebladeMaster: [0, 1, 2, 3, 4, 5, 6, 7],
+  iceWraith: [0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1],
+};
+
+const SPECIAL_ROOM_TEXTURES = {
+  award: "awardRoomBg",
+  challenge: "challengeRoomBg",
+  cursed: "cursedRoomBg",
+  rest: "restRoomBg",
+};
+
+const SPECIAL_TUNNEL_TEXTURES = {
+  award: "awardTunnelBg",
+  challenge: "challengeTunnelBg",
+  cursed: "cursedTunnelBg",
+  rest: "restTunnelBg",
+};
+
+const CHALLENGE_DASH_RULES = [
+  {
+    id: "cooldown2",
+    label: "Dash cooldown x2",
+    detail: "Dash returns slower",
+  },
+  {
+    id: "oneCharge",
+    label: "Dash one charge",
+    detail: "One dash for the trial",
+  },
+  {
+    id: "disabledStart",
+    label: "Dash wakes late",
+    detail: "Dash locked first 25s",
+  },
+  {
+    id: "eliteKill",
+    label: "Dash from elite",
+    detail: "Kill the elite to restore dash",
+  },
+];
+
+const CHALLENGE_VARIANTS = [
+  {
+    id: "easy",
+    title: "Easy Trial",
+    detail: "Fewer enemies, normal reward",
+    waves: 3,
+    timeLimit: 50_000,
+    speedMultiplier: 1.18,
+    healthMultiplier: 0.95,
+    extraEnemies: -1,
+    reward: "normal",
+  },
+  {
+    id: "hard",
+    title: "Hard Trial",
+    detail: "More enemies, rare reward",
+    waves: 4,
+    timeLimit: 48_000,
+    speedMultiplier: 1.35,
+    healthMultiplier: 1.2,
+    extraEnemies: 1,
+    reward: "rare",
+  },
+  {
+    id: "insane",
+    title: "Insane Trial",
+    detail: "Elite enemies, cursed or epic reward",
+    waves: 3,
+    timeLimit: 42_000,
+    speedMultiplier: 1.48,
+    healthMultiplier: 1.55,
+    extraEnemies: 1,
+    aroundPlayer: true,
+    eliteEnemies: true,
+    reward: "insane",
+  },
+];
 const ANIMATION_KEYS = {
   skeleton: createEnemyKeys("enemySkeleton", ENEMY_STRIPS.skeleton),
   guard: createEnemyKeys("enemyGuard", ENEMY_STRIPS.guard),
@@ -422,6 +815,14 @@ const ANIMATION_KEYS = {
   impLittle: createEnemyKeys("enemyImpLittle", ENEMY_STRIPS.impLittle),
   infernalBoss: createEnemyKeys("enemyInfernalBoss", ENEMY_STRIPS.infernalBoss),
   infernalBossPhase2: createEnemyKeys("enemyInfernalBossPhase2", ENEMY_STRIPS.infernalBossPhase2),
+  frostBladeWarrior: createEnemyKeys("enemyFrostBladeWarrior", ENEMY_STRIPS.frostBladeWarrior),
+  frostPriest: createEnemyKeys("enemyFrostPriest", ENEMY_STRIPS.frostPriest),
+  frozenKnight: createEnemyKeys("enemyFrozenKnight", ENEMY_STRIPS.frozenKnight),
+  iceAxeTitan: createEnemyKeys("enemyIceAxeTitan", ENEMY_STRIPS.iceAxeTitan),
+  icebladeMaster: createEnemyKeys("enemyIcebladeMaster", ENEMY_STRIPS.icebladeMaster),
+  iceWraith: createEnemyKeys("enemyIceWraith", ENEMY_STRIPS.iceWraith),
+  frostTyrant: createEnemyKeys("enemyFrostTyrant", ENEMY_STRIPS.frostTyrant),
+  matriarchSoul: createEnemyKeys("enemyMatriarchSoul", ENEMY_STRIPS.matriarchSoul),
 };
 
 const HIT_INVULNERABILITY_MS = 500;
@@ -432,6 +833,8 @@ const BOSS_REVIVE_HEALTH_RATIO = 0.3;
 const INFERNAL_PHASE_TWO_TRIGGER = 0.2;
 const INFERNAL_PHASE_TWO_HEAL = 0.7;
 const INFERNAL_MAX_TORNADOES = 5;
+const FROST_TYRANT_ICE_TRIGGER = 0.3;
+const FROST_TYRANT_SOUL_HEALTH = 25;
 
 const OBSTACLE_TEXTURES = {
   columnBroken: "obstacleColumnBroken",
@@ -452,6 +855,15 @@ const OBSTACLE_TEXTURES = {
   hellSpikes: "hellSpikes",
   hellTorch: "hellTorch",
   hellTable: "hellTable",
+  icyChainedTotem: "icyChainedTotem",
+  icyCrackedObelisk: "icyCrackedObelisk",
+  icyFrostedBrazier: "icyFrostedBrazier",
+  icyRunePedestal: "icyRunePedestal",
+  icySarcophagus: "icySarcophagus",
+  icyStonePillar: "icyStonePillar",
+  icyFrostStatue: "icyFrostStatue",
+  icySnowCrate: "icySnowCrate",
+  icySpikedMound: "icySpikedMound",
 };
 
 export default class RoguelikeScene extends Phaser.Scene {
@@ -490,9 +902,17 @@ export default class RoguelikeScene extends Phaser.Scene {
     this.load.image("rivenRunSheet", rivenRunSheet);
     this.load.image("rivenDashSheet", rivenDashSheet);
     this.load.image("rivenAttackSheet", rivenAttackSheet);
+    this.load.image("rivenSkillSheet", rivenSkillSheet);
+    this.load.image("rivenSuperAttackSheet", rivenSuperAttackSheet);
     this.load.image("rivenDamagedSheet", rivenDamagedSheet);
     this.load.image("rivenDeathSheet", rivenDeathSheet);
-    this.load.image("rivenProjectile", rivenProjectile);
+    this.load.image("rivenDaggerProjectile", rivenDaggerProjectile);
+    this.load.image("rivenDashTrailProjectile", rivenDashTrailProjectile);
+    this.load.image("rivenImpactHitEffect", rivenImpactHitEffect);
+    this.load.image("rivenLargeSlashArcProjectile", rivenLargeSlashArcProjectile);
+    this.load.image("rivenSkillOrbProjectile", rivenSkillOrbProjectile);
+    this.load.image("rivenSmallSlashArcProjectile", rivenSmallSlashArcProjectile);
+    this.load.image("rivenSuperAttackBurstProjectile", rivenSuperAttackBurstProjectile);
     this.load.image("skeletonCommonIdle", skeletonCommonIdle);
     this.load.image("skeletonCommonWalk", skeletonCommonWalk);
     this.load.image("skeletonCommonAttack", skeletonCommonAttack);
@@ -593,6 +1013,14 @@ export default class RoguelikeScene extends Phaser.Scene {
     this.load.image("hellTunnel", hellTunnel);
     this.load.image("hellTunnelBoss", hellTunnelBoss);
     this.load.image("travelerRoomBg", travelerRoomBg);
+    this.load.image("awardRoomBg", awardRoomBg);
+    this.load.image("challengeRoomBg", challengeRoomBg);
+    this.load.image("cursedRoomBg", cursedRoomBg);
+    this.load.image("restRoomBg", restRoomBg);
+    this.load.image("awardTunnelBg", awardTunnelBg);
+    this.load.image("challengeTunnelBg", challengeTunnelBg);
+    this.load.image("cursedTunnelBg", cursedTunnelBg);
+    this.load.image("restTunnelBg", restTunnelBg);
     this.load.image("dungeonChestIcon", dungeonChestIcon);
     this.load.image("dungeonChestOpenSheet", dungeonChestOpenSheet);
     this.load.image("dungeonChestOpenedIcon", dungeonChestOpenedIcon);
@@ -635,6 +1063,7 @@ export default class RoguelikeScene extends Phaser.Scene {
     this.load.image("hellSpikes", hellSpikes);
     this.load.image("hellTorch", hellTorch);
     this.load.image("hellTable", hellTable);
+    ICY_IMAGE_ASSETS.forEach(([key, source]) => this.load.image(key, source));
   }
 
   create() {
@@ -656,6 +1085,7 @@ export default class RoguelikeScene extends Phaser.Scene {
     this.tunnelsSinceTraveler = 0;
     this.hasProjectileAttack = false;
     this.hasNoxVoidBarrage = false;
+    this.hasRivenEmberBlade = false;
     this.purchasedShopCards = new Set();
     this.shopCards = [];
     this.shopCoinRerollCost = GAME_RULES.shopCoinRerollBaseCost;
@@ -663,6 +1093,17 @@ export default class RoguelikeScene extends Phaser.Scene {
     this.activeCurses = [];
     this.challengeActive = false;
     this.challengeCompleted = false;
+    this.challengeVariant = null;
+    this.challengeSpeedMultiplier = 1;
+    this.challengeHealthMultiplier = 1;
+    this.challengeDashRule = null;
+    this.challengeDashCharges = Infinity;
+    this.challengeDashDisabledUntil = 0;
+    this.challengeEliteKilled = false;
+    this.challengeEliteSpawned = false;
+    this.dashCardCooldowns = {};
+    this.lastDashCardCooldownNoticeAt = 0;
+    this.focusNextTarotBuild = null;
     this.stats = { ...PLAYER_BASE_STATS };
     this.lastAttackAt = 0;
     this.lastSkillAt = 0;
@@ -703,6 +1144,7 @@ export default class RoguelikeScene extends Phaser.Scene {
 
     this.movePlayer(time);
     this.moveEnemies(time);
+    this.updateIcyHazards(time);
     this.updateProjectiles(time);
     this.updateChallengeRoom(time);
     this.updateSpriteAnimations(time);
@@ -768,6 +1210,8 @@ export default class RoguelikeScene extends Phaser.Scene {
       this.enemyGroup,
       this.pickupGroup,
       this.projectileGroup,
+      this.icyTrapGroup,
+      this.fireTrailGroup,
       this.chestSprite,
       this.exitZone,
       this.exitLabel,
@@ -792,13 +1236,17 @@ export default class RoguelikeScene extends Phaser.Scene {
     this.shopHint = null;
     this.eventChoiceGroup = null;
     this.eventRoomTitle = null;
+    this.eventExitRevealed = false;
     this.challengeTimerText = null;
     this.challengeActive = false;
     this.challengeCompleted = false;
+    this.challengeVariant = null;
+    this.challengeSpeedMultiplier = 1;
+    this.challengeHealthMultiplier = 1;
     this.challengeNextWaveAt = 0;
-    this.challengeDrainAt = 0;
     this.roomRewardResolved = false;
     this.aliveEnemies = 0;
+    this.nextFallingIceSpikeAt = 0;
   }
 
   getGroupChildren(group) {
@@ -818,6 +1266,9 @@ export default class RoguelikeScene extends Phaser.Scene {
     Object.entries(NOX_PROJECTILE_STRIPS).forEach(([name, strip]) => {
       this.registerStrip(`nox${capitalize(name)}`, strip);
     });
+    Object.entries(RIVEN_PROJECTILE_STRIPS).forEach(([name, strip]) => {
+      this.registerStrip(`riven${capitalize(name)}`, strip);
+    });
     Object.entries(CHEST_STRIPS).forEach(([type, strip]) => {
       this.registerStrip(CHEST_TYPES[type].openPrefix, strip);
     });
@@ -834,6 +1285,17 @@ export default class RoguelikeScene extends Phaser.Scene {
     this.registerEnemyStrips("enemyImpLittle", ENEMY_STRIPS.impLittle);
     this.registerEnemyStrips("enemyInfernalBoss", ENEMY_STRIPS.infernalBoss);
     this.registerEnemyStrips("enemyInfernalBossPhase2", ENEMY_STRIPS.infernalBossPhase2);
+    this.registerEnemyStrips("enemyFrostBladeWarrior", ENEMY_STRIPS.frostBladeWarrior);
+    this.registerEnemyStrips("enemyFrostPriest", ENEMY_STRIPS.frostPriest);
+    this.registerEnemyStrips("enemyFrozenKnight", ENEMY_STRIPS.frozenKnight);
+    this.registerEnemyStrips("enemyIceAxeTitan", ENEMY_STRIPS.iceAxeTitan);
+    this.registerEnemyStrips("enemyIcebladeMaster", ENEMY_STRIPS.icebladeMaster);
+    this.registerEnemyStrips("enemyIceWraith", ENEMY_STRIPS.iceWraith);
+    this.registerEnemyStrips("enemyFrostTyrant", ENEMY_STRIPS.frostTyrant);
+    this.registerEnemyStrips("enemyMatriarchSoul", ENEMY_STRIPS.matriarchSoul);
+    Object.entries(ICY_PROJECTILE_STRIPS).forEach(([name, strip]) => {
+      this.registerStrip(name, strip);
+    });
     this.registerStrip("hellKillerProjectile", {
       source: "hellKillerProjectile",
       width: 636,
@@ -875,25 +1337,198 @@ export default class RoguelikeScene extends Phaser.Scene {
 
   registerEnemyStrips(prefix, strips) {
     Object.entries(strips).forEach(([name, strip]) => {
-      this.registerStrip(`${prefix}${capitalize(name)}`, strip);
+      const walkAnchorProfile = ICY_WALK_ANCHOR_PROFILES[prefix];
+      const shouldUseFootAnchor = Boolean(walkAnchorProfile);
+      const shouldTrimAnchor = !shouldUseFootAnchor && prefix.startsWith("enemyMatriarch");
+      this.registerStrip(`${prefix}${capitalize(name)}`, {
+        ...strip,
+        anchorMode: shouldUseFootAnchor ? "foot" : shouldTrimAnchor ? "trim" : null,
+        anchorProfile: walkAnchorProfile,
+      });
     });
   }
 
   registerStrip(prefix, strip) {
     const frameWidth = Math.floor(strip.width / strip.frames);
+    const crops = Array.from({ length: strip.frames }, (_, index) => ({
+      x: index * frameWidth,
+      y: 0,
+      width: index === strip.frames - 1 ? strip.width - index * frameWidth : frameWidth,
+      height: strip.height,
+    }));
 
-    for (let index = 0; index < strip.frames; index += 1) {
-      this.createCroppedTexture(`${prefix}${index}`, strip.source, {
-        x: index * frameWidth,
-        y: 0,
-        width: index === strip.frames - 1 ? strip.width - index * frameWidth : frameWidth,
-        height: strip.height,
-      });
+    if (strip.anchorMode === "foot") {
+      this.createFootAnchoredCroppedTextures(prefix, strip.source, crops, strip.anchorProfile);
+      return;
     }
+
+    crops.forEach((crop, index) => {
+      if (strip.anchorMode === "trim") {
+        this.createAnchoredCroppedTexture(`${prefix}${index}`, strip.source, crop);
+      } else {
+        this.createCroppedTexture(`${prefix}${index}`, strip.source, crop);
+      }
+    });
+  }
+
+  createFootAnchoredCroppedTextures(prefix, sourceKey, crops, profile = {}) {
+    const sourceImage = this.textures.get(sourceKey).getSourceImage();
+    const frameData = crops.map((crop) => {
+      const scanCanvas = document.createElement("canvas");
+      scanCanvas.width = crop.width;
+      scanCanvas.height = crop.height;
+      const scanContext = scanCanvas.getContext("2d");
+      scanContext.drawImage(
+        sourceImage,
+        crop.x,
+        crop.y,
+        crop.width,
+        crop.height,
+        0,
+        0,
+        crop.width,
+        crop.height
+      );
+
+      const imageData = scanContext.getImageData(0, 0, crop.width, crop.height);
+      const bounds = this.getOpaqueBounds(imageData.data, crop.width, crop.height);
+      return {
+        crop,
+        scanCanvas,
+        metrics: this.getFootAnchorMetrics(imageData.data, crop.width, crop.height, bounds, profile),
+      };
+    });
+
+    const validMetrics = frameData.map((item) => item.metrics).filter(Boolean);
+    const fallbackWidth = crops[0]?.width ?? 1;
+    const fallbackHeight = crops[0]?.height ?? 1;
+    const targetFootX = Math.round(this.getMedian(validMetrics.map((metrics) => metrics.footX)) ?? fallbackWidth / 2);
+    const targetBottom = Math.round(this.getMedian(validMetrics.map((metrics) => metrics.bottom)) ?? fallbackHeight - 1);
+
+    frameData.forEach((item, index) => {
+      const newKey = `${prefix}${index}`;
+      this.replaceGeneratedTexture(newKey);
+
+      const canvas = document.createElement("canvas");
+      canvas.width = item.crop.width;
+      canvas.height = item.crop.height;
+      const context = canvas.getContext("2d");
+      const metrics = item.metrics;
+      const offsetX = metrics ? Math.round(targetFootX - metrics.footX) : 0;
+      const offsetY = metrics ? Math.round(targetBottom - metrics.bottom) : 0;
+      context.drawImage(item.scanCanvas, offsetX, offsetY);
+      this.textures.addCanvas(newKey, canvas);
+    });
+  }
+
+  getFootAnchorMetrics(data, width, height, bounds, profile = {}) {
+    if (!bounds) return null;
+
+    const bandHeight = Math.max(8, Math.round(height * (profile.footBandRatio ?? 0.24)));
+    const bandTop = Math.max(bounds.top, bounds.bottom - bandHeight);
+    let left = width;
+    let right = -1;
+    let weightedX = 0;
+    let weight = 0;
+
+    for (let y = bandTop; y <= bounds.bottom; y += 1) {
+      for (let x = 0; x < width; x += 1) {
+        const alpha = data[(y * width + x) * 4 + 3];
+        if (alpha <= 8) continue;
+        left = Math.min(left, x);
+        right = Math.max(right, x);
+        weightedX += x * alpha;
+        weight += alpha;
+      }
+    }
+
+    const footX = weight > 0 ? weightedX / weight : (left + right) / 2;
+    return {
+      footX,
+      bottom: bounds.bottom,
+    };
+  }
+
+  getMedian(values) {
+    const sortedValues = values.filter((value) => Number.isFinite(value)).sort((a, b) => a - b);
+    if (!sortedValues.length) return null;
+    const middle = Math.floor(sortedValues.length / 2);
+    if (sortedValues.length % 2) return sortedValues[middle];
+    return (sortedValues[middle - 1] + sortedValues[middle]) / 2;
+  }
+
+  createAnchoredCroppedTexture(newKey, sourceKey, crop) {
+    this.replaceGeneratedTexture(newKey);
+
+    const sourceImage = this.textures.get(sourceKey).getSourceImage();
+    const scanCanvas = document.createElement("canvas");
+    scanCanvas.width = crop.width;
+    scanCanvas.height = crop.height;
+    const scanContext = scanCanvas.getContext("2d");
+    scanContext.drawImage(
+      sourceImage,
+      crop.x,
+      crop.y,
+      crop.width,
+      crop.height,
+      0,
+      0,
+      crop.width,
+      crop.height
+    );
+
+    const imageData = scanContext.getImageData(0, 0, crop.width, crop.height);
+    const bounds = this.getOpaqueBounds(imageData.data, crop.width, crop.height);
+    if (!bounds) {
+      this.textures.addCanvas(newKey, scanCanvas);
+      return;
+    }
+
+    const contentWidth = bounds.right - bounds.left + 1;
+    const contentHeight = bounds.bottom - bounds.top + 1;
+    const canvas = document.createElement("canvas");
+    canvas.width = crop.width;
+    canvas.height = crop.height;
+    const context = canvas.getContext("2d");
+    const targetX = Math.round((crop.width - contentWidth) / 2);
+    const targetY = Math.max(0, crop.height - contentHeight);
+    context.drawImage(
+      scanCanvas,
+      bounds.left,
+      bounds.top,
+      contentWidth,
+      contentHeight,
+      targetX,
+      targetY,
+      contentWidth,
+      contentHeight
+    );
+    this.textures.addCanvas(newKey, canvas);
+  }
+
+  getOpaqueBounds(data, width, height) {
+    let left = width;
+    let right = -1;
+    let top = height;
+    let bottom = -1;
+
+    for (let y = 0; y < height; y += 1) {
+      for (let x = 0; x < width; x += 1) {
+        const alpha = data[(y * width + x) * 4 + 3];
+        if (alpha <= 8) continue;
+        left = Math.min(left, x);
+        right = Math.max(right, x);
+        top = Math.min(top, y);
+        bottom = Math.max(bottom, y);
+      }
+    }
+
+    if (right < left || bottom < top) return null;
+    return { left, right, top, bottom };
   }
 
   createCroppedTexture(newKey, sourceKey, crop) {
-    if (this.textures.exists(newKey)) return;
+    this.replaceGeneratedTexture(newKey);
 
     const sourceImage = this.textures.get(sourceKey).getSourceImage();
     const canvas = document.createElement("canvas");
@@ -916,6 +1551,12 @@ export default class RoguelikeScene extends Phaser.Scene {
     this.textures.addCanvas(newKey, canvas);
   }
 
+  replaceGeneratedTexture(key) {
+    if (this.textures.exists(key)) {
+      this.textures.remove(key);
+    }
+  }
+
   getAliveEnemyCount() {
     return this.aliveEnemies ?? 0;
   }
@@ -933,6 +1574,14 @@ export default class RoguelikeScene extends Phaser.Scene {
       hellTank: "Hell Tank",
       hellTitan: "Hell Titan",
       infernalBoss: "Infernal Boss",
+      frostBladeWarrior: "Frost Blade Warrior",
+      frostPriest: "Frost Priest",
+      frozenKnight: "Frozen Knight",
+      iceAxeTitan: "Ice Axe Titan",
+      icebladeMaster: "Iceblade Master",
+      iceWraith: "Ice Wraith",
+      frostTyrant: "Frost Tyrant",
+      matriarchSoul: "Matriarch Soul",
     };
     return names[type] ?? "enemy";
   }
@@ -940,7 +1589,7 @@ export default class RoguelikeScene extends Phaser.Scene {
   getActiveBoss() {
     if (!this.isBossRoom()) return null;
     return this.getGroupChildren(this.enemyGroup).find(
-      (enemy) => enemy?.isAlive && (enemy.type === "boss" || enemy.type === "infernalBoss")
+      (enemy) => enemy?.isAlive && (enemy.type === "boss" || enemy.type === "infernalBoss" || enemy.type === "frostTyrant")
     ) ?? null;
   }
 
@@ -976,8 +1625,15 @@ export default class RoguelikeScene extends Phaser.Scene {
   }
 
   getRoomTexture() {
+    const specialTexture = SPECIAL_ROOM_TEXTURES[this.layout?.roomType];
+    if (specialTexture) return specialTexture;
+
     if (this.levelId === "hell") {
       return this.isBossRoom() ? "hellBgBoss" : "hellBgCommon";
+    }
+
+    if (this.levelId === "icy") {
+      return this.isBossRoom() ? "icyBgBoss" : "icyBgCommon";
     }
 
     return this.isBossRoom() ? "roomBgBoss" : "roomBgCommon";
@@ -1023,12 +1679,38 @@ export default class RoguelikeScene extends Phaser.Scene {
     this.enemyGroup = this.add.group();
     this.pickupGroup = this.add.group();
     this.projectileGroup = this.add.group();
+    this.icyTrapGroup = this.add.group();
+    this.fireTrailGroup = this.add.group();
     this.aliveEnemies = 0;
 
     this.layout.enemies.forEach((enemyData) => {
       this.spawnEnemy(enemyData);
     });
+    this.createIcyRoomTraps();
 
+  }
+
+  createIcyRoomTraps() {
+    if (this.levelId !== "icy" || this.isBossRoom() || this.isEventRoom()) return;
+    (this.layout.traps ?? []).forEach((trap) => {
+      const marker = this.add
+        .image(trap.x, trap.y, "frostSpikeTrap0")
+        .setDisplaySize(70, 34)
+        .setDepth(6)
+        .setAlpha(0.88);
+      marker.trapType = "frostSpike";
+      marker.radius = trap.radius ?? 34;
+      marker.frameKeys = this.getFrameKeys("frostSpikeTrap");
+      marker.animationFps = 10;
+      marker.animationFrame = -1;
+      marker.animationStartedAt = this.time.now + Phaser.Math.Between(0, 400);
+      marker.loopAnimation = true;
+      marker.gameDisplayWidth = 70;
+      marker.gameDisplayHeight = 34;
+      marker.triggeredAt = 0;
+      this.icyTrapGroup.add(marker);
+    });
+    this.nextFallingIceSpikeAt = this.time.now + Phaser.Math.Between(3200, 6500);
   }
 
   spawnEnemy(enemyData, { summoned = false } = {}) {
@@ -1037,25 +1719,32 @@ export default class RoguelikeScene extends Phaser.Scene {
       .image(enemyData.x, enemyData.y, ENEMY_FRAME_KEYS[enemyData.type])
       .setDisplaySize(displaySize.width, displaySize.height)
       .setTint(enemyData.tint)
-      .setDepth(enemyData.type === "boss" || enemyData.type === "infernalBoss" ? 10 : 9);
+      .setDepth(enemyData.type === "boss" || enemyData.type === "infernalBoss" || enemyData.type === "frostTyrant" || enemyData.type === "matriarchSoul" ? 10 : 9);
 
     enemy.body.setSize(displaySize.bodyWidth, displaySize.bodyHeight, true);
     enemy.type = enemyData.type;
-    const bossCurseMultiplier = (enemyData.type === "boss" || enemyData.type === "infernalBoss") && this.activeCurses.includes("Boss HP +20%")
-      ? 1.2
-      : 1;
-    enemy.health = enemyData.health * bossCurseMultiplier;
+    const isBossEnemy = enemyData.type === "boss" || enemyData.type === "infernalBoss" || enemyData.type === "frostTyrant";
+    const bossBaseMultiplier = isBossEnemy ? 2 : 1;
+    const bossCurseMultiplier = isBossEnemy ? this.getBossCurseMultiplier() : 1;
+    const campaignHealthMultiplier = this.getCampaignEnemyHealthMultiplier();
+    const challengeHealthMultiplier = this.challengeActive ? this.challengeHealthMultiplier : 1;
+    enemy.health = enemyData.health * bossBaseMultiplier * bossCurseMultiplier * campaignHealthMultiplier * challengeHealthMultiplier;
     enemy.maxHealth = enemy.health;
+    if (isBossEnemy && this.activeCurses.includes("Boss HP +25%")) {
+      this.activeCurses.splice(this.activeCurses.indexOf("Boss HP +25%"), 1);
+    }
     enemy.isAlive = true;
     enemy.isReviving = false;
     enemy.isSummoned = summoned || enemyData.isSummoned || false;
-    enemy.speed = enemyData.speed * (this.challengeActive ? 1.35 : 1);
+    enemy.speed = enemyData.speed * this.getCampaignEnemySpeedMultiplier() * (this.challengeActive ? this.challengeSpeedMultiplier : 1);
     enemy.aiStyle = enemyData.aiStyle ?? "cautious";
     enemy.desiredRange = enemyData.desiredRange ?? 70;
     enemy.retreatHealthRatio = enemyData.retreatHealthRatio ?? 0.35;
     enemy.retreatChance = enemyData.retreatChance ?? 0.35;
     enemy.lungeChance = enemyData.lungeChance ?? 0;
     enemy.superAttackChance = enemyData.superAttackChance ?? 0.25;
+    enemy.blockChance = enemyData.blockChance ?? 0;
+    enemy.chargeCooldown = enemyData.chargeCooldown ?? 20000;
     enemy.projectileCooldown = enemyData.projectileCooldown ?? 1800;
     enemy.superProjectileCooldown = enemyData.superProjectileCooldown ?? 4400;
     enemy.lastProjectileAt = 0;
@@ -1092,6 +1781,9 @@ export default class RoguelikeScene extends Phaser.Scene {
     );
     enemy.phase = enemy.type === "infernalBoss" ? 1 : 0;
     enemy.phaseTwoTriggered = false;
+    enemy.frostIceTriggered = false;
+    enemy.frostFrozen = false;
+    enemy.sourceBoss = enemyData.sourceBoss ?? null;
 
     this.enemyGroup.add(enemy);
     enemy.setActive(true).setVisible(true);
@@ -1100,6 +1792,14 @@ export default class RoguelikeScene extends Phaser.Scene {
   }
 
   getEnemyDisplaySize(type) {
+    if (type === "frostTyrant") {
+      return { width: 146, height: 136, bodyWidth: 62, bodyHeight: 58 };
+    }
+
+    if (type === "matriarchSoul") {
+      return { width: 96, height: 126, bodyWidth: 46, bodyHeight: 54 };
+    }
+
     if (type === "infernalBoss") {
       return { width: 128, height: 116, bodyWidth: 58, bodyHeight: 54 };
     }
@@ -1124,6 +1824,26 @@ export default class RoguelikeScene extends Phaser.Scene {
       return { width: 58, height: 64, bodyWidth: 28, bodyHeight: 30 };
     }
 
+    if (type === "iceAxeTitan") {
+      return { width: 86, height: 88, bodyWidth: 40, bodyHeight: 42 };
+    }
+
+    if (type === "frostPriest" || type === "iceWraith") {
+      return { width: 66, height: 74, bodyWidth: 30, bodyHeight: 34 };
+    }
+
+    if (type === "frozenKnight") {
+      return { width: 72, height: 76, bodyWidth: 34, bodyHeight: 36 };
+    }
+
+    if (type === "icebladeMaster") {
+      return { width: 62, height: 72, bodyWidth: 28, bodyHeight: 34 };
+    }
+
+    if (type === "frostBladeWarrior") {
+      return { width: 64, height: 72, bodyWidth: 30, bodyHeight: 34 };
+    }
+
     if (type === "dogStrong") {
       return { width: 66, height: 70, bodyWidth: 34, bodyHeight: 34 };
     }
@@ -1131,11 +1851,31 @@ export default class RoguelikeScene extends Phaser.Scene {
     return { width: 54, height: 66, bodyWidth: 28, bodyHeight: 32 };
   }
 
+  getCampaignEnemyHealthMultiplier() {
+    if (this.levelSequence.length <= 1) return 1;
+    return 1 + this.stageIndex * 0.32;
+  }
+
+  getCampaignEnemySpeedMultiplier() {
+    if (this.levelSequence.length <= 1) return 1;
+    return 1 + this.stageIndex * 0.07;
+  }
+
+  getBossCurseMultiplier() {
+    return this.activeCurses.reduce((multiplier, curse) => {
+      if (curse === "Boss HP +20%") return multiplier * 1.2;
+      if (curse === "Boss HP +25%") return multiplier * 1.25;
+      return multiplier;
+    }, 1);
+  }
+
   maybeSpawnChest() {
     if (this.isEventRoom()) return;
     if (this.getAliveEnemyCount() > 0 || this.chestSprite || this.roomRewardResolved) return;
 
     this.roomRewardResolved = true;
+    this.icyTrapGroup?.destroy?.(true);
+    this.icyTrapGroup = this.add.group();
     if (Math.random() > GAME_RULES.chestSpawnChance) return;
 
     const { room } = this.layout;
@@ -1289,29 +2029,29 @@ export default class RoguelikeScene extends Phaser.Scene {
 
   createChestLootByType(chestType, lootRoll, x, y) {
     if (chestType === "blue") {
-      if (lootRoll < 0.45) return this.spawnTempHeartPickup(x, y, 1);
-      if (lootRoll < 0.75) return this.spawnPotion(x, y);
-      if (lootRoll < 0.9) return this.spawnTempHeartPickup(x, y, 0.5);
+      if (lootRoll < 0.62) return this.spawnTempHeartPickup(x, y, 1);
+      if (lootRoll < 0.82) return this.spawnPotion(x, y);
+      if (lootRoll < 0.96) return this.spawnTempHeartPickup(x, y, 0.5);
       return this.spawnTarotPickup(x, y + 4);
     }
 
     if (chestType === "golden") {
-      if (lootRoll < 0.18) return this.spawnCurrency("gem", 1, x, y);
-      if (lootRoll < 0.32) return this.spawnTarotPickup(x, y + 4);
+      if (lootRoll < 0.22) return this.spawnCurrency("gem", 1, x, y);
+      if (lootRoll < 0.30) return this.spawnTarotPickup(x, y + 4);
       return this.spawnCurrency("coin", this.rollCoinAmount(12, 24), x, y);
     }
 
     if (chestType === "cursed") {
       this.applyCursedChestPenalty();
-      if (lootRoll < 0.32) return this.spawnTarotPickup(x, y + 4);
-      if (lootRoll < 0.56) return this.spawnCurrency("gem", 1, x, y);
+      if (lootRoll < 0.18) return this.spawnTarotPickup(x, y + 4);
+      if (lootRoll < 0.46) return this.spawnCurrency("gem", 1, x, y);
       return this.spawnCurrency("coin", this.rollCoinAmount(18, 30), x, y);
     }
 
     if (chestType === "wooden") {
-      if (lootRoll < 0.04) return this.spawnCurrency("gem", 1, x, y);
-      if (lootRoll < 0.12) return this.spawnTarotPickup(x, y + 4);
-      if (lootRoll < 0.28) return this.spawnPotion(x, y);
+      if (lootRoll < 0.025) return this.spawnCurrency("gem", 1, x, y);
+      if (lootRoll < 0.055) return this.spawnTarotPickup(x, y + 4);
+      if (lootRoll < 0.26) return this.spawnPotion(x, y);
       return this.spawnCurrency("coin", this.rollCoinAmount(6, 14), x, y);
     }
 
@@ -1384,6 +2124,17 @@ export default class RoguelikeScene extends Phaser.Scene {
     return tarot;
   }
 
+  spawnPreparedTarotPickup(x, y, rarities = []) {
+    const eligible = this.getEligibleTarotCards(TAROT_CARDS);
+    const filtered = eligible.filter((card) => rarities.includes(card.rarity ?? "common"));
+    const source = filtered.length ? filtered : eligible;
+    const tarot = this.spawnTarotPickup(x, y);
+    if (source.length) {
+      tarot.preparedCard = Phaser.Utils.Array.GetRandom(source);
+    }
+    return tarot;
+  }
+
   spawnCurrency(currency, amount, x, y) {
     const iconKey = currency === "gem" ? "gemIcon" : "coinIcon";
     const pickup = this.add
@@ -1446,33 +2197,55 @@ export default class RoguelikeScene extends Phaser.Scene {
 
   getEventRoomChoices(roomType) {
     if (roomType === "award") {
-      return [
+      return Phaser.Utils.Array.Shuffle([
         { id: "award-tarot", label: "Tarot", detail: "Choose a card", icon: "tarotCard", apply: () => this.offerTarotChoice({ advanceFloor: false }) },
         { id: "award-chest", label: "Chest", detail: "Random chest", icon: "dungeonChestIcon", apply: () => this.spawnRewardChestAt(512, 300) },
-        { id: "award-coins", label: "Coins", detail: "+15 coins", icon: "coinIcon", apply: () => { this.coins += 15; this.updateUi(); } },
-      ];
+        (() => {
+          const amount = this.rollCoinAmount(10, 22);
+          return { id: "award-coins", label: "Coins", detail: `+${amount} coins`, icon: "coinIcon", apply: () => { this.coins += amount; this.updateUi(); } };
+        })(),
+        { id: "award-blue-heart", label: "Blue heart", detail: "+0.5 shield", icon: "blueHeartHalf", apply: () => this.addTempHearts(0.5) },
+        { id: "award-heal", label: "Potion", detail: "Restore 1 heart", icon: "healPotion", apply: () => this.healPlayer(1) },
+        { id: "award-upgrade", label: "Upgrade", detail: "Improve a card", icon: "tarotCard", apply: () => this.upgradeRandomCard() },
+        { id: "award-gem", label: "Gem", detail: "+1 gem", icon: "gemIcon", apply: () => { this.gems += 1; this.updateUi(); } },
+      ]).slice(0, 3);
     }
 
     if (roomType === "challenge") {
+      const challenge = {
+        ...Phaser.Utils.Array.GetRandom(CHALLENGE_VARIANTS),
+        dashRule: Phaser.Utils.Array.GetRandom(CHALLENGE_DASH_RULES),
+      };
       return [
-        { id: "challenge-start", label: "Start", detail: "Waves, no dash, HP drain", icon: "cursedChestIcon", apply: () => this.startChallengeRoom() },
+        {
+          id: "challenge-start",
+          label: challenge.title,
+          detail: `${challenge.detail}\n${challenge.dashRule.label}`,
+          icon: "cursedChestIcon",
+          apply: () => this.startChallengeRoom(challenge),
+        },
       ];
     }
 
     if (roomType === "cursed") {
-      return [
-        { id: "curse-card", label: "Rare card", detail: "Boss HP +20%", icon: "tarotCard", apply: () => this.takeCursedRareCard() },
-        { id: "curse-power", label: "Dark power", detail: "Damage +40%, -1 max heart", icon: "cursedChestIcon", apply: () => { this.stats.attackDamage *= 1.4; this.decreaseMaxHearts(1); } },
-        { id: "curse-gems", label: "Blood gems", detail: "+2 gems, take damage", icon: "gemIcon", apply: () => { this.gems += 2; this.applyPlayerDamage(0.5); this.updateUi(); } },
-      ];
+      return Phaser.Utils.Array.Shuffle([
+        { id: "curse-blood-price", label: "Blood Price", detail: "Epic card, -1 max HP", icon: "tarotCard", apply: () => this.takeBloodPriceReward() },
+        { id: "curse-boss-hunger", label: "Boss Hunger", detail: "+1 gem, next boss +25% HP", icon: "gemIcon", apply: () => this.takeBossHungerReward() },
+        { id: "curse-fragile-power", label: "Fragile Power", detail: "+20% damage, armor -15%", icon: "cursedChestIcon", apply: () => this.takeFragilePowerReward() },
+        { id: "curse-dark-speed", label: "Dark Speed", detail: "+20% speed, dash cd +30%", icon: "cursedChestIcon", apply: () => this.takeDarkSpeedReward() },
+        { id: "curse-poison-gift", label: "Poison Gift", detail: "+2 green HP, potions -50%", icon: "greenHeartHalf", apply: () => this.takePoisonGiftReward() },
+      ]).slice(0, 3);
     }
 
-    return [
+    return Phaser.Utils.Array.Shuffle([
       { id: "rest-heal", label: "Rest", detail: "Restore 1 heart", icon: "healPotion", apply: () => this.healPlayer(1) },
       { id: "rest-cleanse", label: "Cleanse", detail: "Remove a curse", icon: "tarotCard", apply: () => this.cleanseCurse() },
       { id: "rest-upgrade", label: "Upgrade", detail: "Improve a card", icon: "tarotCard", apply: () => this.upgradeRandomCard() },
       { id: "rest-buy-heal", label: "Buy heal", detail: "10 coins -> 1 heart", icon: "coinIcon", apply: () => this.buyRestHeal() },
-    ].slice(0, 3);
+      { id: "rest-meditate", label: "Meditate", detail: "E cooldown -5%", icon: "tarotCard", apply: () => this.takeMeditateReward() },
+      { id: "rest-repair-soul", label: "Repair Soul", detail: "Green HP -> blue HP", icon: "blueHeartHalf", apply: () => this.takeRepairSoulReward() },
+      { id: "rest-focus-build", label: "Focus Build", detail: "Next tarot follows best build", icon: "tarotCard", apply: () => this.takeFocusBuildReward() },
+    ]).slice(0, 3);
   }
 
   createEventChoice(choice, position) {
@@ -1497,17 +2270,24 @@ export default class RoguelikeScene extends Phaser.Scene {
     this.eventChoiceGroup.add(label);
   }
 
-  startChallengeRoom() {
+  startChallengeRoom(variant = Phaser.Utils.Array.GetRandom(CHALLENGE_VARIANTS)) {
     if (this.challengeActive || this.challengeCompleted) return;
     this.challengeActive = true;
     this.challengeCompleted = false;
+    this.challengeVariant = variant;
+    this.challengeDashRule = variant.dashRule ?? Phaser.Utils.Array.GetRandom(CHALLENGE_DASH_RULES);
+    this.challengeDashCharges = this.challengeDashRule.id === "oneCharge" ? 1 : Infinity;
+    this.challengeDashDisabledUntil = this.challengeDashRule.id === "disabledStart" ? this.time.now + 25_000 : 0;
+    this.challengeEliteKilled = this.challengeDashRule.id !== "eliteKill";
+    this.challengeEliteSpawned = false;
+    this.challengeSpeedMultiplier = variant.speedMultiplier ?? 1.35;
+    this.challengeHealthMultiplier = variant.healthMultiplier ?? 1;
     this.challengeWave = 0;
-    this.challengeTotalWaves = 3;
-    this.challengeEndsAt = this.time.now + 45000;
+    this.challengeTotalWaves = variant.waves ?? 3;
+    this.challengeEndsAt = this.time.now + (variant.timeLimit ?? 45000);
     this.challengeNextWaveAt = this.time.now;
-    this.challengeDrainAt = this.time.now + 5000;
     this.challengeTimerText = this.add
-      .text(512, 116, "Challenge: 45s", {
+      .text(512, 116, `${variant.title}: ${Math.ceil((variant.timeLimit ?? 45000) / 1000)}s`, {
         fontFamily: "monospace",
         fontSize: "18px",
         color: "#ffcf6b",
@@ -1522,18 +2302,13 @@ export default class RoguelikeScene extends Phaser.Scene {
     if (!this.challengeActive) return;
 
     const remaining = Math.max(0, Math.ceil((this.challengeEndsAt - time) / 1000));
-    this.challengeTimerText?.setText(`Challenge: ${remaining}s   Dash locked`);
+    const dashText = this.getChallengeDashStatusText(time);
+    this.challengeTimerText?.setText(`${this.challengeVariant?.title ?? "Challenge"}: ${remaining}s   ${dashText}`);
 
     if (time >= this.challengeNextWaveAt && this.challengeWave < this.challengeTotalWaves) {
       this.spawnChallengeWave();
       this.challengeWave += 1;
       this.challengeNextWaveAt = time + 8500;
-    }
-
-    if (time >= this.challengeDrainAt) {
-      this.challengeDrainAt = time + 5000;
-      this.applyPlayerDamage(0.5);
-      this.showFloatingText(this.player.x, this.player.y - 68, "TRIAL DRAIN", "#ff5f87", 16);
     }
 
     const wavesDone = this.challengeWave >= this.challengeTotalWaves;
@@ -1549,23 +2324,75 @@ export default class RoguelikeScene extends Phaser.Scene {
 
   spawnChallengeWave() {
     const bounds = this.getWalkableBounds();
-    const count = 2 + this.challengeWave;
+    const variant = this.challengeVariant ?? CHALLENGE_VARIANTS[0];
+    const count = Math.max(1, 2 + this.challengeWave + (variant.extraEnemies ?? 0));
     Array.from({ length: count }).forEach((_, index) => {
       const type = this.levelId === "hell"
         ? Phaser.Utils.Array.GetRandom(["impLittle", "hellKiller", "hellGolem"])
         : Phaser.Utils.Array.GetRandom(["skeleton", "guard", "dog"]);
-      const x = Phaser.Math.Clamp(310 + index * 120, bounds.left + 40, bounds.right - 40);
-      const y = Phaser.Math.Between(bounds.top + 80, bounds.bottom - 130);
-      const enemy = this.spawnEnemy({
-        ...ENEMY_TYPES[type],
-        type,
-        x,
-        y,
-        canRevive: false,
-        isSummoned: true,
-      }, { summoned: true });
-      enemy.setAlpha(0);
-      this.tweens.add({ targets: enemy, alpha: 1, duration: 240 });
+      const isElite = this.shouldMakeChallengeEnemyElite(index);
+      const angle = Phaser.Math.DegToRad((360 / Math.max(1, count)) * index + Phaser.Math.Between(-18, 18));
+      const x = variant.aroundPlayer
+        ? Phaser.Math.Clamp(this.player.x + Math.cos(angle) * Phaser.Math.Between(170, 240), bounds.left + 40, bounds.right - 40)
+        : Phaser.Math.Clamp(310 + index * 120, bounds.left + 40, bounds.right - 40);
+      const y = variant.aroundPlayer
+        ? Phaser.Math.Clamp(this.player.y + Math.sin(angle) * Phaser.Math.Between(120, 210), bounds.top + 80, bounds.bottom - 130)
+        : Phaser.Math.Between(bounds.top + 80, bounds.bottom - 130);
+      this.createChallengeSpawnIndicator(x, y, () => {
+        if (!this.challengeActive) return;
+        const enemy = this.spawnEnemy({
+          ...ENEMY_TYPES[type],
+          type,
+          x,
+          y,
+          health: ENEMY_TYPES[type].health * (isElite ? 1.75 : 1),
+          speed: ENEMY_TYPES[type].speed * (isElite ? 1.12 : 1),
+          canRevive: false,
+          isSummoned: true,
+        }, { summoned: true });
+        if (isElite) {
+          enemy.challengeElite = true;
+          enemy.setTint(0xf6a23a);
+          this.showFloatingText(enemy.x, enemy.y - 54, "ELITE", "#ffcf6b", 16);
+        }
+        enemy.setAlpha(0);
+        this.tweens.add({ targets: enemy, alpha: 1, duration: 240 });
+      });
+    });
+  }
+
+  shouldMakeChallengeEnemyElite(index) {
+    if (this.challengeVariant?.eliteEnemies && index % 2 === 0) return true;
+    if (
+      this.challengeDashRule?.id === "eliteKill" &&
+      !this.challengeEliteSpawned &&
+      this.challengeWave === 0 &&
+      index === 0
+    ) {
+      this.challengeEliteSpawned = true;
+      return true;
+    }
+    return false;
+  }
+
+  createChallengeSpawnIndicator(x, y, onSpawn) {
+    const marker = this.add
+      .circle(x, y, 28, 0xffcf6b, 0.16)
+      .setStrokeStyle(2, 0xffcf6b, 0.82)
+      .setDepth(15);
+    this.tweens.add({
+      targets: marker,
+      scaleX: 1.42,
+      scaleY: 1.42,
+      alpha: 0.52,
+      duration: 520,
+      yoyo: true,
+      repeat: 1,
+      ease: "Sine.easeInOut",
+    });
+    this.time.delayedCall(900, () => {
+      marker.destroy();
+      onSpawn?.();
     });
   }
 
@@ -1573,8 +2400,22 @@ export default class RoguelikeScene extends Phaser.Scene {
     this.challengeActive = false;
     this.challengeCompleted = true;
     this.challengeTimerText?.setText("Challenge completed");
+    this.challengeDashRule = null;
+    this.challengeDashCharges = Infinity;
+    this.challengeDashDisabledUntil = 0;
     this.spawnCurrency("coin", this.rollCoinAmount(18, 28), 512, 280);
-    if (Math.random() < 0.35) this.spawnTarotPickup(560, 282);
+    if (this.challengeVariant?.reward === "rare") {
+      this.spawnPreparedTarotPickup(560, 282, ["rare"]);
+    } else if (this.challengeVariant?.reward === "insane") {
+      if (Math.random() < 0.5) {
+        this.spawnPreparedTarotPickup(560, 282, ["epic"]);
+      } else {
+        this.spawnPreparedTarotPickup(560, 282, ["cursed"]);
+      }
+    } else if (Math.random() < 0.18) {
+      this.spawnTarotPickup(560, 282);
+    }
+    this.revealEventExit({ announce: true });
     this.showFloatingText(this.player.x, this.player.y - 72, "CHALLENGE COMPLETE", "#ffd36b", 18);
   }
 
@@ -1584,7 +2425,10 @@ export default class RoguelikeScene extends Phaser.Scene {
     const choice = marker.choice;
     this.getGroupChildren(this.eventChoiceGroup).forEach((item) => item?.destroy?.());
     this.eventChoiceGroup = this.add.group();
-    choice.apply?.();
+    choice.apply?.(choice);
+    if (this.layout?.roomType !== "challenge") {
+      this.revealEventExit({ announce: true });
+    }
     this.showFloatingText(this.player.x, this.player.y - 62, choice.label.toUpperCase(), "#f5f0ff", 16);
   }
 
@@ -1605,11 +2449,90 @@ export default class RoguelikeScene extends Phaser.Scene {
     const rareCards = this.getEligibleTarotCards(TAROT_CARDS).filter((card) => ["rare", "epic"].includes(card.rarity));
     const card = this.prepareCardForOffer(Phaser.Utils.Array.GetRandom(rareCards.length ? rareCards : this.getEligibleTarotCards(TAROT_CARDS)));
     this.applyChosenCard(card, "Cursed Room");
+    this.showCardRewardBanner({
+      kicker: "Random tarot",
+      title: card.title,
+      description: card.description,
+      color: card.rarity === "epic" ? "#c084fc" : "#78b7ff",
+    });
+  }
+
+  takeBloodPriceReward() {
+    const eligible = this.getEligibleTarotCards(TAROT_CARDS);
+    const epicCards = eligible.filter((card) => card.rarity === "epic");
+    const source = epicCards.length ? epicCards : eligible;
+    const rawCard = source.length ? Phaser.Utils.Array.GetRandom(source) : null;
+    if (rawCard) {
+      const card = this.prepareCardForOffer(rawCard);
+      this.applyChosenCard(card, "Blood Price");
+      this.showCardRewardBanner({
+        kicker: "Blood Price",
+        title: card.title,
+        description: card.description,
+        color: "#c084fc",
+      });
+    }
+    this.decreaseMaxHearts(1);
+  }
+
+  takeBossHungerReward() {
+    this.gems += 1;
+    this.activeCurses.push("Boss HP +25%");
+    this.updateUi();
+  }
+
+  takeFragilePowerReward() {
+    this.stats.attackDamage *= 1.2;
+    this.stats.damageReduction = Math.max(-0.5, (this.stats.damageReduction ?? 0) - 0.15);
+    this.updateUi();
+  }
+
+  takeDarkSpeedReward() {
+    this.stats.speed *= 1.2;
+    this.stats.rollCooldown *= 1.3;
+    this.updateUi();
+  }
+
+  takePoisonGiftReward() {
+    this.addGreenHearts(2);
+    this.stats.potionHealMultiplier = Math.max(0.25, (this.stats.potionHealMultiplier ?? 1) * 0.5);
+    this.updateUi();
   }
 
   cleanseCurse() {
     const removed = this.activeCurses.pop();
     this.showFloatingText(this.player.x, this.player.y - 70, removed ? "CURSE CLEANSED" : "NO CURSE", "#d9ccff", 16);
+  }
+
+  takeMeditateReward() {
+    this.stats.skillCooldown *= 0.95;
+    this.updateUi();
+  }
+
+  takeRepairSoulReward() {
+    if (this.greenHearts < 1) {
+      this.showFloatingText(this.player.x, this.player.y - 70, "NO GREEN HEART", "#75f08a", 16);
+      return;
+    }
+    this.greenHearts = Math.max(0, this.greenHearts - 1);
+    this.addTempHearts(1);
+    this.updateUi();
+  }
+
+  takeFocusBuildReward() {
+    const builds = [
+      { id: "fire", count: this.stats.fireCards ?? 0, label: "FIRE" },
+      { id: "blueHeart", count: this.stats.blueHeartCards ?? 0, label: "BLUE" },
+      { id: "crit", count: this.stats.critCards ?? 0, label: "CRIT" },
+      { id: "poison", count: this.stats.poisonCards ?? 0, label: "POISON" },
+    ].sort((a, b) => b.count - a.count);
+    const strongest = builds[0];
+    if (!strongest || strongest.count <= 0) {
+      this.showFloatingText(this.player.x, this.player.y - 70, "NO BUILD YET", "#d9ccff", 16);
+      return;
+    }
+    this.focusNextTarotBuild = strongest.id;
+    this.showFloatingText(this.player.x, this.player.y - 70, `${strongest.label} FOCUS`, "#ffd36b", 16);
   }
 
   upgradeRandomCard() {
@@ -1623,6 +2546,12 @@ export default class RoguelikeScene extends Phaser.Scene {
     if (!source) return;
     const card = this.prepareCardForOffer(source);
     this.applyChosenCard(card, "Rest Upgrade");
+    this.showCardRewardBanner({
+      kicker: "Card upgraded",
+      title: `${card.baseTitle ?? card.title} ${this.toRoman(card.currentLevel)} -> ${this.toRoman(card.level)}`,
+      description: card.description,
+      color: "#ffd36b",
+    });
   }
 
   buyRestHeal() {
@@ -1636,17 +2565,50 @@ export default class RoguelikeScene extends Phaser.Scene {
 
   createExit() {
     const { exit } = this.layout;
-    this.exitReadyAt = this.time.now + (this.isEventRoom() ? 900 : 0);
+    const isEventRoom = this.isEventRoom();
+    this.exitReadyAt = this.time.now + (isEventRoom ? 5000 : 0);
+    this.eventExitRevealed = !isEventRoom;
     this.exitZone = this.add.rectangle(exit.x, exit.y, exit.width, exit.height, 0x6b4bb5, 0.35);
     this.exitZone.setStrokeStyle(2, 0xa988ff, 0.9);
     this.exitLabel = this.add
-      .text(exit.x, exit.y - (this.isEventRoom() ? 42 : 7), "EXIT", {
+      .text(exit.x, exit.y - (isEventRoom ? 42 : 7), "EXIT", {
         fontFamily: "monospace",
         fontSize: "14px",
         color: "#d9ccff",
       })
       .setOrigin(0.5)
       .setDepth(12);
+
+    if (isEventRoom) {
+      const exitFloor = this.floor;
+      const exitRoom = this.room;
+      this.exitZone.setVisible(false);
+      this.exitLabel.setVisible(false);
+      this.time.delayedCall(5000, () => {
+        if (this.floor === exitFloor && this.room === exitRoom) {
+          this.revealEventExit();
+        }
+      });
+    }
+  }
+
+  revealEventExit({ announce = false } = {}) {
+    if (!this.isEventRoom() || this.eventExitRevealed || !this.exitZone || !this.exitLabel) return;
+
+    this.eventExitRevealed = true;
+    this.exitReadyAt = this.time.now + 250;
+    this.exitZone.setVisible(true).setAlpha(0);
+    this.exitLabel.setVisible(true).setAlpha(0);
+    this.tweens.add({
+      targets: [this.exitZone, this.exitLabel],
+      alpha: 1,
+      duration: 260,
+      ease: "Sine.easeOut",
+    });
+
+    if (announce) {
+      this.showFloatingText(this.player.x, this.player.y - 82, "EXIT OPEN", "#d9ccff", 16);
+    }
   }
 
   movePlayer(time) {
@@ -1690,8 +2652,14 @@ export default class RoguelikeScene extends Phaser.Scene {
 
       if (enemy.type === "infernalBoss") {
         this.updateInfernalBossAi(enemy, time, distance);
+      } else if (enemy.type === "frostTyrant") {
+        this.updateFrostTyrantAi(enemy, time, distance);
+      } else if (enemy.type === "matriarchSoul") {
+        this.updateMatriarchSoulAi(enemy, time, distance);
       } else if (enemy.type === "boss") {
         this.updateBossAi(enemy, time, distance);
+      } else if (this.isIcyEnemy(enemy.type)) {
+        this.updateIcyEnemyAi(enemy, time, distance);
       } else {
         this.updateEnemyAi(enemy, time, distance);
       }
@@ -1706,13 +2674,130 @@ export default class RoguelikeScene extends Phaser.Scene {
     });
   }
 
+  isIcyEnemy(type) {
+    return [
+      "frostBladeWarrior",
+      "frostPriest",
+      "frozenKnight",
+      "iceAxeTitan",
+      "icebladeMaster",
+      "iceWraith",
+    ].includes(type);
+  }
+
+  updateIcyEnemyAi(enemy, time, distance) {
+    if (enemy.type === "frostPriest") {
+      this.tryFrostPriestCrystals(enemy, time);
+    }
+
+    if (enemy.type === "iceWraith") {
+      this.tryIceWraithTeleportShot(enemy, time, distance);
+    }
+
+    if (enemy.type === "iceAxeTitan" && time >= (enemy.nextChargeAt ?? 0) && distance > 135 && distance < 420) {
+      enemy.nextChargeAt = time + enemy.chargeCooldown;
+      enemy.aiMode = "icyCharge";
+      enemy.aiModeUntil = time + 760;
+      enemy.nextAiDecisionAt = time + 840;
+      this.playEnemyAnimation(enemy, "superAttack", { loop: false, lockMs: 760 });
+    }
+
+    if (enemy.type === "iceAxeTitan" && enemy.aiMode === "icyCharge" && time < enemy.aiModeUntil) {
+      this.moveEnemyByMode(enemy, "icyCharge", this.getEnemySpeed(enemy, time) * 2.6, time);
+      return;
+    }
+
+    if (enemy.type === "icebladeMaster" && distance < 70 && time - (enemy.lastDamageAt ?? 0) > enemy.damageCooldown * 0.65) {
+      enemy.useSuperNext = !enemy.useSuperNext;
+      this.playEnemyAnimation(enemy, enemy.useSuperNext ? "superAttack" : "attack", { loop: false, lockMs: 340 });
+    }
+
+    this.updateEnemyAi(enemy, time, distance);
+
+  }
+
+  tryFrostPriestCrystals(enemy, time) {
+    if (time - (enemy.lastSuperProjectileAt ?? 0) < enemy.superProjectileCooldown) return;
+    enemy.lastSuperProjectileAt = time;
+    this.playEnemyAnimation(enemy, Math.random() < 0.35 ? "superAttack" : "attack", { loop: false, lockMs: 720 });
+    [-1, 1].forEach((side, index) => {
+      const angle = Phaser.Math.Angle.Between(enemy.x, enemy.y, this.player.x, this.player.y) + side * 0.42;
+      const x = enemy.x + Math.cos(angle) * 42;
+      const y = enemy.y + Math.sin(angle) * 42;
+      this.time.delayedCall(index * 180, () => this.spawnFrostPriestCrystal(enemy, x, y));
+    });
+  }
+
+  spawnFrostPriestCrystal(enemy, x, y) {
+    if (!enemy?.active || !enemy.isAlive) return;
+    const charged = Math.random() < 0.18;
+    const spawn = this.add
+      .image(x, y, charged ? "frostPriestChargedShot0" : "frostPriestSpawn0")
+      .setDisplaySize(charged ? 72 : 54, charged ? 58 : 48)
+      .setDepth(12);
+    spawn.frameKeys = this.getFrameKeys(charged ? "frostPriestChargedShot" : "frostPriestSpawn");
+    spawn.animationFps = charged ? 12 : 8;
+    spawn.animationFrame = -1;
+    spawn.animationStartedAt = this.time.now;
+    spawn.loopAnimation = true;
+    spawn.gameDisplayWidth = charged ? 72 : 54;
+    spawn.gameDisplayHeight = charged ? 58 : 48;
+    spawn.owner = "visual";
+    this.projectileGroup.add(spawn);
+    this.time.delayedCall(2000, () => {
+      if (!spawn?.active || !enemy?.active || !enemy.isAlive) {
+        spawn?.destroy();
+        return;
+      }
+      const angle = Phaser.Math.Angle.Between(spawn.x, spawn.y, this.player.x, this.player.y);
+      spawn.destroy();
+      const projectile = this.fireAnimatedEnemyProjectile(
+        enemy,
+        charged ? "frostPriestChargedShot0" : "frostPriestFly0",
+        charged ? "frostPriestChargedShot" : "frostPriestFly",
+        angle,
+        charged ? 210 : 260,
+        charged ? 58 : 40,
+        2400
+      );
+      projectile.x = x;
+      projectile.y = y;
+      projectile.hazardRadius = charged ? 48 : 28;
+      projectile.impactPrefix = charged ? "frostPriestChargedExplosion" : "frostPriestImpact";
+      projectile.impactSize = charged ? 98 : 64;
+    });
+  }
+
+  tryIceWraithTeleportShot(enemy, time, distance) {
+    if (time - (enemy.lastProjectileAt ?? 0) < enemy.projectileCooldown || distance > 520) return;
+    enemy.lastProjectileAt = time;
+    const bounds = this.getWalkableBounds();
+    const escapeAngle = Phaser.Math.Angle.Between(this.player.x, this.player.y, enemy.x, enemy.y) + Phaser.Math.FloatBetween(-0.6, 0.6);
+    enemy.x = Phaser.Math.Clamp(this.player.x + Math.cos(escapeAngle) * Phaser.Math.Between(180, 260), bounds.left + 42, bounds.right - 42);
+    enemy.y = Phaser.Math.Clamp(this.player.y + Math.sin(escapeAngle) * Phaser.Math.Between(140, 220), bounds.top + 42, bounds.bottom - 42);
+    enemy.setAlpha(0.35);
+    this.tweens.add({ targets: enemy, alpha: 1, duration: 220 });
+    this.playEnemyAnimation(enemy, "superAttack", { loop: false, lockMs: 620 });
+    this.time.delayedCall(420, () => {
+      if (!enemy?.active || !enemy.isAlive) return;
+      const angle = Phaser.Math.Angle.Between(enemy.x, enemy.y, this.player.x, this.player.y);
+      const projectile = this.fireAnimatedEnemyProjectile(enemy, "iceWraithCharge0", "iceWraithCharge", angle, 225, 50, 2300);
+      this.time.delayedCall(420, () => {
+        if (!projectile?.active) return;
+        projectile.frameKeys = this.getFrameKeys("iceWraithFly");
+        projectile.animationStartedAt = this.time.now;
+        projectile.animationFrame = -1;
+      });
+    });
+  }
+
   updateEnemyAi(enemy, time, distance) {
     const healthRatio = enemy.health / enemy.maxHealth;
     const effectiveSpeed = this.getEnemySpeed(enemy, time);
-    const isRanged = enemy.aiStyle === "ranged";
+    const isRanged = ["ranged", "icyMage", "icyWraith", "matriarchSoul"].includes(enemy.aiStyle);
     const isMelee = !isRanged;
 
-    if (isRanged && distance < 480) {
+    if (enemy.type === "hellKiller" && distance < 480) {
       this.tryHellKillerProjectile(enemy, time, distance);
     }
 
@@ -2042,6 +3127,157 @@ export default class RoguelikeScene extends Phaser.Scene {
     });
   }
 
+  updateFrostTyrantAi(enemy, time, distance) {
+    if (enemy.frostFrozen) {
+      enemy.setVelocity(0, 0);
+      this.playEnemyAnimation(enemy, "intoIceEnd", { loop: false });
+      return;
+    }
+
+    if (!enemy.frostIceTriggered && enemy.health / enemy.maxHealth <= FROST_TYRANT_ICE_TRIGGER) {
+      this.triggerFrostTyrantIce(enemy);
+      return;
+    }
+
+    const effectiveSpeed = this.getEnemySpeed(enemy, time);
+    if (time >= enemy.nextAiDecisionAt) {
+      enemy.nextAiDecisionAt = time + Phaser.Math.Between(520, 840);
+      enemy.strafeDirection = Math.random() > 0.5 ? 1 : -1;
+      if (distance < 105) {
+        enemy.aiMode = "strafe";
+        enemy.aiModeUntil = time + 520;
+      } else if (distance > enemy.desiredRange + 75) {
+        enemy.aiMode = "chase";
+        enemy.aiModeUntil = time + 740;
+      } else {
+        enemy.aiMode = "strafe";
+        enemy.aiModeUntil = time + 820;
+      }
+    }
+
+    this.moveEnemyByMode(enemy, enemy.aiMode, effectiveSpeed, time);
+    this.tryFrostTyrantAttack(enemy, time, distance);
+  }
+
+  tryFrostTyrantAttack(enemy, time, distance) {
+    if (enemy.animationLockedUntil > time) return;
+
+    if (distance < 96 && time - (enemy.lastDamageAt ?? 0) > enemy.damageCooldown) {
+      const animation = Math.random() < 0.45 ? "heavyAttack" : "attack";
+      this.playEnemyAnimation(enemy, animation, { loop: false, lockMs: 560 });
+      return;
+    }
+
+    const canSuper = time - (enemy.lastSuperProjectileAt ?? 0) >= enemy.superProjectileCooldown;
+    const canShot = time - (enemy.lastProjectileAt ?? 0) >= enemy.projectileCooldown;
+    const angle = Phaser.Math.Angle.Between(enemy.x, enemy.y, this.player.x, this.player.y);
+
+    if (canSuper && distance < 440 && Math.random() < 0.34) {
+      enemy.lastSuperProjectileAt = time;
+      this.playEnemyAnimation(enemy, "superAttack", { loop: false, lockMs: 820 });
+      [-12, 12].forEach((spread) => {
+        this.fireAnimatedEnemyProjectile(enemy, "frostTyrantFrostOrb0", "frostTyrantFrostOrb", angle + Phaser.Math.DegToRad(spread), 205, 62, 2900);
+      });
+      return;
+    }
+
+    if (canShot && distance < 520) {
+      enemy.lastProjectileAt = time;
+      this.playEnemyAnimation(enemy, "rangedAttack", { loop: false, lockMs: 620 });
+      this.fireAnimatedEnemyProjectile(enemy, "frostTyrantIceLance0", "frostTyrantIceLance", angle, 285, 54, 2400);
+    }
+  }
+
+  triggerFrostTyrantIce(enemy) {
+    enemy.frostIceTriggered = true;
+    enemy.frostFrozen = true;
+    enemy.invulnerable = true;
+    enemy.setVelocity(0, 0);
+    this.playEnemyAnimation(enemy, "intoIceStart", { loop: false, lockMs: 900 });
+    this.showFloatingText(enemy.x, enemy.y - 82, "ICE SHELL", "#9ee7ff", 20);
+    this.cameras.main.shake(360, 0.006);
+
+    this.time.delayedCall(780, () => {
+      if (!enemy?.active || !enemy.isAlive) return;
+      this.playEnemyAnimation(enemy, "intoIceEnd", { loop: false, lockMs: 999999 });
+      this.spawnMatriarchSoul(enemy);
+    });
+  }
+
+  spawnMatriarchSoul(sourceBoss) {
+    const bounds = this.getWalkableBounds();
+    const x = Phaser.Math.Between(bounds.left + 120, bounds.right - 120);
+    const y = Phaser.Math.Between(bounds.top + 120, bounds.bottom - 120);
+    const soul = this.spawnEnemy({
+      ...ENEMY_TYPES.matriarchSoul,
+      type: "matriarchSoul",
+      x,
+      y,
+      health: FROST_TYRANT_SOUL_HEALTH,
+      sourceBoss,
+      canRevive: false,
+      isSummoned: true,
+    }, { summoned: true });
+    soul.sourceBoss = sourceBoss;
+    soul.setAlpha(0);
+    this.playEnemyAnimation(soul, "appear", { loop: false, lockMs: 920 });
+    this.tweens.add({ targets: soul, alpha: 1, duration: 380 });
+  }
+
+  updateMatriarchSoulAi(enemy, time) {
+    enemy.setVelocity(0, 0);
+    if (enemy.animationLockedUntil > time) return;
+
+    if (time - (enemy.lastSuperProjectileAt ?? 0) > enemy.superProjectileCooldown) {
+      enemy.lastSuperProjectileAt = time;
+      this.playEnemyAnimation(enemy, "superAttack", { loop: false, lockMs: 760 });
+      this.castMatriarchBlizzard(enemy);
+      return;
+    }
+
+    if (time - (enemy.lastProjectileAt ?? 0) > enemy.projectileCooldown) {
+      enemy.lastProjectileAt = time;
+      this.playEnemyAnimation(enemy, "attack", { loop: false, lockMs: 680 });
+      this.castMatriarchShardBurst(enemy);
+    }
+  }
+
+  castMatriarchShardBurst(enemy) {
+    Array.from({ length: 8 }).forEach((_, index) => {
+      this.time.delayedCall(index * 125, () => {
+        if (!enemy?.active || !enemy.isAlive) return;
+        const angle = -Math.PI / 2 + index * (Math.PI * 2 / 8);
+        this.fireAnimatedEnemyProjectile(enemy, "matriarchSoulShard0", "matriarchSoulShard", angle, 225, 44, 2400);
+      });
+    });
+  }
+
+  castMatriarchBlizzard(enemy) {
+    const aimedAngles = [
+      Phaser.Math.Angle.Between(enemy.x, enemy.y, this.player.x, this.player.y),
+      Phaser.Math.Angle.Between(enemy.x, enemy.y, this.player.x + 45, this.player.y - 35),
+    ];
+    const randomAngles = Array.from({ length: 5 }, () => Phaser.Math.FloatBetween(0, Math.PI * 2));
+    [...aimedAngles, ...randomAngles].forEach((angle, index) => {
+      this.time.delayedCall(index * 95, () => {
+        if (!enemy?.active || !enemy.isAlive) return;
+        this.fireAnimatedEnemyProjectile(enemy, "matriarchSoulBlizzard0", "matriarchSoulBlizzard", angle, 205, 52, 2600);
+      });
+    });
+  }
+
+  unfreezeFrostTyrant(boss) {
+    if (!boss?.active || !boss.isAlive) return;
+    boss.frostFrozen = false;
+    boss.invulnerable = false;
+    boss.animationLockedUntil = 0;
+    boss.clearTint();
+    boss.setTint(boss.baseTint || 0xffffff);
+    this.playEnemyAnimation(boss, "walk");
+    this.showFloatingText(boss.x, boss.y - 82, "SHELL BROKEN", "#f5f0ff", 18);
+    this.cameras.main.shake(420, 0.007);
+  }
+
   updateBossAi(enemy, time, distance) {
     const healthRatio = enemy.health / enemy.maxHealth;
     enemy.phase = healthRatio <= 0.35 ? 3 : healthRatio <= 0.65 ? 2 : 1;
@@ -2109,7 +3345,10 @@ export default class RoguelikeScene extends Phaser.Scene {
     enemy.setVelocity(Math.cos(moveAngle) * speed, Math.sin(moveAngle) * speed);
     enemy.setFlipX(enemy.type === "hellGolem" ? enemy.body.velocity.x > 0 : enemy.body.velocity.x < 0);
     if (enemy.animationLockedUntil <= time || !enemy.animationLockedUntil) {
-      this.playEnemyAnimation(enemy, "walk");
+      const movementAnimation = (mode === "icyCharge" || enemy.type === "icebladeMaster") && enemy.animationSet?.run
+        ? "run"
+        : "walk";
+      this.playEnemyAnimation(enemy, movementAnimation);
     }
   }
 
@@ -2120,6 +3359,13 @@ export default class RoguelikeScene extends Phaser.Scene {
 
       if (projectile.isTornado) {
         this.updateInfernalTornado(projectile);
+      }
+
+      if (projectile.owner === "visual") {
+        if (time > projectile.expiresAt) {
+          projectile.destroy();
+        }
+        return;
       }
 
       if (projectile.owner === "hero") {
@@ -2134,6 +3380,7 @@ export default class RoguelikeScene extends Phaser.Scene {
 
         if (distance < (projectile.hazardRadius ?? 30)) {
           if (!projectile.isTornado) {
+            this.createEnemyProjectileImpact(projectile);
             projectile.destroy();
           }
           this.takeProjectileHit(projectile.damage ?? GAME_RULES.enemyHitDamage, time);
@@ -2142,8 +3389,99 @@ export default class RoguelikeScene extends Phaser.Scene {
       }
 
       if (time > projectile.expiresAt) {
+        this.createEnemyProjectileImpact(projectile);
         projectile.destroy();
       }
+    });
+  }
+
+  createEnemyProjectileImpact(projectile) {
+    if (!projectile?.impactPrefix) return;
+    const impact = this.add
+      .image(projectile.x, projectile.y, `${projectile.impactPrefix}0`)
+      .setDisplaySize(projectile.impactSize ?? 62, projectile.impactSize ?? 62)
+      .setDepth(13);
+    impact.frameKeys = this.getFrameKeys(projectile.impactPrefix);
+    impact.animationFps = 12;
+    impact.animationFrame = -1;
+    impact.animationStartedAt = this.time.now;
+    impact.loopAnimation = false;
+    impact.gameDisplayWidth = projectile.impactSize ?? 62;
+    impact.gameDisplayHeight = projectile.impactSize ?? 62;
+    this.projectileGroup.add(impact);
+    impact.owner = "visual";
+    impact.expiresAt = this.time.now + 520;
+  }
+
+  updateIcyHazards(time) {
+    if (this.levelId !== "icy" || this.isEventRoom()) return;
+
+    this.getGroupChildren(this.icyTrapGroup).forEach((trap) => {
+      if (!trap?.active) return;
+      this.animateSprite(trap, time);
+      const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, trap.x, trap.y);
+      if (distance < (trap.radius ?? 34) && time - (trap.triggeredAt ?? 0) > 1200) {
+        trap.triggeredAt = time;
+        this.takeProjectileHit(GAME_RULES.enemyHitDamage, time);
+        this.showFloatingText(trap.x, trap.y - 28, "FROST SPIKES", "#9ee7ff", 14);
+      }
+    });
+
+    if (this.isBossRoom()) return;
+    if (this.getAliveEnemyCount() <= 0 || this.roomRewardResolved || this.chestSprite) return;
+    if (!this.nextFallingIceSpikeAt || time < this.nextFallingIceSpikeAt) return;
+    this.nextFallingIceSpikeAt = time + Phaser.Math.Between(4600, 7800);
+    this.spawnFallingIceSpike();
+  }
+
+  spawnFallingIceSpike() {
+    const bounds = this.getWalkableBounds();
+    const targetX = Phaser.Math.Clamp(this.player.x + Phaser.Math.Between(-80, 80), bounds.left + 32, bounds.right - 32);
+    const targetY = Phaser.Math.Clamp(this.player.y + Phaser.Math.Between(-55, 55), bounds.top + 32, bounds.bottom - 32);
+    const indicator = this.add
+      .image(targetX, targetY, "fallingIceSpikeIndicator0")
+      .setDisplaySize(82, 52)
+      .setDepth(7)
+      .setAlpha(0.75);
+    indicator.frameKeys = this.getFrameKeys("fallingIceSpikeIndicator");
+    indicator.animationFps = 12;
+    indicator.animationFrame = -1;
+    indicator.animationStartedAt = this.time.now;
+    indicator.loopAnimation = false;
+    indicator.gameDisplayWidth = 82;
+    indicator.gameDisplayHeight = 52;
+    indicator.owner = "visual";
+    indicator.expiresAt = this.time.now + 860;
+    this.projectileGroup.add(indicator);
+
+    this.time.delayedCall(820, () => {
+      if (!indicator?.active) return;
+      indicator.destroy();
+      const spike = this.add
+        .image(targetX, targetY - 120, "fallingIceSpikeTrap0")
+        .setDisplaySize(56, 94)
+        .setDepth(13);
+      spike.owner = "enemy";
+      spike.damage = GAME_RULES.enemyHitDamage;
+      spike.expiresAt = this.time.now + 900;
+      spike.hazardRadius = 36;
+      spike.frameKeys = this.getFrameKeys("fallingIceSpikeTrap");
+      spike.animationFps = 13;
+      spike.animationFrame = -1;
+      spike.animationStartedAt = this.time.now;
+      spike.loopAnimation = false;
+      spike.gameDisplayWidth = 56;
+      spike.gameDisplayHeight = 94;
+      this.projectileGroup.add(spike);
+      this.physics.add.existing(spike);
+      spike.body.setVelocity(0, 420);
+      this.tweens.add({
+        targets: spike,
+        y: targetY,
+        duration: 320,
+        ease: "Cubic.easeIn",
+        onComplete: () => spike.body?.setVelocity(0, 0),
+      });
     });
   }
 
@@ -2169,7 +3507,7 @@ export default class RoguelikeScene extends Phaser.Scene {
 
       const distance = Phaser.Math.Distance.Between(projectile.x, projectile.y, enemy.x, enemy.y);
       if (distance < (projectile.hazardRadius ?? enemy.displayWidth * 0.28 + 14)) {
-        this.createNoxHitImpact(projectile.x, projectile.y, projectile.rotation);
+        this.createHeroHitImpact(projectile.x, projectile.y, projectile.rotation, projectile.hitEffect);
         this.damageEnemy(enemy, projectile.damage ?? this.stats.attackDamage, {
           canBurn: true,
           canCrit: true,
@@ -2194,16 +3532,40 @@ export default class RoguelikeScene extends Phaser.Scene {
     const hitX = this.player.x + Math.cos(angle) * 42;
     const hitY = this.player.y + Math.sin(angle) * 42;
 
-    const slash = this.add.arc(hitX, hitY, 38, -50, 50, false, 0xb98cff, 0.4);
-    slash.setRotation(angle);
-    this.playHeroAnimation("attack", { loop: false, lockMs: 260 });
-    this.tweens.add({
-      targets: slash,
-      alpha: 0,
-      scale: 1.6,
-      duration: 145,
-      onComplete: () => slash.destroy(),
-    });
+    this.playHeroAnimation("attack", { loop: false, lockMs: this.heroId === "riven" ? 330 : 260 });
+    if (this.heroId === "riven") {
+      const slash = this.createRivenAnimatedEffect({
+        prefix: "rivenSmallSlash",
+        strip: RIVEN_PROJECTILE_STRIPS.smallSlash,
+        x: hitX,
+        y: hitY,
+        width: 82,
+        height: 44,
+        rotation: angle,
+        depth: 12,
+        selfAnimate: true,
+      }).setAlpha(0.9);
+      this.tweens.add({
+        targets: slash,
+        x: slash.x + Math.cos(angle) * 32,
+        y: slash.y + Math.sin(angle) * 32,
+        alpha: 0,
+        scaleX: 1.18,
+        scaleY: 1.12,
+        duration: 230,
+        onComplete: () => slash.destroy(),
+      });
+    } else {
+      const slash = this.add.arc(hitX, hitY, 38, -50, 50, false, 0xb98cff, 0.4);
+      slash.setRotation(angle);
+      this.tweens.add({
+        targets: slash,
+        alpha: 0,
+        scale: 1.6,
+        duration: 145,
+        onComplete: () => slash.destroy(),
+      });
+    }
 
     if (this.hasProjectileAttack) {
       this.fireHeroProjectile(angle);
@@ -2218,6 +3580,7 @@ export default class RoguelikeScene extends Phaser.Scene {
           canCrit: true,
           canSlow: true,
         });
+        this.createHeroHitImpact(enemy.x, enemy.y - enemy.displayHeight * 0.1, angle);
       }
     });
 
@@ -2230,15 +3593,16 @@ export default class RoguelikeScene extends Phaser.Scene {
     const isRiven = this.heroId === "riven";
     const isNox = this.heroId === "nox";
     const projectile = isRiven
-      ? this.add
-        .image(
-          this.player.x + Math.cos(angle) * 34,
-          this.player.y + Math.sin(angle) * 34,
-          "rivenProjectile"
-        )
-        .setDisplaySize(48, 34)
-        .setDepth(11)
-        .setRotation(angle)
+      ? this.createRivenAnimatedEffect({
+        prefix: "rivenDagger",
+        strip: RIVEN_PROJECTILE_STRIPS.dagger,
+        x: this.player.x + Math.cos(angle) * 38,
+        y: this.player.y + Math.sin(angle) * 38,
+        width: 58,
+        height: 34,
+        rotation: angle,
+        depth: 11,
+      })
       : this.createNoxAnimatedEffect({
         prefix: "noxMagicBolt",
         strip: NOX_PROJECTILE_STRIPS.magicBolt,
@@ -2250,11 +3614,14 @@ export default class RoguelikeScene extends Phaser.Scene {
         depth: 11,
       });
     projectile.owner = "hero";
-    projectile.damage = this.stats.attackDamage * (isNox && this.hasNoxVoidBarrage ? 1.08 : 1);
-    projectile.expiresAt = this.time.now + (isNox ? 1150 : 950);
+    projectile.hitEffect = isRiven ? "riven" : "nox";
+    projectile.damage = this.stats.attackDamage * (
+      isNox && this.hasNoxVoidBarrage ? 1.08 : isRiven && this.hasRivenEmberBlade ? 1.1 : 1
+    );
+    projectile.expiresAt = this.time.now + (isNox ? 1150 : 1000);
     this.projectileGroup.add(projectile);
     this.physics.add.existing(projectile);
-    projectile.body.setVelocity(Math.cos(angle) * (isNox ? 500 : 430), Math.sin(angle) * (isNox ? 500 : 430));
+    projectile.body.setVelocity(Math.cos(angle) * (isNox ? 500 : 520), Math.sin(angle) * (isNox ? 500 : 520));
 
     if (isNox && this.hasNoxVoidBarrage && this.attackCounter % 3 === 0) {
       const crit = this.createNoxAnimatedEffect({
@@ -2268,11 +3635,33 @@ export default class RoguelikeScene extends Phaser.Scene {
         depth: 12,
       });
       crit.owner = "hero";
+      crit.hitEffect = "nox";
       crit.damage = this.stats.attackDamage * 1.35;
       crit.expiresAt = this.time.now + 1050;
       this.projectileGroup.add(crit);
       this.physics.add.existing(crit);
       crit.body.setVelocity(Math.cos(angle) * 560, Math.sin(angle) * 560);
+    }
+
+    if (isRiven && this.hasRivenEmberBlade && this.attackCounter % 3 === 0) {
+      const blade = this.createRivenAnimatedEffect({
+        prefix: "rivenLargeSlash",
+        strip: RIVEN_PROJECTILE_STRIPS.largeSlash,
+        x: this.player.x + Math.cos(angle) * 46,
+        y: this.player.y + Math.sin(angle) * 46,
+        width: 92,
+        height: 54,
+        rotation: angle,
+        depth: 12,
+      });
+      blade.owner = "hero";
+      blade.hitEffect = "riven";
+      blade.damage = this.stats.attackDamage * 1.45;
+      blade.hazardRadius = 54;
+      blade.expiresAt = this.time.now + 900;
+      this.projectileGroup.add(blade);
+      this.physics.add.existing(blade);
+      blade.body.setVelocity(Math.cos(angle) * 480, Math.sin(angle) * 480);
     }
   }
 
@@ -2301,8 +3690,8 @@ export default class RoguelikeScene extends Phaser.Scene {
       strip: this.hasNoxVoidBarrage ? NOX_PROJECTILE_STRIPS.superBurst : NOX_PROJECTILE_STRIPS.largeWave,
       x: this.player.x + Math.cos(angle) * 72,
       y: this.player.y + Math.sin(angle) * 72,
-      width: this.hasNoxVoidBarrage ? 126 : 104,
-      height: this.hasNoxVoidBarrage ? 86 : 50,
+      width: this.hasNoxVoidBarrage ? 138 : 112,
+      height: this.hasNoxVoidBarrage ? 94 : 54,
       rotation: angle,
       depth: 12,
       selfAnimate: true,
@@ -2314,7 +3703,7 @@ export default class RoguelikeScene extends Phaser.Scene {
       alpha: 0,
       scaleX: 1.35,
       scaleY: 1.2,
-      duration: this.hasNoxVoidBarrage ? 520 : 390,
+      duration: this.hasNoxVoidBarrage ? 540 : 410,
       ease: "Cubic.easeOut",
       onComplete: () => burst.destroy(),
     });
@@ -2329,6 +3718,7 @@ export default class RoguelikeScene extends Phaser.Scene {
           canSlow: true,
           isSkill: true,
         });
+        this.createNoxHitImpact(enemy.x, enemy.y - enemy.displayHeight * 0.08, angle);
       }
     });
 
@@ -2358,6 +3748,10 @@ export default class RoguelikeScene extends Phaser.Scene {
         this.time.delayedCall(index * 70, () => {
           this.fireNoxShardProjectile(angle + Phaser.Math.DegToRad(spread));
         });
+      });
+    } else {
+      this.time.delayedCall(120, () => {
+        this.fireNoxShardProjectile(angle);
       });
     }
   }
@@ -2431,37 +3825,115 @@ export default class RoguelikeScene extends Phaser.Scene {
     });
   }
 
+  createRivenAnimatedEffect(options) {
+    return this.createNoxAnimatedEffect(options);
+  }
+
+  createRivenHitImpact(x, y, rotation = 0) {
+    const impact = this.createRivenAnimatedEffect({
+      prefix: "rivenHitImpact",
+      strip: RIVEN_PROJECTILE_STRIPS.hitImpact,
+      x,
+      y,
+      width: 62,
+      height: 50,
+      rotation,
+      depth: 13,
+      selfAnimate: true,
+    });
+    this.tweens.add({
+      targets: impact,
+      alpha: 0,
+      scaleX: 1.28,
+      scaleY: 1.2,
+      duration: 260,
+      onComplete: () => impact.destroy(),
+    });
+  }
+
+  createHeroHitImpact(x, y, rotation = 0, effect = this.heroId) {
+    if (effect === "riven") {
+      this.createRivenHitImpact(x, y, rotation);
+      return;
+    }
+    if (effect === "nox") {
+      this.createNoxHitImpact(x, y, rotation);
+    }
+  }
+
   castRivenSkill() {
     const pointer = this.input.activePointer;
     const angle = Phaser.Math.Angle.Between(this.player.x, this.player.y, pointer.worldX, pointer.worldY);
-    const wave = this.add
-      .image(this.player.x + Math.cos(angle) * 55, this.player.y + Math.sin(angle) * 55, "rivenProjectile")
-      .setDisplaySize(78, 46)
-      .setRotation(angle)
-      .setDepth(12)
-      .setTint(0xff8b3d);
+    const isEmberBlade = this.hasRivenEmberBlade;
+    this.playHeroAnimation(isEmberBlade ? "superAttack" : "skillAttack", {
+      loop: false,
+      lockMs: isEmberBlade ? 560 : 440,
+    });
+
+    const slash = this.createRivenAnimatedEffect({
+      prefix: isEmberBlade ? "rivenSuperBurst" : "rivenLargeSlash",
+      strip: isEmberBlade ? RIVEN_PROJECTILE_STRIPS.superBurst : RIVEN_PROJECTILE_STRIPS.largeSlash,
+      x: this.player.x + Math.cos(angle) * 68,
+      y: this.player.y + Math.sin(angle) * 68,
+      width: isEmberBlade ? 124 : 96,
+      height: isEmberBlade ? 82 : 56,
+      rotation: angle,
+      depth: 12,
+      selfAnimate: true,
+    });
 
     this.tweens.add({
-      targets: wave,
-      x: wave.x + Math.cos(angle) * 190,
-      y: wave.y + Math.sin(angle) * 190,
+      targets: slash,
+      x: slash.x + Math.cos(angle) * (isEmberBlade ? 235 : 190),
+      y: slash.y + Math.sin(angle) * (isEmberBlade ? 235 : 190),
       alpha: 0,
-      duration: 360,
-      onComplete: () => wave.destroy(),
+      scaleX: 1.25,
+      scaleY: 1.14,
+      duration: isEmberBlade ? 520 : 380,
+      ease: "Cubic.easeOut",
+      onComplete: () => slash.destroy(),
     });
 
     this.getGroupChildren(this.enemyGroup).forEach((enemy) => {
       if (!enemy?.isAlive || enemy.isReviving) return;
-      const distance = Phaser.Math.Distance.Between(wave.x, wave.y, enemy.x, enemy.y);
-      if (distance < 190) {
-        this.damageEnemy(enemy, this.getSkillDamage(enemy, this.stats.burningWave ? 2.05 : 1.65), {
+      const distance = Phaser.Math.Distance.Between(slash.x, slash.y, enemy.x, enemy.y);
+      if (distance < (isEmberBlade ? 225 : 190)) {
+        this.damageEnemy(enemy, this.getSkillDamage(enemy, isEmberBlade ? 2.15 : this.stats.burningWave ? 2.05 : 1.65), {
           canBurn: true,
           canCrit: true,
           canSlow: true,
           isSkill: true,
         });
+        this.createRivenHitImpact(enemy.x, enemy.y - enemy.displayHeight * 0.08, angle);
       }
     });
+
+    const orb = this.createRivenAnimatedEffect({
+      prefix: "rivenSkillOrb",
+      strip: RIVEN_PROJECTILE_STRIPS.skillOrb,
+      x: this.player.x + Math.cos(angle) * 44,
+      y: this.player.y + Math.sin(angle) * 44,
+      width: 58,
+      height: 42,
+      rotation: angle,
+      depth: 12,
+    });
+    orb.owner = "hero";
+    orb.hitEffect = "riven";
+    orb.damage = this.stats.attackDamage * (isEmberBlade ? 1.45 : 1.1);
+    orb.hazardRadius = isEmberBlade ? 52 : 42;
+    orb.expiresAt = this.time.now + 1000;
+    this.projectileGroup.add(orb);
+    this.physics.add.existing(orb);
+    orb.body.setVelocity(Math.cos(angle) * (isEmberBlade ? 560 : 480), Math.sin(angle) * (isEmberBlade ? 560 : 480));
+
+    if (isEmberBlade) {
+      [-18, 18].forEach((spread, index) => {
+        this.time.delayedCall(90 + index * 70, () => {
+          this.fireHeroProjectile(angle + Phaser.Math.DegToRad(spread));
+        });
+      });
+    }
   }
 
   getSkillDamage(enemy, multiplier) {
@@ -2502,17 +3974,45 @@ export default class RoguelikeScene extends Phaser.Scene {
   }
 
   roll(time) {
-    if (this.challengeActive) {
-      this.showFloatingText(this.player.x, this.player.y - 56, "NO DASH", "#ffcf6b", 14);
+    const challengeBlockReason = this.getChallengeDashBlockReason(time);
+    if (challengeBlockReason) {
+      this.showFloatingText(this.player.x, this.player.y - 56, challengeBlockReason, "#ffcf6b", 14);
       return;
     }
-    if (time - this.lastRollAt < this.stats.rollCooldown || this.isRolling) return;
+    const rollCooldown = this.getEffectiveRollCooldown();
+    if (time - this.lastRollAt < rollCooldown || this.isRolling) return;
 
     this.lastRollAt = time;
+    if (this.challengeActive && this.challengeDashRule?.id === "oneCharge") {
+      this.challengeDashCharges = Math.max(0, this.challengeDashCharges - 1);
+    }
     this.isRolling = true;
     this.invulnerableUntil = time + this.stats.rollDuration + 120;
     this.player.setAlpha(0.55);
     this.playHeroAnimation("dash", { loop: false, lockMs: this.stats.rollDuration });
+    if (this.heroId === "riven") {
+      const pointer = this.input.activePointer;
+      const angle = Phaser.Math.Angle.Between(this.player.x, this.player.y, pointer.worldX, pointer.worldY);
+      const trail = this.createRivenAnimatedEffect({
+        prefix: "rivenDashTrail",
+        strip: RIVEN_PROJECTILE_STRIPS.dashTrail,
+        x: this.player.x - Math.cos(angle) * 18,
+        y: this.player.y - Math.sin(angle) * 18,
+        width: 92,
+        height: 48,
+        rotation: angle,
+        depth: 7,
+        selfAnimate: true,
+      }).setAlpha(0.72);
+      this.tweens.add({
+        targets: trail,
+        alpha: 0,
+        scaleX: 1.22,
+        scaleY: 1.12,
+        duration: 280,
+        onComplete: () => trail.destroy(),
+      });
+    }
     if (this.heroId === "nox") {
       const pointer = this.input.activePointer;
       const angle = Phaser.Math.Angle.Between(this.player.x, this.player.y, pointer.worldX, pointer.worldY);
@@ -2535,7 +4035,7 @@ export default class RoguelikeScene extends Phaser.Scene {
         onComplete: () => shadow.destroy(),
       });
     }
-    if (this.stats.infernalDash) {
+    if (this.stats.infernalDash && this.tryUseDashCardEffect("infernalDash", time)) {
       this.createInfernalDashTrail();
     }
 
@@ -2545,10 +4045,50 @@ export default class RoguelikeScene extends Phaser.Scene {
     });
   }
 
+  getEffectiveRollCooldown() {
+    const challengeMultiplier = this.challengeActive && this.challengeDashRule?.id === "cooldown2" ? 2 : 1;
+    return this.stats.rollCooldown * challengeMultiplier;
+  }
+
+  getChallengeDashBlockReason(time) {
+    if (!this.challengeActive || !this.challengeDashRule) return "";
+    if (this.challengeDashRule.id === "oneCharge" && this.challengeDashCharges <= 0) return "NO CHARGE";
+    if (this.challengeDashRule.id === "disabledStart" && time < this.challengeDashDisabledUntil) return "DASH LOCKED";
+    if (this.challengeDashRule.id === "eliteKill" && !this.challengeEliteKilled) return "KILL ELITE";
+    return "";
+  }
+
+  getChallengeDashStatusText(time) {
+    if (!this.challengeDashRule) return "Dash ready";
+    if (this.challengeDashRule.id === "cooldown2") return "Dash cd x2";
+    if (this.challengeDashRule.id === "oneCharge") return `Dash charges ${this.challengeDashCharges}`;
+    if (this.challengeDashRule.id === "disabledStart") {
+      const remaining = Math.max(0, Math.ceil((this.challengeDashDisabledUntil - time) / 1000));
+      return remaining > 0 ? `Dash in ${remaining}s` : "Dash ready";
+    }
+    if (this.challengeDashRule.id === "eliteKill") return this.challengeEliteKilled ? "Dash ready" : "Dash: kill elite";
+    return this.challengeDashRule.label;
+  }
+
+  tryUseDashCardEffect(key, time, cooldown = 5000) {
+    const readyAt = this.dashCardCooldowns[key] ?? 0;
+    if (time < readyAt) {
+      if (time - this.lastDashCardCooldownNoticeAt > 900) {
+        this.lastDashCardCooldownNoticeAt = time;
+        const remaining = Math.ceil((readyAt - time) / 1000);
+        this.showFloatingText(this.player.x, this.player.y - 74, `DASH CARD ${remaining}s`, "#ff8a3d", 13);
+      }
+      return false;
+    }
+    this.dashCardCooldowns[key] = time + cooldown;
+    return true;
+  }
+
   createInfernalDashTrail() {
     const trail = this.add
       .ellipse(this.player.x, this.player.y, 150, 46, 0xff6a22, 0.36)
       .setDepth(6);
+    this.fireTrailGroup?.add(trail);
     this.tweens.add({
       targets: trail,
       alpha: 0,
@@ -2606,10 +4146,24 @@ export default class RoguelikeScene extends Phaser.Scene {
 
     const strip = enemy.stripSet[name];
     enemy.animationState = name;
-    enemy.frameKeys = enemy.type === "hellGolem" && name === "idle"
-      ? [enemy.animationSet[name][0]]
-      : enemy.animationSet[name];
-    enemy.animationFps = enemy.type === "hellGolem" && name === "idle" ? 1 : strip.fps;
+    if (enemy.type === "hellGolem" && name === "idle") {
+      enemy.frameKeys = [enemy.animationSet[name][0]];
+      enemy.animationFps = 1;
+    } else if (enemy.type === "hellGolem" && name === "walk") {
+      enemy.frameKeys = [
+        enemy.animationSet[name][0],
+        enemy.animationSet[name][1],
+        enemy.animationSet[name][2],
+        enemy.animationSet[name][1],
+      ].filter(Boolean);
+      enemy.animationFps = 4;
+    } else if (this.shouldUseIcyMovementLoop(enemy, name, loop)) {
+      enemy.frameKeys = this.getIcyMovementLoopKeys(enemy, name);
+      enemy.animationFps = Math.max(6, Math.round(strip.fps * 0.92));
+    } else {
+      enemy.frameKeys = enemy.animationSet[name];
+      enemy.animationFps = strip.fps;
+    }
     enemy.animationFrame = -1;
     enemy.animationStartedAt = this.time.now;
     enemy.loopAnimation = loop;
@@ -2619,6 +4173,22 @@ export default class RoguelikeScene extends Phaser.Scene {
     if (lockMs > 0) {
       enemy.animationLockedUntil = this.time.now + lockMs;
     }
+  }
+
+  shouldUseIcyMovementLoop(enemy, name, loop) {
+    return Boolean(
+      loop &&
+      (name === "walk" || name === "run") &&
+      ICY_MOVEMENT_LOOP_FRAMES[enemy.type] &&
+      enemy.type !== "frostTyrant"
+    );
+  }
+
+  getIcyMovementLoopKeys(enemy, name) {
+    const sourceKeys = enemy.animationSet[name] ?? [];
+    return ICY_MOVEMENT_LOOP_FRAMES[enemy.type]
+      .map((index) => sourceKeys[index])
+      .filter(Boolean);
   }
 
   tryBossProjectile(enemy, time) {
@@ -2655,7 +4225,7 @@ export default class RoguelikeScene extends Phaser.Scene {
     const elapsed = Math.max(0, time - (sprite.animationStartedAt ?? 0));
     const nextFrame = sprite.loopAnimation === false
       ? Math.min(sprite.frameKeys.length - 1, Math.floor(elapsed / frameDuration))
-      : Math.floor(time / frameDuration) % sprite.frameKeys.length;
+      : Math.floor(elapsed / frameDuration) % sprite.frameKeys.length;
 
     if (sprite.animationFrame === nextFrame) return;
 
@@ -2777,6 +4347,7 @@ export default class RoguelikeScene extends Phaser.Scene {
 
   isPlayerTouchingExit() {
     if (this.time.now < (this.exitReadyAt ?? 0)) return false;
+    if (this.isEventRoom() && !this.eventExitRevealed) return false;
     const bounds = this.exitZone.getBounds();
 
     return (
@@ -2797,6 +4368,21 @@ export default class RoguelikeScene extends Phaser.Scene {
     isSkill = false,
   } = {}) {
     if (!enemy?.isAlive || enemy.isReviving) return;
+    if (enemy.invulnerable) {
+      this.showFloatingText(enemy.x, enemy.y - enemy.displayHeight * 0.55, "IMMUNE", "#9ee7ff", 16);
+      return;
+    }
+    if (
+      enemy.type === "frozenKnight" &&
+      !isBurn &&
+      !isPoison &&
+      !isBleed &&
+      Math.random() < (enemy.blockChance ?? 0)
+    ) {
+      this.playEnemyAnimation(enemy, "damaged", { loop: false, lockMs: 220 });
+      this.showFloatingText(enemy.x, enemy.y - enemy.displayHeight * 0.45, "BLOCK", "#c7efff", 16);
+      return;
+    }
 
     let finalDamage = damage;
     if (!isBurn && !isPoison && !isBleed && this.stats.crystalBlood) {
@@ -2838,8 +4424,17 @@ export default class RoguelikeScene extends Phaser.Scene {
     if (isCritical) {
       this.showFloatingText(enemy.x, enemy.y - enemy.displayHeight * 0.48, "CRIT!", "#ffd36b", 22);
     }
-    if (isCritical || finalDamage >= this.stats.attackDamage * 1.5 || enemy.type === "boss" || enemy.type === "infernalBoss") {
+    if (isCritical || finalDamage >= this.stats.attackDamage * 1.5 || enemy.type === "boss" || enemy.type === "infernalBoss" || enemy.type === "frostTyrant") {
       this.cameras.main.shake(isCritical ? 150 : 110, isCritical ? 0.0055 : 0.0035);
+    }
+    if (
+      enemy.type === "frostTyrant" &&
+      !enemy.frostIceTriggered &&
+      enemy.health / enemy.maxHealth <= FROST_TYRANT_ICE_TRIGGER &&
+      enemy.health > 0
+    ) {
+      this.triggerFrostTyrantIce(enemy);
+      return;
     }
     if (
       enemy.type === "infernalBoss" &&
@@ -3152,6 +4747,10 @@ export default class RoguelikeScene extends Phaser.Scene {
   defeatEnemy(enemy) {
     enemy.isAlive = false;
     this.enemyKills += 1;
+    if (enemy.challengeElite) {
+      this.challengeEliteKilled = true;
+      this.showFloatingText(enemy.x, enemy.y - 64, "DASH RESTORED", "#ffcf6b", 16);
+    }
     this.aliveEnemies = Math.max(0, this.getAliveEnemyCount() - 1);
     enemy.setVelocity(0, 0);
     enemy.body.enable = false;
@@ -3168,7 +4767,13 @@ export default class RoguelikeScene extends Phaser.Scene {
       if (this.stats.spreadingPlague) this.spreadPoison(enemy);
       if (this.stats.toxicReward && Math.random() < 0.15) this.addGreenHearts(0.5);
     }
-    if (enemy.type === "boss" || enemy.type === "infernalBoss") {
+    if (enemy.type === "iceWraith") {
+      this.createIceWraithNova(enemy.x, enemy.y);
+    }
+    if (enemy.type === "matriarchSoul") {
+      this.time.delayedCall(deathDuration + 80, () => this.unfreezeFrostTyrant(enemy.sourceBoss));
+    }
+    if (enemy.type === "boss" || enemy.type === "infernalBoss" || enemy.type === "frostTyrant") {
       this.spawnCurrency("gem", 1, enemy.x, enemy.y + 42);
       this.bossRewards.push("Gem x1");
       this.grantBossCard();
@@ -3193,6 +4798,25 @@ export default class RoguelikeScene extends Phaser.Scene {
       enemy.frameKeys = null;
     });
     this.time.delayedCall(5000, () => enemy.destroy());
+  }
+
+  createIceWraithNova(x, y) {
+    const nova = this.add
+      .image(x, y, "iceWraithNova0")
+      .setDisplaySize(138, 92)
+      .setDepth(13);
+    nova.owner = "enemy";
+    nova.damage = GAME_RULES.enemyHitDamage;
+    nova.expiresAt = this.time.now + 760;
+    nova.hazardRadius = 74;
+    nova.frameKeys = this.getFrameKeys("iceWraithNova");
+    nova.animationFps = 12;
+    nova.animationFrame = -1;
+    nova.animationStartedAt = this.time.now;
+    nova.loopAnimation = false;
+    nova.gameDisplayWidth = 138;
+    nova.gameDisplayHeight = 92;
+    this.projectileGroup.add(nova);
   }
 
   grantBossCard() {
@@ -3248,7 +4872,7 @@ export default class RoguelikeScene extends Phaser.Scene {
 
   collectPickup(player, pickup) {
     if (pickup.type === "potion") {
-      this.healPlayer(1);
+      this.healPlayer(1 * (this.stats.potionHealMultiplier ?? 1));
       pickup.destroy();
     }
 
@@ -3263,8 +4887,20 @@ export default class RoguelikeScene extends Phaser.Scene {
     }
 
     if (pickup.type === "tarot") {
+      const preparedCard = pickup.preparedCard;
       pickup.destroy();
-      this.offerTarotChoice({ advanceFloor: false });
+      if (preparedCard) {
+        const card = this.prepareCardForOffer(preparedCard);
+        this.applyChosenCard(card, "Challenge reward");
+        this.showCardRewardBanner({
+          kicker: "Challenge tarot",
+          title: card.title,
+          description: card.description,
+          color: card.rarity === "cursed" ? "#7c3cff" : card.rarity === "epic" ? "#c084fc" : "#78b7ff",
+        });
+      } else {
+        this.offerTarotChoice({ advanceFloor: false });
+      }
     }
 
     if (pickup.type === "temp-heart") {
@@ -3373,6 +5009,10 @@ export default class RoguelikeScene extends Phaser.Scene {
       this.hasNoxVoidBarrage = true;
       this.stats.skillCooldown *= 0.92;
     }
+    if (this.heroId === "riven") {
+      this.hasRivenEmberBlade = true;
+      this.stats.attackCooldown *= 0.94;
+    }
     this.updateUi();
   }
 
@@ -3388,8 +5028,10 @@ export default class RoguelikeScene extends Phaser.Scene {
     if (this.room < this.floorPlan.roomCount) {
       const nextRoom = this.room + 1;
       const toBoss = this.floor === GAME_RULES.floorsPerLevel && nextRoom === this.floorPlan.roomCount;
+      const nextRoomType = this.getRoomTypeAt(nextRoom);
       this.enterTunnel({
         toBoss,
+        roomType: nextRoomType,
         onComplete: () => {
           this.room = nextRoom;
           this.startRoom();
@@ -3400,13 +5042,27 @@ export default class RoguelikeScene extends Phaser.Scene {
 
     this.enterTunnel({
       toBoss: false,
-      onComplete: () => this.offerTarotChoice(),
+      roomType: "combat",
+      onComplete: () => {
+        this.floor += 1;
+        this.room = 1;
+        this.floorPlan = createFloorPlan(this.floor);
+        this.startRoom();
+      },
     });
   }
 
-  enterTunnel({ toBoss, onComplete }) {
+  getRoomTypeAt(roomNumber) {
+    if (this.floor === GAME_RULES.floorsPerLevel && roomNumber === this.floorPlan.roomCount) {
+      return "combat";
+    }
+    return this.floorPlan.roomTypes?.[roomNumber - 1] ?? "combat";
+  }
+
+  enterTunnel({ toBoss, roomType = "combat", onComplete }) {
     this.isTransitioning = true;
     this.tunnelHasTraveler = this.shouldSpawnTraveler(toBoss);
+    this.pendingTunnelRoomType = roomType;
     this.pendingTunnelComplete = onComplete;
     this.clearFloorObjects();
     const tunnelTexture = this.getTunnelTexture(toBoss);
@@ -3477,8 +5133,15 @@ export default class RoguelikeScene extends Phaser.Scene {
       return "travelerRoomBg";
     }
 
+    const specialTunnel = SPECIAL_TUNNEL_TEXTURES[this.pendingTunnelRoomType];
+    if (specialTunnel) return specialTunnel;
+
     if (this.levelId === "hell") {
       return toBoss ? "hellTunnelBoss" : "hellTunnel";
+    }
+
+    if (this.levelId === "icy") {
+      return "icyTunnelBg";
     }
 
     return toBoss ? "roomTunnelBoss" : "roomTunnel";
@@ -3758,7 +5421,7 @@ export default class RoguelikeScene extends Phaser.Scene {
       maxLevel > 1 ? `${card.title} ${this.toRoman(nextLevel)}` : card.title
     );
     const description = nextLevelData?.description ?? (
-      currentLevel > 0 ? `Improved: ${card.description}` : card.description
+      currentLevel > 0 ? this.getGenericUpgradeDescription(card, nextLevel) : card.description
     );
 
     return {
@@ -3772,8 +5435,50 @@ export default class RoguelikeScene extends Phaser.Scene {
       maxLevel,
       isDuplicate: currentLevel > 0,
       rarity: card.rarity ?? "common",
-      apply: nextLevelData?.apply ?? card.apply,
+      apply: nextLevelData?.apply ?? ((stats, scene) => {
+        card.apply?.(stats, scene);
+        if (currentLevel > 0) {
+          scene.applyGenericCardUpgrade(card, nextLevel);
+        }
+      }),
     };
+  }
+
+  getGenericUpgradeDescription(card, level) {
+    const bonusByBuild = {
+      fire: "Bonus upgrade: fire damage +10%",
+      blueHeart: "Bonus upgrade: gain +0.5 blue heart",
+      crit: "Bonus upgrade: crit chance +5%",
+      poison: "Bonus upgrade: poison damage +10%",
+    };
+    if (bonusByBuild[card.build]) return `${card.description}. ${bonusByBuild[card.build]}`;
+    if (card.rarity === "cursed") return `${card.description}. Bonus upgrade: damage +8%`;
+    if (card.rarity === "hero") return `${card.description}. Bonus upgrade: skill cooldown -8%`;
+    if (card.rarity === "boss") return `${card.description}. Bonus upgrade: damage +10%`;
+    return `${card.description}. Bonus upgrade ${this.toRoman(level)}: damage +5% and speed +4%`;
+  }
+
+  applyGenericCardUpgrade(card, level) {
+    if (card.build === "fire") {
+      this.stats.burnDamageMultiplier = (this.stats.burnDamageMultiplier ?? 1) * 1.1;
+    } else if (card.build === "blueHeart") {
+      this.addTempHearts(0.5);
+    } else if (card.build === "crit") {
+      this.stats.critChance += 0.05;
+    } else if (card.build === "poison") {
+      this.stats.poisonDamage = Math.max(this.stats.poisonDamage ?? 0, this.stats.attackDamage * 0.08) * 1.1;
+    } else if (card.rarity === "hero") {
+      this.stats.skillCooldown *= 0.92;
+    } else if (card.rarity === "boss") {
+      this.stats.attackDamage *= 1.1;
+    } else if (card.rarity === "cursed") {
+      this.stats.attackDamage *= 1.08;
+    } else {
+      this.stats.attackDamage *= 1.05;
+      this.stats.speed *= 1.04;
+    }
+
+    this.showFloatingText(this.player.x, this.player.y - 92, `UPGRADE ${this.toRoman(level)}`, "#ffd36b", 16);
   }
 
   applyChosenCard(card, source = "Tarot") {
@@ -3787,6 +5492,50 @@ export default class RoguelikeScene extends Phaser.Scene {
       rarity: card.rarity,
       level: card.level,
       source,
+    });
+  }
+
+  showCardRewardBanner({ kicker, title, description, color = "#f7efff" }) {
+    const panel = this.add
+      .rectangle(512, 150, 520, 104, 0x10121b, 0.86)
+      .setStrokeStyle(2, Phaser.Display.Color.HexStringToColor(color).color, 0.85)
+      .setDepth(60)
+      .setAlpha(0);
+    const label = this.add
+      .text(512, 150, `${kicker}\n${title}\n${description}`, {
+        fontFamily: "monospace",
+        fontSize: "14px",
+        color: "#f7efff",
+        align: "center",
+        lineSpacing: 4,
+        wordWrap: { width: 470 },
+      })
+      .setOrigin(0.5)
+      .setDepth(61)
+      .setAlpha(0);
+
+    label.setTint(0xffffff);
+    this.tweens.add({
+      targets: [panel, label],
+      y: "-=8",
+      alpha: 1,
+      duration: 180,
+      ease: "Sine.easeOut",
+      onComplete: () => {
+        this.time.delayedCall(1900, () => {
+          this.tweens.add({
+            targets: [panel, label],
+            y: "-=16",
+            alpha: 0,
+            duration: 320,
+            ease: "Sine.easeIn",
+            onComplete: () => {
+              panel.destroy();
+              label.destroy();
+            },
+          });
+        });
+      },
     });
   }
 
@@ -3870,6 +5619,7 @@ export default class RoguelikeScene extends Phaser.Scene {
     this.isTransitioning = false;
     const onComplete = this.pendingTunnelComplete;
     this.pendingTunnelComplete = null;
+    this.pendingTunnelRoomType = null;
     this.clearFloorObjects();
     onComplete?.();
   }
@@ -3878,7 +5628,16 @@ export default class RoguelikeScene extends Phaser.Scene {
     this.isChoosingTarot = true;
     this.physics.pause();
 
-    const cards = chooseTarotCards(this.getEligibleTarotCards(TAROT_CARDS))
+    const eligibleCards = this.getEligibleTarotCards(TAROT_CARDS);
+    const focusedCards = this.focusNextTarotBuild
+      ? eligibleCards.filter((card) => card.build === this.focusNextTarotBuild)
+      : [];
+    const sourceCards = focusedCards.length ? focusedCards : eligibleCards;
+    if (focusedCards.length) {
+      this.focusNextTarotBuild = null;
+    }
+
+    const cards = chooseTarotCards(sourceCards)
       .map((card) => this.prepareCardForOffer(card));
     this.callbacks.onTarotOffer?.(cards, (cardId) => {
       const card = cards.find((item) => item.id === cardId);
@@ -3928,7 +5687,7 @@ export default class RoguelikeScene extends Phaser.Scene {
     const roomLabel = this.isBossRoom()
       ? "Boss"
       : (eventLabel ?? `Room ${this.room}/${this.floorPlan.roomCount}`);
-    const levelLabel = this.levelId === "hell" ? "Hell" : "Crypt";
+    const levelLabel = this.levelId === "icy" ? "Icy" : this.levelId === "hell" ? "Hell" : "Crypt";
     const stageLabel = this.levelSequence.length > 1
       ? `Stage ${this.stageIndex + 1}/${this.levelSequence.length}  `
       : "";
@@ -3943,9 +5702,11 @@ export default class RoguelikeScene extends Phaser.Scene {
       stageCount: this.levelSequence.length,
       room: this.room,
       roomCount: this.floorPlan.roomCount,
+      roomTypes: this.floorPlan.roomTypes ?? [],
+      currentRoomType: this.layout?.roomType ?? this.getCurrentRoomType(),
       boss: Boolean(activeBoss),
-      bossType: activeBoss?.type === "infernalBoss" ? "hell" : "skeleton",
-      bossName: activeBoss?.type === "infernalBoss" ? "Infernal Boss" : "Skeleton King",
+      bossType: activeBoss?.type === "frostTyrant" ? "icy" : activeBoss?.type === "infernalBoss" ? "hell" : "skeleton",
+      bossName: activeBoss ? this.getEnemyName(activeBoss.type) : "",
       bossHealth: activeBoss ? Math.max(0, Number(activeBoss.health.toFixed(2))) : 0,
       bossMaxHealth: activeBoss?.maxHealth ?? 0,
       hearts: this.hearts,

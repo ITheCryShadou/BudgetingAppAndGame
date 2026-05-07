@@ -23,10 +23,17 @@ import rivenWalk from "../assets/game/heroes/riven/Riven-Walk.png";
 import rivenRun from "../assets/game/heroes/riven/Riven-Run.png";
 import rivenDash from "../assets/game/heroes/riven/Riven-Dash.png";
 import rivenAttack from "../assets/game/heroes/riven/Riven-Attack.png";
-import rivenCrit from "../assets/game/heroes/riven/Riven-AttackCrit.png";
-import rivenDamage from "../assets/game/heroes/riven/Riven-DamageTaken.png";
+import rivenSkill from "../assets/game/heroes/riven/Riven-Skill.png";
+import rivenSuperAttack from "../assets/game/heroes/riven/Riven-SuperAttack.png";
+import rivenDamage from "../assets/game/heroes/riven/Riven-TakeDamage.png";
 import rivenDeath from "../assets/game/heroes/riven/Riven-Death.png";
-import rivenProjectile from "../assets/game/heroes/riven/Riven-AttackCritProjectin.png";
+import rivenDaggerProjectile from "../assets/game/heroes/riven/Riven-DaggerProjectile.png";
+import rivenDashTrailProjectile from "../assets/game/heroes/riven/Riven-DashTrailProjectile.png";
+import rivenImpactHitEffect from "../assets/game/heroes/riven/Riven-ImpactHitEffect.png";
+import rivenLargeSlashArcProjectile from "../assets/game/heroes/riven/Riven-LargeSlashArcProjectile.png";
+import rivenSkillOrbProjectile from "../assets/game/heroes/riven/Riven-SkillOrbProjectile.png";
+import rivenSmallSlashArcProjectile from "../assets/game/heroes/riven/Riven-SmallSlashArcProjectile.png";
+import rivenSuperAttackBurstProjectile from "../assets/game/heroes/riven/Riven-SuperAttackBurstProjectile.png";
 import skeletonIcon from "../assets/game/enemies/skeleton-common/SkeletonCommon-Icon.png";
 import skeletonIdle from "../assets/game/enemies/skeleton-common/SkeletonCommon-Idle.png";
 import skeletonWalk from "../assets/game/enemies/skeleton-common/SkeletonCommon-Walk.png";
@@ -124,6 +131,53 @@ import infernalP2Attack from "../assets/game/hell/enemies/InfernalBoss/InfernalB
 import infernalP2Super from "../assets/game/hell/enemies/InfernalBoss/InfernalBossPhase2-SuperAttack.png";
 import infernalTornado from "../assets/game/hell/enemies/InfernalBoss/InfernalBossPhase2-HellfireTornado.png";
 import infernalSuperTornado from "../assets/game/hell/enemies/InfernalBoss/InfernalBossPhase2-SuperHellfireTornado.png";
+import frostBladeWarriorIcon from "../assets/game/icy/Enemy/FrostBladeWarrior/FrostBladeWarrior-Icon.png";
+import frostBladeWarriorIdle from "../assets/game/icy/Enemy/FrostBladeWarrior/FrostBladeWarrior-Idle.png";
+import frostBladeWarriorWalk from "../assets/game/icy/Enemy/FrostBladeWarrior/FrostBladeWarrior-Walk.png";
+import frostBladeWarriorAttack from "../assets/game/icy/Enemy/FrostBladeWarrior/FrostBladeWarrior-Attack.png";
+import frostBladeWarriorSuper from "../assets/game/icy/Enemy/FrostBladeWarrior/FrostBladeWarrior-SuperAttack.png";
+import frostBladeWarriorDeath from "../assets/game/icy/Enemy/FrostBladeWarrior/FrostBladeWarrior-Death.png";
+import frostPriestIcon from "../assets/game/icy/Enemy/FrostPriest/FrostPriest-Icon.png";
+import frostPriestIdle from "../assets/game/icy/Enemy/FrostPriest/FrostPriest-Idle.png";
+import frostPriestWalk from "../assets/game/icy/Enemy/FrostPriest/FrostPriest-Walk.png";
+import frostPriestAttack from "../assets/game/icy/Enemy/FrostPriest/FrostPriest-Attack.png";
+import frostPriestSuper from "../assets/game/icy/Enemy/FrostPriest/FrostPriest-SuperAttack.png";
+import frostPriestProjectileSpawn from "../assets/game/icy/Enemy/FrostPriest/FrostPriestProjectile-Spawn.png";
+import frostPriestProjectileFly from "../assets/game/icy/Enemy/FrostPriest/FrostPriestProjectile-Fly.png";
+import frostPriestProjectileImpact from "../assets/game/icy/Enemy/FrostPriest/FrostPriestProjectile-Impact.png";
+import frozenKnightIcon from "../assets/game/icy/Enemy/FrozenKnight/FrozenKnight-Icon.png";
+import frozenKnightIdle from "../assets/game/icy/Enemy/FrozenKnight/FrozenKnight-Idle.png";
+import frozenKnightWalk from "../assets/game/icy/Enemy/FrozenKnight/FrozenKnight-Walk.png";
+import frozenKnightAttack from "../assets/game/icy/Enemy/FrozenKnight/FrozenKnight-Attack.png";
+import frozenKnightSuper from "../assets/game/icy/Enemy/FrozenKnight/FrozenKnight-SuperAttack.png";
+import iceAxeTitanIcon from "../assets/game/icy/Enemy/IceAxeTitan/IceAxeTitan-Icon.png";
+import iceAxeTitanIdle from "../assets/game/icy/Enemy/IceAxeTitan/IceAxeTitan-Idle.png";
+import iceAxeTitanWalk from "../assets/game/icy/Enemy/IceAxeTitan/IceAxeTitan-Walk.png";
+import iceAxeTitanRun from "../assets/game/icy/Enemy/IceAxeTitan/IceAxeTitan-Run.png";
+import iceAxeTitanSuper from "../assets/game/icy/Enemy/IceAxeTitan/IceAxeTitan-SuperAttack.png";
+import icebladeMasterIcon from "../assets/game/icy/Enemy/IcebladeMaster/IcebladeMaster-Icon.png";
+import icebladeMasterIdle from "../assets/game/icy/Enemy/IcebladeMaster/IcebladeMaster-Idle.png";
+import icebladeMasterRun from "../assets/game/icy/Enemy/IcebladeMaster/IcebladeMaster-Run.png";
+import icebladeMasterAttack from "../assets/game/icy/Enemy/IcebladeMaster/IcebladeMaster-Attack.png";
+import icebladeMasterSuper from "../assets/game/icy/Enemy/IcebladeMaster/IcebladeMaster-SuperAttack.png";
+import iceWraithIcon from "../assets/game/icy/Enemy/IceWraith/IceWraith-Icon.png";
+import iceWraithIdle from "../assets/game/icy/Enemy/IceWraith/IceWraith-Idle.png";
+import iceWraithWalk from "../assets/game/icy/Enemy/IceWraith/IceWraith-Walk.png";
+import iceWraithSuper from "../assets/game/icy/Enemy/IceWraith/IceWraith-SuperAttack.png";
+import iceWraithNova from "../assets/game/icy/Enemy/IceWraith/IceWraithProjectile-Nova.png";
+import frostTyrantIcon from "../assets/game/icy/Enemy/Boss/FrostTyrant-Icon.png";
+import frostTyrantIdle from "../assets/game/icy/Enemy/Boss/FrostTyrant-Idle.png";
+import frostTyrantWalk from "../assets/game/icy/Enemy/Boss/FrostTyrant-Walk.png";
+import frostTyrantAttack from "../assets/game/icy/Enemy/Boss/FrostTyrant-Attack.png";
+import frostTyrantRanged from "../assets/game/icy/Enemy/Boss/FrostTyrant-RangedAttack.png";
+import frostTyrantSuper from "../assets/game/icy/Enemy/Boss/FrostTyrant-SuperAttack.png";
+import frostTyrantIceStart from "../assets/game/icy/Enemy/Boss/FrostTyranthIntoIce-Start.png";
+import frostTyrantIceEnd from "../assets/game/icy/Enemy/Boss/FrostTyranthIntoIce-End.png";
+import frostTyrantDeath from "../assets/game/icy/Enemy/Boss/FrostTyrant-Death.png";
+import matriarchSoulIcon from "../assets/game/icy/Enemy/Boss/FrostTyranthIntoIce-Icon.png";
+import matriarchSoulSprite from "../assets/game/icy/Enemy/Boss/FrostTyrantProjectile-MatriarchSoul.png";
+import matriarchSoulAppear from "../assets/game/icy/Enemy/Boss/MatriarchSoul-Appear.png";
+import matriarchSoulDeath from "../assets/game/icy/Enemy/Boss/MatriarchSoul-Death.png";
 
 function stat(label, value) {
   return { label, value };
@@ -173,15 +227,22 @@ const ARCHIVE_ANIMATION_META = {
     "Super spell burst projectile": { frames: 7, fps: 11 },
   },
   riven: {
-    Idle: { frames: 1, fps: 1 },
-    Walk: { frames: 8, fps: 9 },
-    Run: { frames: 8, fps: 12 },
-    Dash: { frames: 6, fps: 14 },
-    Attack: { frames: 5, fps: 13 },
-    "Critical attack": { frames: 5, fps: 13 },
-    "Damage taken": { frames: 5, fps: 12 },
-    Death: { frames: 7, fps: 8 },
-    Projectile: { frames: 1, fps: 1 },
+    Idle: { frames: 8, fps: 6 },
+    Walk: { frames: 9, fps: 10 },
+    Run: { frames: 9, fps: 13 },
+    Dash: { frames: 6, fps: 15 },
+    Attack: { frames: 10, fps: 15 },
+    Skill: { frames: 8, fps: 13 },
+    "Super attack": { frames: 10, fps: 14 },
+    "Damage taken": { frames: 4, fps: 11 },
+    Death: { frames: 6, fps: 8 },
+    "Dagger projectile": { frames: 9, fps: 14 },
+    "Dash trail projectile": { frames: 8, fps: 14 },
+    "Hit impact effect": { frames: 6, fps: 15 },
+    "Large slash projectile": { frames: 9, fps: 13 },
+    "Skill orb projectile": { frames: 8, fps: 13 },
+    "Small slash projectile": { frames: 7, fps: 14 },
+    "Super burst projectile": { frames: 9, fps: 12 },
   },
   skeleton: {
     Idle: { frames: 4, fps: 5 },
@@ -291,6 +352,61 @@ const ARCHIVE_ANIMATION_META = {
     Tornado: { frames: 11, fps: 10 },
     "Super tornado": { frames: 11, fps: 9 },
   },
+  frostBladeWarrior: {
+    Idle: { frames: 8, fps: 6 },
+    Walk: { frames: 9, fps: 9 },
+    Attack: { frames: 8, fps: 12 },
+    "Super attack": { frames: 10, fps: 11 },
+    Death: { frames: 9, fps: 8 },
+  },
+  frostPriest: {
+    Idle: { frames: 8, fps: 5 },
+    Walk: { frames: 9, fps: 7 },
+    Attack: { frames: 10, fps: 11 },
+    "Super attack": { frames: 10, fps: 10 },
+    "Crystal spawn": { frames: 7, fps: 8 },
+    "Crystal fly": { frames: 8, fps: 11 },
+    "Crystal impact": { frames: 8, fps: 12 },
+  },
+  frozenKnight: {
+    Idle: { frames: 8, fps: 5 },
+    Walk: { frames: 9, fps: 8 },
+    Attack: { frames: 10, fps: 11 },
+    "Super attack": { frames: 10, fps: 10 },
+  },
+  iceAxeTitan: {
+    Idle: { frames: 8, fps: 5 },
+    Walk: { frames: 8, fps: 7 },
+    Run: { frames: 8, fps: 12 },
+    "Super attack": { frames: 10, fps: 10 },
+  },
+  icebladeMaster: {
+    Idle: { frames: 8, fps: 6 },
+    Run: { frames: 9, fps: 13 },
+    Attack: { frames: 9, fps: 13 },
+    "Super attack": { frames: 10, fps: 12 },
+  },
+  iceWraith: {
+    Idle: { frames: 8, fps: 6 },
+    Walk: { frames: 8, fps: 8 },
+    "Ranged attack": { frames: 10, fps: 10 },
+    "Death nova": { frames: 10, fps: 12 },
+  },
+  frostTyrant: {
+    Idle: { frames: 5, fps: 5 },
+    Walk: { frames: 6, fps: 7 },
+    Attack: { frames: 10, fps: 11 },
+    "Ranged attack": { frames: 10, fps: 10 },
+    "Super attack": { frames: 10, fps: 9 },
+    "Ice shell start": { frames: 7, fps: 8 },
+    "Ice shell end": { frames: 7, fps: 8 },
+    Death: { frames: 10, fps: 8 },
+  },
+  matriarchSoul: {
+    Idle: { frames: 1, fps: 1 },
+    Appear: { frames: 8, fps: 8 },
+    Death: { frames: 7, fps: 8 },
+  },
 };
 
 function addAnimationMeta(entries) {
@@ -341,7 +457,7 @@ export const ARCHIVE_HEROES = addAnimationMeta([
     name: "Riven",
     icon: rivenIcon,
     type: "Hero",
-    description: "Fast blade fighter focused on forward pressure. Riven is stronger when she can dash through danger and chain attacks into fire waves.",
+    description: "Remodeled blade fighter with fast slash chains, dagger projectiles, animated hit impacts, and a stronger awakened skill from the traveler.",
     stats: heroStats("riven"),
     animations: [
       { label: "Idle", image: rivenIdle },
@@ -349,15 +465,23 @@ export const ARCHIVE_HEROES = addAnimationMeta([
       { label: "Run", image: rivenRun },
       { label: "Dash", image: rivenDash },
       { label: "Attack", image: rivenAttack },
-      { label: "Critical attack", image: rivenCrit },
+      { label: "Skill", image: rivenSkill },
+      { label: "Super attack", image: rivenSuperAttack },
       { label: "Damage taken", image: rivenDamage },
       { label: "Death", image: rivenDeath },
-      { label: "Projectile", image: rivenProjectile },
+      { label: "Dagger projectile", image: rivenDaggerProjectile },
+      { label: "Dash trail projectile", image: rivenDashTrailProjectile },
+      { label: "Hit impact effect", image: rivenImpactHitEffect },
+      { label: "Large slash projectile", image: rivenLargeSlashArcProjectile },
+      { label: "Skill orb projectile", image: rivenSkillOrbProjectile },
+      { label: "Small slash projectile", image: rivenSmallSlashArcProjectile },
+      { label: "Super burst projectile", image: rivenSuperAttackBurstProjectile },
     ],
     attacks: [
-      "LMB: blade slash in melee range.",
-      "E: forward flame wave.",
-      "Shop upgrade: Ember Blade adds a burning blade projectile.",
+      "LMB: animated melee slash with a hit impact effect.",
+      "Projectile upgrade: dagger projectiles and every third attack sends a larger blade arc.",
+      "E: forward slash and skill orb.",
+      "Shop upgrade: Ember Blade awakens Super Attack, adds burst visuals, faster projectiles, and extra dagger follow-ups.",
     ],
   },
 ]);
@@ -573,5 +697,132 @@ export const ARCHIVE_ENEMIES = addAnimationMeta([
       "Phase 2: faster attacks, chain control, and 1-5 moving tornadoes.",
       "Super tornado attack can spawn two tornadoes at once.",
     ],
+  },
+  {
+    id: "frostBladeWarrior",
+    name: "Frost Blade Warrior",
+    icon: frostBladeWarriorIcon,
+    type: "Enemy",
+    description: "Basic Icy Kingdom swordsman. It pressures the player with simple melee movement and occasional heavier swings.",
+    stats: enemyStats("frostBladeWarrior"),
+    animations: [
+      { label: "Idle", image: frostBladeWarriorIdle },
+      { label: "Walk", image: frostBladeWarriorWalk },
+      { label: "Attack", image: frostBladeWarriorAttack },
+      { label: "Super attack", image: frostBladeWarriorSuper },
+      { label: "Death", image: frostBladeWarriorDeath },
+    ],
+    attacks: ["Melee sword attack.", "Occasional super slash."],
+  },
+  {
+    id: "frostPriest",
+    name: "Frost Priest",
+    icon: frostPriestIcon,
+    type: "Enemy",
+    description: "Slow winter mage. Every ten seconds she creates two crystals that charge up, then fly at the hero.",
+    stats: enemyStats("frostPriest"),
+    animations: [
+      { label: "Idle", image: frostPriestIdle },
+      { label: "Walk", image: frostPriestWalk },
+      { label: "Attack", image: frostPriestAttack },
+      { label: "Super attack", image: frostPriestSuper },
+      { label: "Crystal spawn", image: frostPriestProjectileSpawn },
+      { label: "Crystal fly", image: frostPriestProjectileFly },
+      { label: "Crystal impact", image: frostPriestProjectileImpact },
+    ],
+    attacks: ["Two delayed crystal shots.", "Small chance for a larger charged crystal explosion."],
+  },
+  {
+    id: "frozenKnight",
+    name: "Frozen Knight",
+    icon: frozenKnightIcon,
+    type: "Enemy",
+    description: "Shielded fighter. Its shield can completely block some direct hero hits.",
+    stats: enemyStats("frozenKnight"),
+    animations: [
+      { label: "Idle", image: frozenKnightIdle },
+      { label: "Walk", image: frozenKnightWalk },
+      { label: "Attack", image: frozenKnightAttack },
+      { label: "Super attack", image: frozenKnightSuper },
+    ],
+    attacks: ["Melee attack.", "Shield block chance against normal hits."],
+  },
+  {
+    id: "iceAxeTitan",
+    name: "Ice Axe Titan",
+    icon: iceAxeTitanIcon,
+    type: "Enemy",
+    description: "Heavy armored warrior. Roughly once every twenty seconds it can rush forward with a super axe hit.",
+    stats: enemyStats("iceAxeTitan"),
+    animations: [
+      { label: "Idle", image: iceAxeTitanIdle },
+      { label: "Walk", image: iceAxeTitanWalk },
+      { label: "Run", image: iceAxeTitanRun },
+      { label: "Super attack", image: iceAxeTitanSuper },
+    ],
+    attacks: ["Heavy melee hit.", "Cooldown-gated rush super attack."],
+  },
+  {
+    id: "icebladeMaster",
+    name: "Iceblade Master",
+    icon: icebladeMasterIcon,
+    type: "Enemy",
+    description: "Fast dagger hunter. It mostly runs and alternates normal and super attacks at close range.",
+    stats: enemyStats("icebladeMaster"),
+    animations: [
+      { label: "Idle", image: icebladeMasterIdle },
+      { label: "Run", image: icebladeMasterRun },
+      { label: "Attack", image: icebladeMasterAttack },
+      { label: "Super attack", image: icebladeMasterSuper },
+    ],
+    attacks: ["Fast melee attack.", "Alternating super attack."],
+  },
+  {
+    id: "iceWraith",
+    name: "Ice Wraith",
+    icon: iceWraithIcon,
+    type: "Enemy",
+    description: "Ancient winter spirit. It can teleport away from the hero and fire a ranged shot; on death it releases a nova.",
+    stats: enemyStats("iceWraith"),
+    animations: [
+      { label: "Idle", image: iceWraithIdle },
+      { label: "Walk", image: iceWraithWalk },
+      { label: "Ranged attack", image: iceWraithSuper },
+      { label: "Death nova", image: iceWraithNova },
+    ],
+    attacks: ["Teleport reposition.", "Ranged charge shot.", "Death nova hazard."],
+  },
+  {
+    id: "frostTyrant",
+    name: "Frost Tyrant",
+    icon: frostTyrantIcon,
+    type: "Boss",
+    description: "Icy Kingdom boss. Under 30% HP it locks itself inside an ice shell and becomes immune until the Matriarch Soul is defeated.",
+    stats: enemyStats("frostTyrant"),
+    animations: [
+      { label: "Idle", image: frostTyrantIdle },
+      { label: "Walk", image: frostTyrantWalk },
+      { label: "Attack", image: frostTyrantAttack },
+      { label: "Ranged attack", image: frostTyrantRanged },
+      { label: "Super attack", image: frostTyrantSuper },
+      { label: "Ice shell start", image: frostTyrantIceStart },
+      { label: "Ice shell end", image: frostTyrantIceEnd },
+      { label: "Death", image: frostTyrantDeath },
+    ],
+    attacks: ["Close attacks and super attacks.", "Ice Lance ranged shots.", "Frost Orb extra attack.", "Ice shell phase summons Matriarch Soul."],
+  },
+  {
+    id: "matriarchSoul",
+    name: "Matriarch Soul",
+    icon: matriarchSoulIcon,
+    type: "Boss Helper",
+    description: "Summoned during Frost Tyrant's ice shell phase. It has 25 HP and must be destroyed to continue the boss fight.",
+    stats: enemyStats("matriarchSoul"),
+    animations: [
+      { label: "Idle", image: matriarchSoulSprite },
+      { label: "Appear", image: matriarchSoulAppear },
+      { label: "Death", image: matriarchSoulDeath },
+    ],
+    attacks: ["Clockwise shard burst with up to 8 shots.", "Blizzard pattern with two shots aimed at the hero."],
   },
 ]);
