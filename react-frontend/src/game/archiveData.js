@@ -8,6 +8,18 @@ import tarotCursed from "../assets/game/tarot-card-cursed.png";
 import tarotHero from "../assets/game/tarot-card-hero.png";
 import tarotBoss from "../assets/game/tarot-card-boss.png";
 import tarotFrost from "../assets/game/tarot-card-frost.png";
+import tarotFrost1 from "../assets/game/tarot-card-frost-1.png";
+import tarotFrost2 from "../assets/game/tarot-card-frost-2.png";
+import tarotFrost3 from "../assets/game/tarot-card-frost-3.png";
+import tarotSwamp1 from "../assets/game/tarot-card-swamp-1.png";
+import tarotSwamp2 from "../assets/game/tarot-card-swamp-2.png";
+import tarotSwamp3 from "../assets/game/tarot-card-swamp-3.png";
+import tarotHeaven1 from "../assets/game/tarot-card-heaven-1.png";
+import tarotHeaven2 from "../assets/game/tarot-card-heaven-2.png";
+import tarotHeaven3 from "../assets/game/tarot-card-heaven-3.png";
+import tarotAqua1 from "../assets/game/tarot-card-aqua-1.png";
+import tarotAqua2 from "../assets/game/tarot-card-aqua-2.png";
+import tarotAqua3 from "../assets/game/tarot-card-aqua-3.png";
 import noxIcon from "../assets/game/heroes/nox/Nox-Icon.png";
 import noxIdle from "../assets/game/heroes/nox/Nox-Idle.png";
 import noxWalk from "../assets/game/heroes/nox/Nox-Walk.png";
@@ -428,10 +440,27 @@ function addAnimationMeta(entries) {
   }));
 }
 
+const TAROT_BG_VARIANTS = {
+  frost: [tarotFrost1, tarotFrost2, tarotFrost3],
+  poison: [tarotSwamp1, tarotSwamp2, tarotSwamp3],
+  crit: [tarotHeaven1, tarotHeaven2, tarotHeaven3],
+  blueHeart: [tarotAqua1, tarotAqua2, tarotAqua3],
+};
+
+function stableTarotVariant(card, images) {
+  const key = card.id ?? card.title ?? "";
+  const hash = Array.from(key).reduce((sum, char) => sum + char.charCodeAt(0), 0);
+  return images[hash % images.length];
+}
+
 function tarotBg(card) {
   if (card.theme === "cursed" || card.rarity === "cursed") return tarotCursed;
   if (card.theme === "hero" || card.rarity === "hero") return tarotHero;
   if (card.theme === "boss" || card.rarity === "boss") return tarotBoss;
+  if (card.build === "poison") return stableTarotVariant(card, TAROT_BG_VARIANTS.poison);
+  if (card.build === "crit") return stableTarotVariant(card, TAROT_BG_VARIANTS.crit);
+  if (card.build === "ice" || card.theme === "frost") return stableTarotVariant(card, TAROT_BG_VARIANTS.frost);
+  if (card.build === "blueHeart") return stableTarotVariant(card, TAROT_BG_VARIANTS.blueHeart);
   if (card.theme === "heart") return tarotHeart;
   if (card.theme === "hell") return tarotHell;
   if (card.theme === "hellBonus") return tarotHellBonus;

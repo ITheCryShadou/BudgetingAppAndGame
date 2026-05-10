@@ -14,6 +14,18 @@ import tarotCardCursedImage from "../assets/game/tarot-card-cursed.png";
 import tarotCardHeroImage from "../assets/game/tarot-card-hero.png";
 import tarotCardBossImage from "../assets/game/tarot-card-boss.png";
 import tarotCardFrostImage from "../assets/game/tarot-card-frost.png";
+import tarotCardFrost1Image from "../assets/game/tarot-card-frost-1.png";
+import tarotCardFrost2Image from "../assets/game/tarot-card-frost-2.png";
+import tarotCardFrost3Image from "../assets/game/tarot-card-frost-3.png";
+import tarotCardSwamp1Image from "../assets/game/tarot-card-swamp-1.png";
+import tarotCardSwamp2Image from "../assets/game/tarot-card-swamp-2.png";
+import tarotCardSwamp3Image from "../assets/game/tarot-card-swamp-3.png";
+import tarotCardHeaven1Image from "../assets/game/tarot-card-heaven-1.png";
+import tarotCardHeaven2Image from "../assets/game/tarot-card-heaven-2.png";
+import tarotCardHeaven3Image from "../assets/game/tarot-card-heaven-3.png";
+import tarotCardAqua1Image from "../assets/game/tarot-card-aqua-1.png";
+import tarotCardAqua2Image from "../assets/game/tarot-card-aqua-2.png";
+import tarotCardAqua3Image from "../assets/game/tarot-card-aqua-3.png";
 import tarotTraveler1 from "../assets/game/tarot-traveler-1.png";
 import tarotTraveler2 from "../assets/game/tarot-traveler-2.png";
 import tarotTraveler3 from "../assets/game/tarot-traveler-3.png";
@@ -55,6 +67,13 @@ const BOSS_HOT_BARS = {
   icy: bossHotBarSkeleton,
 };
 
+const TAROT_BG_VARIANTS = {
+  frost: [tarotCardFrost1Image, tarotCardFrost2Image, tarotCardFrost3Image],
+  poison: [tarotCardSwamp1Image, tarotCardSwamp2Image, tarotCardSwamp3Image],
+  crit: [tarotCardHeaven1Image, tarotCardHeaven2Image, tarotCardHeaven3Image],
+  blueHeart: [tarotCardAqua1Image, tarotCardAqua2Image, tarotCardAqua3Image],
+};
+
 const PLAYABLE_LEVEL_IDS = ["skeleton", "hell", "icy"];
 
 function createCampaignSequence(length = 5) {
@@ -93,10 +112,20 @@ function greenHeartImage(hearts, index) {
   return value >= 1 ? heartGreenFullImage : heartGreenHalfImage;
 }
 
+function stableTarotVariant(card, images) {
+  const key = card.id ?? card.title ?? "";
+  const hash = Array.from(key).reduce((sum, char) => sum + char.charCodeAt(0), 0);
+  return images[hash % images.length];
+}
+
 function tarotBackground(card) {
   if (card.theme === "cursed" || card.rarity === "cursed") return tarotCardCursedImage;
   if (card.theme === "hero" || card.rarity === "hero") return tarotCardHeroImage;
   if (card.theme === "boss" || card.rarity === "boss") return tarotCardBossImage;
+  if (card.build === "poison") return stableTarotVariant(card, TAROT_BG_VARIANTS.poison);
+  if (card.build === "crit") return stableTarotVariant(card, TAROT_BG_VARIANTS.crit);
+  if (card.build === "ice" || card.theme === "frost") return stableTarotVariant(card, TAROT_BG_VARIANTS.frost);
+  if (card.build === "blueHeart") return stableTarotVariant(card, TAROT_BG_VARIANTS.blueHeart);
   if (card.theme === "heart") return tarotCardHealImage;
   if (card.theme === "hell") return tarotCardHellImage;
   if (card.theme === "hellBonus") return tarotCardHellBonusImage;
