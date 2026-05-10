@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { createRoguelikeGame } from "./createRoguelikeGame";
-import { ARCHIVE_ENEMIES, ARCHIVE_HEROES } from "./archiveData";
+import { ARCHIVE_ENEMIES, ARCHIVE_HEROES, ARCHIVE_TAROT } from "./archiveData";
 import { HEROES, LEVELS } from "./gameBalance";
 import heroIcon from "../assets/game/heroes/nox/Nox-Icon.png";
 import rivenIcon from "../assets/game/heroes/riven/Riven-Icon.png";
@@ -13,6 +13,7 @@ import tarotCardSkeletonImage from "../assets/game/tarot-card-skeleton.png";
 import tarotCardCursedImage from "../assets/game/tarot-card-cursed.png";
 import tarotCardHeroImage from "../assets/game/tarot-card-hero.png";
 import tarotCardBossImage from "../assets/game/tarot-card-boss.png";
+import tarotCardFrostImage from "../assets/game/tarot-card-frost.png";
 import tarotTraveler1 from "../assets/game/tarot-traveler-1.png";
 import tarotTraveler2 from "../assets/game/tarot-traveler-2.png";
 import tarotTraveler3 from "../assets/game/tarot-traveler-3.png";
@@ -100,6 +101,7 @@ function tarotBackground(card) {
   if (card.theme === "hell") return tarotCardHellImage;
   if (card.theme === "hellBonus") return tarotCardHellBonusImage;
   if (card.theme === "skeleton") return tarotCardSkeletonImage;
+  if (card.theme === "frost") return tarotCardFrostImage;
   return tarotCardImage;
 }
 
@@ -442,12 +444,20 @@ function ArchiveOverlay({
   onAnimationChange,
   onClose,
 }) {
-  const entries = tab === "heroes" ? ARCHIVE_HEROES : ARCHIVE_ENEMIES;
+  const entries = tab === "heroes"
+    ? ARCHIVE_HEROES
+    : tab === "tarot"
+      ? ARCHIVE_TAROT
+      : ARCHIVE_ENEMIES;
   const activeEntry = entries.find((entry) => entry.id === entryId) ?? entries[0];
   const activeAnimation = activeEntry.animations[animationIndex] ?? activeEntry.animations[0];
 
   function changeTab(nextTab) {
-    const nextEntries = nextTab === "heroes" ? ARCHIVE_HEROES : ARCHIVE_ENEMIES;
+    const nextEntries = nextTab === "heroes"
+      ? ARCHIVE_HEROES
+      : nextTab === "tarot"
+        ? ARCHIVE_TAROT
+        : ARCHIVE_ENEMIES;
     onTabChange(nextTab);
     onEntryChange(nextEntries[0].id);
     onAnimationChange(0);
@@ -485,6 +495,13 @@ function ArchiveOverlay({
             onClick={() => changeTab("enemies")}
           >
             Enemies
+          </button>
+          <button
+            type="button"
+            className={tab === "tarot" ? "active" : ""}
+            onClick={() => changeTab("tarot")}
+          >
+            Tarot
           </button>
         </div>
 
@@ -1108,7 +1125,7 @@ function RoguelikeGame() {
           <p>Speed: {stats?.speed ?? 210}</p>
           <p>Damage: {stats?.damage ?? 1}</p>
           <p>Crit: {stats?.critChance ?? 5}%</p>
-          <p>Armor: {stats?.damageReduction ?? 0}%</p>
+          <p>Dodge: {stats?.dodgeChance ?? 0}%</p>
           <p>Attack cd: {stats?.attackCooldown ?? 420}ms</p>
           <p>
             Skill E:{" "}
@@ -1119,7 +1136,7 @@ function RoguelikeGame() {
           <p>Projectile: {stats?.projectileAttack ? "yes" : "no"}</p>
           <p>
             Builds: F{stats?.synergies?.fire ?? 0} / B{stats?.synergies?.blueHeart ?? 0} / C
-            {stats?.synergies?.crit ?? 0} / P{stats?.synergies?.poison ?? 0}
+            {stats?.synergies?.crit ?? 0} / P{stats?.synergies?.poison ?? 0} / I{stats?.synergies?.ice ?? 0}
           </p>
         </div>
       </aside>

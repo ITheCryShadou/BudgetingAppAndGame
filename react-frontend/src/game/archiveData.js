@@ -1,4 +1,13 @@
-import { ENEMY_TYPES, GAME_RULES, HEROES, PLAYER_BASE_STATS } from "./gameBalance";
+import { BOSS_CARDS, ENEMY_TYPES, GAME_RULES, HEROES, PLAYER_BASE_STATS, TAROT_CARDS } from "./gameBalance";
+import tarotDefault from "../assets/game/tarot-card.png";
+import tarotHeart from "../assets/game/tarot-card-heal.png";
+import tarotHell from "../assets/game/tarot-card-hell.png";
+import tarotHellBonus from "../assets/game/tarot-card-hell-bonus.png";
+import tarotSkeleton from "../assets/game/tarot-card-skeleton.png";
+import tarotCursed from "../assets/game/tarot-card-cursed.png";
+import tarotHero from "../assets/game/tarot-card-hero.png";
+import tarotBoss from "../assets/game/tarot-card-boss.png";
+import tarotFrost from "../assets/game/tarot-card-frost.png";
 import noxIcon from "../assets/game/heroes/nox/Nox-Icon.png";
 import noxIdle from "../assets/game/heroes/nox/Nox-Idle.png";
 import noxWalk from "../assets/game/heroes/nox/Nox-Walk.png";
@@ -418,6 +427,51 @@ function addAnimationMeta(entries) {
     })),
   }));
 }
+
+function tarotBg(card) {
+  if (card.theme === "cursed" || card.rarity === "cursed") return tarotCursed;
+  if (card.theme === "hero" || card.rarity === "hero") return tarotHero;
+  if (card.theme === "boss" || card.rarity === "boss") return tarotBoss;
+  if (card.theme === "heart") return tarotHeart;
+  if (card.theme === "hell") return tarotHell;
+  if (card.theme === "hellBonus") return tarotHellBonus;
+  if (card.theme === "skeleton") return tarotSkeleton;
+  if (card.theme === "frost") return tarotFrost;
+  return tarotDefault;
+}
+
+function tarotType(card) {
+  if (card.rarity === "boss") return "Boss Card";
+  if (card.rarity === "hero") return "Hero Card";
+  if (card.rarity === "cursed") return "Cursed Tarot";
+  if (card.build === "ice") return "Ice Tarot";
+  if (card.build === "fire") return "Fire Tarot";
+  if (card.build === "blueHeart") return "Blue Heart Tarot";
+  if (card.build === "crit") return "Crit Tarot";
+  if (card.build === "poison") return "Poison Tarot";
+  return "Tarot";
+}
+
+export const ARCHIVE_TAROT = [...TAROT_CARDS, ...BOSS_CARDS].map((card) => ({
+  id: card.id,
+  name: card.title,
+  icon: tarotBg(card),
+  type: tarotType(card),
+  description: card.description,
+  rarity: card.rarity ?? "common",
+  stats: [
+    { label: "Rarity", value: card.rarity ?? "common" },
+    { label: "Build", value: card.build ?? card.theme ?? "neutral" },
+    { label: "Background", value: card.theme ?? "default" },
+  ],
+  animations: [
+    { label: "Card background", image: tarotBg(card), frames: 1, fps: 1 },
+  ],
+  attacks: [
+    card.description,
+    ...(card.levels ?? []).map((level, index) => `${level.title ?? `${card.title} ${index + 1}`}: ${level.description}`),
+  ],
+}));
 
 export const ARCHIVE_HEROES = addAnimationMeta([
   {

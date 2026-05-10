@@ -1270,7 +1270,11 @@ export default class RoguelikeScene extends Phaser.Scene {
       this.registerStrip(`riven${capitalize(name)}`, strip);
     });
     Object.entries(CHEST_STRIPS).forEach(([type, strip]) => {
-      this.registerStrip(CHEST_TYPES[type].openPrefix, strip);
+      this.registerStrip(CHEST_TYPES[type].openPrefix, {
+        ...strip,
+        anchorMode: "foot",
+        anchorProfile: { footBandRatio: 0.34 },
+      });
     });
 
     this.registerEnemyStrips("enemySkeleton", ENEMY_STRIPS.skeleton);
@@ -2074,7 +2078,7 @@ export default class RoguelikeScene extends Phaser.Scene {
       this.applyPlayerDamage(0.5);
       return;
     }
-    this.stats.damageReduction = Math.max(-0.35, (this.stats.damageReduction ?? 0) - 0.08);
+    this.stats.dodgeChance = Math.max(-0.35, (this.stats.dodgeChance ?? 0) - 0.08);
   }
 
   rollCoinAmount(min = GAME_RULES.coinDropMin, max = GAME_RULES.coinDropMax) {
@@ -2231,7 +2235,7 @@ export default class RoguelikeScene extends Phaser.Scene {
       return Phaser.Utils.Array.Shuffle([
         { id: "curse-blood-price", label: "Blood Price", detail: "Epic card, -1 max HP", icon: "tarotCard", apply: () => this.takeBloodPriceReward() },
         { id: "curse-boss-hunger", label: "Boss Hunger", detail: "+1 gem, next boss +25% HP", icon: "gemIcon", apply: () => this.takeBossHungerReward() },
-        { id: "curse-fragile-power", label: "Fragile Power", detail: "+20% damage, armor -15%", icon: "cursedChestIcon", apply: () => this.takeFragilePowerReward() },
+        { id: "curse-fragile-power", label: "Fragile Power", detail: "+20% damage, dodge -15%", icon: "cursedChestIcon", apply: () => this.takeFragilePowerReward() },
         { id: "curse-dark-speed", label: "Dark Speed", detail: "+20% speed, dash cd +30%", icon: "cursedChestIcon", apply: () => this.takeDarkSpeedReward() },
         { id: "curse-poison-gift", label: "Poison Gift", detail: "+2 green HP, potions -50%", icon: "greenHeartHalf", apply: () => this.takePoisonGiftReward() },
       ]).slice(0, 3);
@@ -2483,7 +2487,7 @@ export default class RoguelikeScene extends Phaser.Scene {
 
   takeFragilePowerReward() {
     this.stats.attackDamage *= 1.2;
-    this.stats.damageReduction = Math.max(-0.5, (this.stats.damageReduction ?? 0) - 0.15);
+    this.stats.dodgeChance = Math.max(-0.5, (this.stats.dodgeChance ?? 0) - 0.15);
     this.updateUi();
   }
 
@@ -2525,6 +2529,7 @@ export default class RoguelikeScene extends Phaser.Scene {
       { id: "blueHeart", count: this.stats.blueHeartCards ?? 0, label: "BLUE" },
       { id: "crit", count: this.stats.critCards ?? 0, label: "CRIT" },
       { id: "poison", count: this.stats.poisonCards ?? 0, label: "POISON" },
+      { id: "ice", count: this.stats.iceCards ?? 0, label: "ICE" },
     ].sort((a, b) => b.count - a.count);
     const strongest = builds[0];
     if (!strongest || strongest.count <= 0) {
@@ -3513,6 +3518,7 @@ export default class RoguelikeScene extends Phaser.Scene {
           canCrit: true,
           canSlow: true,
         });
+        if (projectile.appliesChill) this.applyEnemyChill(enemy);
         projectile.destroy();
       }
     });
@@ -4038,6 +4044,12 @@ export default class RoguelikeScene extends Phaser.Scene {
     if (this.stats.infernalDash && this.tryUseDashCardEffect("infernalDash", time)) {
       this.createInfernalDashTrail();
     }
+    if (this.stats.crystalStep && this.tryUseDashCardEffect("crystalStep", time)) {
+      this.createCrystalStepTrail();
+    }
+    if (this.stats.frozenAfterimage && this.tryUseDashCardEffect("frozenAfterimage", time, 10000)) {
+      this.createFrozenAfterimage();
+    }
 
     this.time.delayedCall(this.stats.rollDuration, () => {
       this.isRolling = false;
@@ -4108,6 +4120,66 @@ export default class RoguelikeScene extends Phaser.Scene {
           if (distance < 96) this.applyEnemyBurn(enemy);
         });
       },
+    });
+  }
+
+  createCrystalStepTrail() {
+    const trail = this.add
+      .ellipse(this.player.x, this.player.y, 150, 44, 0x8adfff, 0.34)
+      .setDepth(6);
+    this.tweens.add({
+      targets: trail,
+      alpha: 0,
+      scaleX: 1.28,
+      scaleY: 1.16,
+      duration: 2000,
+      onComplete: () => trail.destroy(),
+    });
+    this.time.addEvent({
+      delay: 220,
+      repeat: 8,
+      callback: () => {
+        if (!trail.active) return;
+        this.getGroupChildren(this.enemyGroup).forEach((enemy) => {
+          if (!enemy?.isAlive || enemy.isReviving) return;
+          const distance = Phaser.Math.Distance.Between(trail.x, trail.y, enemy.x, enemy.y);
+          if (distance >= 98) return;
+          if (enemy.isChilled) {
+            this.damageEnemy(enemy, Math.max(0.06, this.stats.attackDamage * 0.1), { isFrost: true });
+          }
+          this.applyEnemyChill(enemy);
+        });
+      },
+    });
+  }
+
+  createFrozenAfterimage() {
+    const afterimage = this.add
+      .image(this.player.x, this.player.y, "fallingIceSpikeTrap0")
+      .setDisplaySize(52, 86)
+      .setDepth(12)
+      .setAlpha(0.86);
+    afterimage.frameKeys = this.getFrameKeys("fallingIceSpikeTrap");
+    afterimage.animationFps = 13;
+    afterimage.animationFrame = -1;
+    afterimage.animationStartedAt = this.time.now;
+    afterimage.loopAnimation = false;
+    afterimage.gameDisplayWidth = 52;
+    afterimage.gameDisplayHeight = 86;
+    afterimage.owner = "visual";
+    afterimage.expiresAt = this.time.now + 950;
+    this.projectileGroup.add(afterimage);
+
+    this.time.delayedCall(420, () => {
+      if (!afterimage?.active) return;
+      this.getGroupChildren(this.enemyGroup).forEach((enemy) => {
+        if (!enemy?.isAlive || enemy.isReviving) return;
+        const distance = Phaser.Math.Distance.Between(afterimage.x, afterimage.y, enemy.x, enemy.y);
+        if (distance < 82) {
+          this.damageEnemy(enemy, this.stats.attackDamage * 0.55, { isFrost: true });
+          this.applyEnemyChill(enemy);
+        }
+      });
     });
   }
 
@@ -4365,6 +4437,7 @@ export default class RoguelikeScene extends Phaser.Scene {
     isBurn = false,
     isPoison = false,
     isBleed = false,
+    isFrost = false,
     isSkill = false,
   } = {}) {
     if (!enemy?.isAlive || enemy.isReviving) return;
@@ -4377,6 +4450,7 @@ export default class RoguelikeScene extends Phaser.Scene {
       !isBurn &&
       !isPoison &&
       !isBleed &&
+      !isFrost &&
       Math.random() < (enemy.blockChance ?? 0)
     ) {
       this.playEnemyAnimation(enemy, "damaged", { loop: false, lockMs: 220 });
@@ -4385,22 +4459,39 @@ export default class RoguelikeScene extends Phaser.Scene {
     }
 
     let finalDamage = damage;
-    if (!isBurn && !isPoison && !isBleed && this.stats.crystalBlood) {
+    if (!isBurn && !isPoison && !isBleed && !isFrost && this.stats.crystalBlood) {
       finalDamage *= 1 + Math.min(this.tempHearts, 5) * 0.05;
     }
-    if (!isBurn && !isPoison && !isBleed && this.stats.huntersMark && !enemy.hasTakenHeroHit) {
+    if (!isBurn && !isPoison && !isBleed && !isFrost && this.stats.huntersMark && !enemy.hasTakenHeroHit) {
       finalDamage *= 1.5;
       enemy.hasTakenHeroHit = true;
+    }
+    if (!isBurn && !isBleed && enemy.isChilled) {
+      if (this.stats.iceBreaker && !isPoison) {
+        finalDamage *= 1.2;
+      }
+      if (this.stats.numbingVenom && isPoison) {
+        finalDamage *= 1.2;
+      }
     }
 
     const forcedCrit = canCrit && this.stats.perfectStrike && this.guaranteedCritCounter >= 5;
     const isCritical = canCrit && (forcedCrit || Math.random() < this.stats.critChance);
+    const wasChilledForCrit = Boolean(enemy.isChilled);
     if (isCritical) {
       this.guaranteedCritCounter = 0;
       finalDamage *= this.stats.critMultiplier;
       if (this.stats.flameCrit && enemy.isBurning) {
         finalDamage *= 1.4;
         enemy.burnExpiresAt = Math.max(enemy.burnExpiresAt ?? 0, this.time.now + 3000);
+      }
+      if (wasChilledForCrit) {
+        if (this.stats.iceBreaker) {
+          this.extendEnemyChill(enemy, 1000);
+        }
+        if (this.stats.shatterCritical) {
+          finalDamage *= 1.25;
+        }
       }
       if (this.stats.executionFang && enemy.health / enemy.maxHealth <= 0.3) {
         finalDamage *= 1.6;
@@ -4457,6 +4548,9 @@ export default class RoguelikeScene extends Phaser.Scene {
     });
 
     if (enemy.health <= 0) {
+      if (isCritical && wasChilledForCrit && this.stats.shatterCritical) {
+        this.releaseIceShards(enemy, 3);
+      }
       if (this.tryReviveEnemy(enemy)) {
         return;
       }
@@ -4467,6 +4561,19 @@ export default class RoguelikeScene extends Phaser.Scene {
 
     if (canSlow && this.stats.enemySlowOnHit > 0) {
       this.applyEnemySlow(enemy);
+    }
+
+    if (!isBurn && !isPoison && !isBleed && !isFrost && this.stats.frostNova) {
+      this.frostNovaCounter = (this.frostNovaCounter ?? 0) + 1;
+      const interval = this.stats.frostNovaAttackInterval ?? 6;
+      if (this.frostNovaCounter >= interval) {
+        this.frostNovaCounter = 0;
+        this.createFrostNova(enemy.x, enemy.y, this.stats.frostNovaDamageRatio ?? 0.15);
+      }
+    }
+
+    if (!isBurn && !isPoison && !isBleed && !isFrost && this.stats.chillChance > 0 && Math.random() < this.stats.chillChance) {
+      this.applyEnemyChill(enemy);
     }
 
     if (!isBurn && canBurn && this.stats.burnChance > 0 && Math.random() < this.stats.burnChance) {
@@ -4491,6 +4598,121 @@ export default class RoguelikeScene extends Phaser.Scene {
       this.time.now + this.stats.enemySlowDuration
     );
     this.showFloatingText(enemy.x, enemy.y - enemy.displayHeight * 0.34, "SLOWED", "#78d8ff", 16);
+  }
+
+  getChillDuration() {
+    const blueBonus = this.stats.crystalBarrier && this.tempHearts > 0 ? 1000 : 0;
+    return (this.stats.chillDuration ?? 3000) + blueBonus;
+  }
+
+  extendEnemyChill(enemy, amount) {
+    if (!enemy?.isAlive) return;
+    enemy.isChilled = true;
+    enemy.chillExpiresAt = Math.max(enemy.chillExpiresAt ?? 0, this.time.now) + amount;
+    enemy.slowedUntil = Math.max(enemy.slowedUntil ?? 0, enemy.chillExpiresAt);
+  }
+
+  applyEnemyChill(enemy, duration = this.getChillDuration()) {
+    if (!enemy?.isAlive || enemy.isReviving) return;
+
+    if (enemy.isBurning && this.stats.steamBurst) {
+      this.createSteamBurst(enemy);
+      return;
+    }
+
+    const slow = this.stats.deepChill ? 0.25 : (this.stats.chillSlow ?? 0.15);
+    enemy.isChilled = true;
+    enemy.chillExpiresAt = Math.max(enemy.chillExpiresAt ?? 0, this.time.now + duration);
+    enemy.slowAmount = Math.max(enemy.slowAmount ?? 0, slow);
+    enemy.slowedUntil = Math.max(enemy.slowedUntil ?? 0, enemy.chillExpiresAt);
+    enemy.setTint(0x9ee7ff);
+    this.showFloatingText(enemy.x, enemy.y - enemy.displayHeight * 0.38, "CHILL", "#9ee7ff", 16);
+
+    this.time.delayedCall(duration + 40, () => {
+      if (!enemy?.active || !enemy.isAlive || this.time.now < (enemy.chillExpiresAt ?? 0)) return;
+      enemy.isChilled = false;
+      enemy.clearTint();
+      enemy.setTint(enemy.baseTint || 0xffffff);
+    });
+  }
+
+  createFrostNova(x, y, damageRatio = 0.15) {
+    const nova = this.add.circle(x, y, 24, 0x9ee7ff, 0.34).setDepth(8);
+    this.tweens.add({
+      targets: nova,
+      radius: 118,
+      alpha: 0,
+      duration: 360,
+      onComplete: () => nova.destroy(),
+    });
+    this.getGroupChildren(this.enemyGroup).forEach((enemy) => {
+      if (!enemy?.isAlive || enemy.isReviving) return;
+      const distance = Phaser.Math.Distance.Between(x, y, enemy.x, enemy.y);
+      if (distance < 120) {
+        this.damageEnemy(enemy, Math.max(0.05, this.stats.attackDamage * damageRatio), { isFrost: true });
+        this.applyEnemyChill(enemy);
+      }
+    });
+  }
+
+  releaseIceShards(enemy, count = 5) {
+    const shardKeys = this.getFrameKeys("frostPriestFly");
+    const shardDamage = Math.max(0.08, this.stats.attackDamage * 0.28);
+    Array.from({ length: count }, (_, index) => {
+      const angle = (Math.PI * 2 * index) / count;
+      const shard = this.add
+        .image(enemy.x, enemy.y - 10, shardKeys[0] ?? "frostPriestFly0")
+        .setDisplaySize(46, 34)
+        .setDepth(12)
+        .setRotation(angle);
+      shard.owner = "hero";
+      shard.damage = shardDamage;
+      shard.appliesChill = true;
+      shard.hazardRadius = 28;
+      shard.expiresAt = this.time.now + 900;
+      shard.frameKeys = shardKeys;
+      shard.animationFps = 12;
+      shard.animationFrame = -1;
+      shard.animationStartedAt = this.time.now;
+      shard.loopAnimation = true;
+      shard.gameDisplayWidth = 46;
+      shard.gameDisplayHeight = 34;
+      this.projectileGroup.add(shard);
+      this.physics.add.existing(shard);
+      shard.body.setVelocity(Math.cos(angle) * 340, Math.sin(angle) * 340);
+    });
+  }
+
+  createSteamBurst(enemy) {
+    enemy.isBurning = false;
+    enemy.isChilled = false;
+    enemy.burnExpiresAt = 0;
+    enemy.chillExpiresAt = 0;
+    this.showFloatingText(enemy.x, enemy.y - enemy.displayHeight * 0.48, "STEAM", "#dffbff", 18);
+    this.damageEnemy(enemy, this.stats.attackDamage * 0.35, { isFrost: true });
+    const cloud = this.add.circle(enemy.x, enemy.y, 30, 0xdffbff, 0.2).setDepth(7);
+    this.tweens.add({
+      targets: cloud,
+      radius: 120,
+      alpha: 0,
+      duration: 1700,
+      onComplete: () => cloud.destroy(),
+    });
+    this.time.addEvent({
+      delay: 300,
+      repeat: 4,
+      callback: () => {
+        if (!cloud.active) return;
+        this.getGroupChildren(this.enemyGroup).forEach((target) => {
+          if (!target?.isAlive || target.isReviving) return;
+          const distance = Phaser.Math.Distance.Between(cloud.x, cloud.y, target.x, target.y);
+          if (distance < 116) {
+            target.slowAmount = Math.max(target.slowAmount ?? 0, 0.18);
+            target.slowedUntil = Math.max(target.slowedUntil ?? 0, this.time.now + 700);
+          }
+        });
+      },
+    });
   }
 
   applyEnemyBurn(enemy) {
@@ -4767,6 +4989,14 @@ export default class RoguelikeScene extends Phaser.Scene {
       if (this.stats.spreadingPlague) this.spreadPoison(enemy);
       if (this.stats.toxicReward && Math.random() < 0.15) this.addGreenHearts(0.5);
     }
+    if (enemy.isChilled && this.stats.frozenShatter) {
+      this.releaseIceShards(enemy, 5);
+      this.getGroupChildren(this.enemyGroup).forEach((target) => {
+        if (!target?.isAlive || target === enemy || target.isReviving) return;
+        const distance = Phaser.Math.Distance.Between(enemy.x, enemy.y, target.x, target.y);
+        if (distance < 130) this.applyEnemyChill(target);
+      });
+    }
     if (enemy.type === "iceWraith") {
       this.createIceWraithNova(enemy.x, enemy.y);
     }
@@ -4858,7 +5088,7 @@ export default class RoguelikeScene extends Phaser.Scene {
   takeProjectileHit(damage, time) {
     if (time < this.invulnerableUntil) return;
 
-    this.applyPlayerDamage(damage);
+    this.applyPlayerDamage(damage, { isProjectile: true });
     this.invulnerableUntil = time + HIT_INVULNERABILITY_MS;
     this.cameras.main.shake(120, 0.005);
     this.player.setTint(0xff6b8a);
@@ -4962,11 +5192,20 @@ export default class RoguelikeScene extends Phaser.Scene {
 
   applyPlayerDamage(damage, sourceEnemy = null) {
     const incomingDamage = this.getIncomingDamage(damage);
+    if (this.tryAvoidDamage(sourceEnemy)) {
+      this.showFloatingText(this.player.x, this.player.y - 66, "DODGE", "#f5f0ff", 18);
+      this.updateUi();
+      return;
+    }
+
     const tempAbsorb = Math.min(this.tempHearts, incomingDamage);
     this.tempHearts = Math.max(0, this.tempHearts - tempAbsorb);
     let remainingDamage = incomingDamage - tempAbsorb;
     if (tempAbsorb > 0 && this.stats.shieldEcho) {
       this.createShieldEcho();
+    }
+    if (tempAbsorb > 0 && this.stats.crystalBarrier) {
+      this.createFrostNova(this.player.x, this.player.y, 0.22);
     }
     const greenAbsorb = Math.min(this.greenHearts, remainingDamage);
     this.greenHearts = Math.max(0, this.greenHearts - greenAbsorb);
@@ -4975,15 +5214,36 @@ export default class RoguelikeScene extends Phaser.Scene {
       this.poisonAroundPlayer(sourceEnemy);
     }
     this.hearts = Math.max(0, this.hearts - remainingDamage);
+    this.tryFrozenGuard();
   }
 
   getIncomingDamage(damage) {
-    const cappedDamage = Math.min(damage, GAME_RULES.enemyHitDamage);
-    const azureReduction = this.stats.azureBarrier && this.tempHearts >= 1 ? 0.15 : 0;
-    return Math.max(
-      0.25,
-      cappedDamage * (1 - Math.min((this.stats.damageReduction ?? 0) + azureReduction, 0.75))
-    );
+    return Math.min(damage, GAME_RULES.enemyHitDamage);
+  }
+
+  tryAvoidDamage(sourceEnemy = null) {
+    const isProjectile = sourceEnemy?.isProjectile === true;
+    const baseChance = Math.max(0, this.stats.dodgeChance ?? 0);
+    const azureChance = this.stats.azureBarrier && this.tempHearts > 0 ? 0.15 : 0;
+    const winterChance = isProjectile && this.stats.winterHeart && (this.tempHearts > 0 || this.greenHearts > 0)
+      ? 0.15
+      : 0;
+    const chance = Math.min(0.75, baseChance + azureChance + winterChance);
+    return chance > 0 && Math.random() < chance;
+  }
+
+  tryFrozenGuard() {
+    if (!this.stats.frozenGuard) return;
+    if (this.time.now < (this.frozenGuardReadyAt ?? 0)) return;
+    if (Math.random() >= 0.2) return;
+
+    this.frozenGuardReadyAt = this.time.now + 15000;
+    this.showFloatingText(this.player.x, this.player.y - 74, "FROZEN GUARD", "#9ee7ff", 16);
+    this.getGroupChildren(this.enemyGroup).forEach((enemy) => {
+      if (!enemy?.isAlive || enemy.isReviving) return;
+      const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, enemy.x, enemy.y);
+      if (distance < 145) this.applyEnemyChill(enemy);
+    });
   }
 
   healToFull() {
@@ -5450,6 +5710,7 @@ export default class RoguelikeScene extends Phaser.Scene {
       blueHeart: "Bonus upgrade: gain +0.5 blue heart",
       crit: "Bonus upgrade: crit chance +5%",
       poison: "Bonus upgrade: poison damage +10%",
+      ice: "Bonus upgrade: Chill chance +5%",
     };
     if (bonusByBuild[card.build]) return `${card.description}. ${bonusByBuild[card.build]}`;
     if (card.rarity === "cursed") return `${card.description}. Bonus upgrade: damage +8%`;
@@ -5467,6 +5728,9 @@ export default class RoguelikeScene extends Phaser.Scene {
       this.stats.critChance += 0.05;
     } else if (card.build === "poison") {
       this.stats.poisonDamage = Math.max(this.stats.poisonDamage ?? 0, this.stats.attackDamage * 0.08) * 1.1;
+    } else if (card.build === "ice") {
+      this.stats.chillChance = Math.min(0.6, (this.stats.chillChance ?? 0) + 0.05);
+      this.stats.chillDuration = Math.max(this.stats.chillDuration ?? 3000, 3400);
     } else if (card.rarity === "hero") {
       this.stats.skillCooldown *= 0.92;
     } else if (card.rarity === "boss") {
@@ -5550,6 +5814,7 @@ export default class RoguelikeScene extends Phaser.Scene {
       blueHeart: "blueHeartCards",
       crit: "critCards",
       poison: "poisonCards",
+      ice: "iceCards",
     };
     const counter = counterByBuild[card.build];
     if (!counter) return;
@@ -5599,6 +5864,34 @@ export default class RoguelikeScene extends Phaser.Scene {
         this.showFloatingText(this.player.x, this.player.y - 62, "BLACK VENOM", "#55d16a", 18);
       }
     }
+
+    if (card.build === "ice") {
+      if (this.stats.iceCards >= 3 && !this.stats.deepChill) {
+        this.stats.deepChill = true;
+        this.showFloatingText(this.player.x, this.player.y - 62, "DEEP CHILL", "#9ee7ff", 18);
+      }
+      if (this.stats.iceCards >= 5 && !this.stats.frozenShatter) {
+        this.stats.frozenShatter = true;
+        this.showFloatingText(this.player.x, this.player.y - 62, "FROZEN SHATTER", "#c7efff", 18);
+      }
+    }
+
+    this.applyMixedIceSynergies();
+  }
+
+  applyMixedIceSynergies() {
+    if ((this.stats.iceCards ?? 0) <= 0) return;
+    const unlock = (key, label, color = "#9ee7ff") => {
+      if (this.stats[key]) return;
+      this.stats[key] = true;
+      this.showFloatingText(this.player.x, this.player.y - 84, label, color, 16);
+    };
+
+    if ((this.stats.critCards ?? 0) > 0) unlock("shatterCritical", "SHATTER CRITICAL", "#ffd36b");
+    if ((this.stats.blueHeartCards ?? 0) > 0) unlock("crystalBarrier", "CRYSTAL BARRIER", "#78d8ff");
+    if ((this.stats.fireCards ?? 0) > 0) unlock("steamBurst", "STEAM BURST", "#ffcf8a");
+    if ((this.stats.poisonCards ?? 0) > 0) unlock("numbingVenom", "NUMBING VENOM", "#75f08a");
+    if (this.stats.crystalStep || this.stats.infernalDash) unlock("frozenAfterimage", "FROZEN AFTERIMAGE", "#c7efff");
   }
 
   checkTunnelExit() {
@@ -5724,9 +6017,10 @@ export default class RoguelikeScene extends Phaser.Scene {
         blueHeart: this.stats.blueHeartCards,
         crit: this.stats.critCards,
         poison: this.stats.poisonCards,
+        ice: this.stats.iceCards,
       },
       critChance: Math.round(this.stats.critChance * 100),
-      damageReduction: Math.round((this.stats.damageReduction ?? 0) * 100),
+      dodgeChance: Math.round(Math.max(0, this.stats.dodgeChance ?? 0) * 100),
       skillCooldown: Math.round(this.stats.skillCooldown),
       skillCooldownRemaining: Math.max(
         0,

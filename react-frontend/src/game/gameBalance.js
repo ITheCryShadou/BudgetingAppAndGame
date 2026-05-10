@@ -82,17 +82,22 @@ export const PLAYER_BASE_STATS = {
   burnDamage: 0,
   burnDamageMultiplier: 1,
   burnDurationBonus: 0,
-  damageReduction: 0,
+  dodgeChance: 0,
+  projectileDodgeChance: 0,
   enemySlowOnHit: 0,
   enemySlowDuration: 0,
   blueHeartDropChance: 0,
   poisonChance: 0,
   poisonDamage: 0,
   poisonDamageReduction: 0,
+  chillChance: 0,
+  chillSlow: 0.15,
+  chillDuration: 3000,
   fireCards: 0,
   blueHeartCards: 0,
   critCards: 0,
   poisonCards: 0,
+  iceCards: 0,
   shieldEcho: false,
   crystalBlood: false,
   shieldPulse: false,
@@ -113,6 +118,19 @@ export const PLAYER_BASE_STATS = {
   venomRitual: false,
   spreadingPlague: false,
   blackVenom: false,
+  iceBreaker: false,
+  frozenGuard: false,
+  crystalStep: false,
+  frostNova: false,
+  frostNovaDamageRatio: 0.15,
+  winterHeart: false,
+  deepChill: false,
+  frozenShatter: false,
+  shatterCritical: false,
+  crystalBarrier: false,
+  steamBurst: false,
+  numbingVenom: false,
+  frozenAfterimage: false,
   quickHandsKillTempo: false,
   potionHealMultiplier: 1,
   skillCooldown: 4500,
@@ -275,10 +293,10 @@ export const TAROT_CARDS = [
   {
     id: "obsidian-skin",
     title: "Obsidian Skin",
-    description: "Incoming damage -20%",
+    description: "20% chance to ignore enemy hit",
     theme: "hell",
     apply(stats) {
-      stats.damageReduction = Math.min(0.55, stats.damageReduction + 0.2);
+      stats.dodgeChance = Math.min(0.55, (stats.dodgeChance ?? 0) + 0.2);
     },
   },
   {
@@ -404,6 +422,67 @@ export const TAROT_CARDS = [
     },
   },
   {
+    id: "frost-touch",
+    title: "Frost Touch",
+    description: "15% chance to Chill enemies for 3s",
+    theme: "frost",
+    build: "ice",
+    apply(stats) {
+      stats.chillChance = Math.max(stats.chillChance ?? 0, 0.15);
+    },
+  },
+  {
+    id: "ice-breaker",
+    title: "Ice Breaker",
+    description: "Hits against Chilled enemies deal +20% damage",
+    theme: "frost",
+    build: "ice",
+    apply(stats) {
+      stats.iceBreaker = true;
+    },
+  },
+  {
+    id: "frozen-guard",
+    title: "Frozen Guard",
+    description: "On damage: 20% chance to Chill nearby enemies",
+    theme: "frost",
+    build: "ice",
+    apply(stats) {
+      stats.frozenGuard = true;
+    },
+  },
+  {
+    id: "crystal-step",
+    title: "Crystal Step",
+    description: "Dash can leave an icy trail that slows enemies",
+    theme: "frost",
+    build: "ice",
+    apply(stats) {
+      stats.crystalStep = true;
+    },
+  },
+  {
+    id: "frost-nova",
+    title: "Frost Nova",
+    description: "Every 6th attack creates a Chill nova",
+    theme: "frost",
+    build: "ice",
+    apply(stats) {
+      stats.frostNova = true;
+      stats.frostNovaDamageRatio = Math.max(stats.frostNovaDamageRatio ?? 0.15, 0.15);
+    },
+  },
+  {
+    id: "winter-heart",
+    title: "Winter Heart",
+    description: "With blue or green hearts: 15% chance to ignore projectiles",
+    theme: "frost",
+    build: "ice",
+    apply(stats) {
+      stats.winterHeart = true;
+    },
+  },
+  {
     id: "cursed-contract",
     title: "Cursed Contract",
     description: "Damage +45%, max HP -1 heart",
@@ -417,12 +496,12 @@ export const TAROT_CARDS = [
   {
     id: "hollow-speed",
     title: "Hollow Speed",
-    description: "Speed +25%, incoming damage +15%",
+    description: "Speed +25%, dodge chance -15%",
     theme: "cursed",
     rarity: "cursed",
     apply(stats) {
       stats.speed *= 1.25;
-      stats.damageReduction = Math.max(-0.35, (stats.damageReduction ?? 0) - 0.15);
+      stats.dodgeChance = Math.max(-0.35, (stats.dodgeChance ?? 0) - 0.15);
     },
   },
   {
@@ -460,6 +539,7 @@ const TAROT_CARD_RARITIES = {
   "short-ritual": "common",
   "war-tempo": "common",
   "toxic-edge": "common",
+  "frost-touch": "common",
   "heart-vessel": "rare",
   "azure-vessel": "rare",
   "blue-splinter": "rare",
@@ -468,6 +548,9 @@ const TAROT_CARD_RARITIES = {
   "obsidian-skin": "rare",
   "cinder-edge": "rare",
   "rotten-heart": "rare",
+  "ice-breaker": "rare",
+  "frozen-guard": "rare",
+  "crystal-step": "rare",
   "violet-force": "epic",
   "shield-echo": "epic",
   "crystal-blood": "epic",
@@ -482,6 +565,8 @@ const TAROT_CARD_RARITIES = {
   "plague-cloud": "epic",
   "venom-ritual": "epic",
   "toxic-reward": "epic",
+  "frost-nova": "epic",
+  "winter-heart": "epic",
 };
 
 const TAROT_CARD_LEVELS = {
@@ -581,6 +666,57 @@ const TAROT_CARD_LEVELS = {
         stats.burnChance = Math.max(stats.burnChance, 0.28);
         stats.burnDamage = Math.max(stats.burnDamage, 0.24);
         stats.flameCrit = true;
+      },
+    },
+  ],
+  "frost-touch": [
+    {
+      title: "Frost Touch I",
+      description: "15% chance to Chill enemies for 3s",
+      apply(stats) {
+        stats.chillChance = Math.max(stats.chillChance ?? 0, 0.15);
+      },
+    },
+    {
+      title: "Frost Touch II",
+      description: "22% chance to Chill enemies for 3s",
+      apply(stats) {
+        stats.chillChance = Math.max(stats.chillChance ?? 0, 0.22);
+      },
+    },
+    {
+      title: "Frost Touch III",
+      description: "28% Chill chance; Chill lasts +1s",
+      apply(stats) {
+        stats.chillChance = Math.max(stats.chillChance ?? 0, 0.28);
+        stats.chillDuration = Math.max(stats.chillDuration ?? 3000, 4000);
+      },
+    },
+  ],
+  "frost-nova": [
+    {
+      title: "Frost Nova I",
+      description: "Every 6th attack creates a Chill nova for 15% damage",
+      apply(stats) {
+        stats.frostNova = true;
+        stats.frostNovaDamageRatio = Math.max(stats.frostNovaDamageRatio ?? 0.15, 0.15);
+      },
+    },
+    {
+      title: "Frost Nova II",
+      description: "Every 6th attack creates a Chill nova for 30% damage",
+      apply(stats) {
+        stats.frostNova = true;
+        stats.frostNovaDamageRatio = Math.max(stats.frostNovaDamageRatio ?? 0.15, 0.3);
+      },
+    },
+    {
+      title: "Frost Nova III",
+      description: "Every 5th attack creates a stronger Chill nova",
+      apply(stats) {
+        stats.frostNova = true;
+        stats.frostNovaDamageRatio = Math.max(stats.frostNovaDamageRatio ?? 0.15, 0.36);
+        stats.frostNovaAttackInterval = 5;
       },
     },
   ],
